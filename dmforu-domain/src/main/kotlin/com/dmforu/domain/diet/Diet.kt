@@ -1,4 +1,4 @@
-package com.dmforu.domain
+package com.dmforu.domain.diet
 
 import java.time.LocalDate
 

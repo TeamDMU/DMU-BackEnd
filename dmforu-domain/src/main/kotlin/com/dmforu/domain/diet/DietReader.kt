@@ -1,4 +1,4 @@
-package com.dmforu.domain
+package com.dmforu.domain.diet
 
 import org.springframework.stereotype.Component
 import java.time.LocalDate

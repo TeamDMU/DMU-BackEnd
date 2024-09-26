@@ -1,7 +1,7 @@
 package com.dmforu.api.controller.v1
 
-import com.dmforu.domain.Diet
-import com.dmforu.domain.DietService
+import com.dmforu.domain.diet.Diet
+import com.dmforu.domain.diet.DietService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
