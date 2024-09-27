@@ -1,9 +1,9 @@
 rootProject.name = "DMU-BackEnd"
 
 include(
-        "dmforu-api",
-        "dmforu-domain",
-        "dmforu-storage:db-mysql"
+    "dmforu-api",
+    "dmforu-domain",
+    "dmforu-crawling"
 )
 
 pluginManagement {

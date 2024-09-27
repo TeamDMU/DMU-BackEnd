@@ -5,8 +5,9 @@ import org.springframework.boot.runApplication
 
 @SpringBootApplication(
     scanBasePackages = [
+        "com.dmforu.api",
         "com.dmforu.domain",
-        "com.dmforu.api"
+        "com.dmforu.crawling"
     ]
 )
 class ApiApplication
