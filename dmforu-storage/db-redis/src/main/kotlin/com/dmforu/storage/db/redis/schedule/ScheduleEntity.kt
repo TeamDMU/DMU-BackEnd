@@ -8,4 +8,6 @@ import org.springframework.data.redis.core.RedisHash
 internal class ScheduleEntity(
     @Id val id: String = "schedule",
     val schedules: List<Schedule.Year>
-)
+) {
+    private constructor(): this("", emptyList())
+}
