@@ -37,8 +37,9 @@ internal class RedisConfig(
             this.connectionFactory = redisConnectionFactory
 
             this.keySerializer = StringRedisSerializer()
+            this.valueSerializer = GenericJackson2JsonRedisSerializer()
             this.hashKeySerializer = StringRedisSerializer()
-            this.valueSerializer = StringRedisSerializer()
+            this.hashValueSerializer = GenericJackson2JsonRedisSerializer()
         }
     }
 
