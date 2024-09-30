@@ -2,20 +2,37 @@ package com.dmforu.storage.db.redis.diet
 
 import com.dmforu.domain.diet.Diet
 import com.dmforu.domain.diet.DietRepository
+import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
 internal class DietEntityRepository(
-    private val dietRedisRepository: DietRedisRepository
+    private val redisTemplate: RedisTemplate<String, Any>
 ) : DietRepository {
+    private companion object {
+        const val DIET_KEY = "diet"
+    }
+
     override fun write(diets: List<Diet>) {
-        // 기존 데이터를 모두 삭제
-        dietRedisRepository.deleteAll()
-        // 새로운 데이터를 저장
-        dietRedisRepository.save(DietEntity(diets = diets))
+        writeEntity(DIET_KEY, DietEntity(diets = diets))
     }
 
     override fun read(): List<Diet>? {
-        return dietRedisRepository.findAll().firstOrNull()?.diets
+        return readEntity<DietEntity>(DIET_KEY)?.diets
+    }
+
+    /**
+     * 공통된 엔티티 쓰기 메서드
+     */
+    private fun <T : Any> writeEntity(key: String, entity: T) {
+        redisTemplate.opsForValue().set(key, entity)
+    }
+
+    /**
+     * 공통된 엔티티 읽기 메서드
+     */
+    @Suppress("UNCHECKED_CAST")
+    private fun <T> readEntity(key: String): T? {
+        return redisTemplate.opsForValue().get(key) as? T
     }
 }
