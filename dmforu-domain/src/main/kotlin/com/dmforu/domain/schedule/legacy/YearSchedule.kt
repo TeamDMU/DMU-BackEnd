@@ -1,6 +1,6 @@
-package com.dmforu.domain.schedule.legacy;
+package com.dmforu.domain.schedule.legacy
 
-data class YearSchedule (
+data class YearSchedule(
     val year: Int,
     val yearSchedule: List<MonthSchedule>
 ) {

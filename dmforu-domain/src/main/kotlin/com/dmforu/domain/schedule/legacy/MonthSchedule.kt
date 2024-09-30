@@ -1,4 +1,4 @@
-package com.dmforu.domain.schedule.legacy;
+package com.dmforu.domain.schedule.legacy
 
 data class MonthSchedule(
     val month: Int,
