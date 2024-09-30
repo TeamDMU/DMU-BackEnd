@@ -7,9 +7,9 @@ import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
-internal class ScheduleEntityRepository (
+internal class ScheduleEntityRepository(
     private val redisTemplate: RedisTemplate<String, Any>
-) : ScheduleRepository{
+) : ScheduleRepository {
 
     private companion object {
         const val SCHEDULE_KEY = "schedule"
@@ -36,7 +36,6 @@ internal class ScheduleEntityRepository (
      * 공통된 엔티티 쓰기 메서드
      */
     private fun <T : Any> writeEntity(key: String, entity: T) {
-        redisTemplate.delete(key)
         redisTemplate.opsForValue().set(key, entity)
     }
 
