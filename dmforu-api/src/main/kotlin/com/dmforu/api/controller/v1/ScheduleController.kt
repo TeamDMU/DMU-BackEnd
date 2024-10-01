@@ -1,8 +1,8 @@
 package com.dmforu.api.controller.v1
 
+import com.dmforu.api.controller.v1.response.LegacySchedule
 import com.dmforu.domain.schedule.Schedule
 import com.dmforu.domain.schedule.ScheduleService
-import com.dmforu.domain.schedule.legacy.YearSchedule
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
@@ -19,8 +19,9 @@ class ScheduleController(
         summary = "[구버전] 학사일정 API",
         description = "현재년도를 기준으로 작년부터 내년 2월까지의 학사일정을 출력한다."
     )
-    fun readScheduleOld(): ResponseEntity<List<YearSchedule>> {
-        return ResponseEntity.ok().body(scheduleService.readOld())
+    fun readScheduleOld(): ResponseEntity<List<LegacySchedule.YearSchedule>> {
+        val schedules = LegacySchedule.fromScheduleYears(scheduleService.read())
+        return ResponseEntity.ok().body(schedules)
     }
 
     @GetMapping("/api/v1/schedule")

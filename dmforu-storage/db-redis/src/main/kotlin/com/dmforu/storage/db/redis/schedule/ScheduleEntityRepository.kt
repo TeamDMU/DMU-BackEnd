@@ -2,7 +2,6 @@ package com.dmforu.storage.db.redis.schedule
 
 import com.dmforu.domain.schedule.Schedule
 import com.dmforu.domain.schedule.ScheduleRepository
-import com.dmforu.domain.schedule.legacy.YearSchedule
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Repository
 
@@ -13,20 +12,13 @@ internal class ScheduleEntityRepository(
 
     private companion object {
         const val SCHEDULE_KEY = "schedule"
-        const val OLD_SCHEDULE_KEY = "oldSchedule"
     }
 
-    override fun writeOld(schedules: List<YearSchedule>) {
-        writeEntity(OLD_SCHEDULE_KEY, OldScheduleEntity(schedules = schedules))
-    }
 
     override fun write(schedules: List<Schedule.Year>) {
         writeEntity(SCHEDULE_KEY, ScheduleEntity(schedules = schedules))
     }
 
-    override fun readOld(): List<YearSchedule>? {
-        return readEntity<OldScheduleEntity>(OLD_SCHEDULE_KEY)?.schedules
-    }
 
     override fun read(): List<Schedule.Year>? {
         return readEntity<ScheduleEntity>(SCHEDULE_KEY)?.schedules
