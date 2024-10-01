@@ -12,6 +12,8 @@ dependencies {
     runtimeOnly(project(":dmforu-storage:db-mysql"))
     runtimeOnly(project(":dmforu-storage:db-redis"))
 
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+    implementation("org.springframework.boot:spring-boot-starter-batch")
+    // Jackson Library
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 }

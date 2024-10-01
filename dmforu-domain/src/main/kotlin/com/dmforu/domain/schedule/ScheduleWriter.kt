@@ -3,10 +3,10 @@ package com.dmforu.domain.schedule
 import org.springframework.stereotype.Component
 
 @Component
-class ScheduleReader(
+class ScheduleWriter(
     private val scheduleRepository: ScheduleRepository
 ) {
-    fun read(): List<Schedule.Year> {
-        return scheduleRepository.read().orEmpty()
+    fun write(schedules: List<Schedule.Year>) {
+        scheduleRepository.write(schedules)
     }
 }
