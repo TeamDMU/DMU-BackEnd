@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 class DietWriter(
     private val dietRepository: DietRepository
 ) {
-    fun write(diets: List<Diet>) {
+    fun overwrite(diets: List<Diet>) {
         dietRepository.write(diets)
     }
 }

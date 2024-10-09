@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 class NoticeWriter (
     private val noticeRepository: NoticeRepository
 ){
-    fun write(notice: Notice) {
+    fun overwrite(notice: Notice) {
         noticeRepository.write(notice)
     }
 }

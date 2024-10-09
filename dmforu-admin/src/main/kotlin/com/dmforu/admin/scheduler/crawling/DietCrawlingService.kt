@@ -2,12 +2,13 @@ package com.dmforu.admin.scheduler.crawling
 
 import com.dmforu.crawling.DietParser
 import com.dmforu.domain.diet.DietService
+import com.dmforu.domain.diet.DietWriter
 
 class DietCrawlingService(
     private val dietParser: DietParser,
-    private val dietService: DietService
+    private val dietWriter: DietWriter,
 ) {
-    fun rewriteToRedis() {
-        dietService.write(dietParser.parse())
+    fun overwriteToRedis() {
+        dietWriter.overwrite(dietParser.parse())
     }
 }
