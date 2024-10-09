@@ -1,7 +1,5 @@
-package com.dmforu.crawling.diet
+package com.dmforu.crawling
 
-import com.dmforu.crawling.Parser
-import com.dmforu.crawling.WebPageLoader
 import com.dmforu.domain.diet.Diet
 import org.jsoup.nodes.Element
 import org.springframework.stereotype.Service

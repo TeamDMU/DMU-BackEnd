@@ -1,5 +1,6 @@
-package com.dmforu.crawling.notice.university
+package com.dmforu.admin.scheduler.crawling
 
+import com.dmforu.crawling.UniversityNoticeParser
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.NoticeRepository
 import org.springframework.beans.factory.ObjectProvider

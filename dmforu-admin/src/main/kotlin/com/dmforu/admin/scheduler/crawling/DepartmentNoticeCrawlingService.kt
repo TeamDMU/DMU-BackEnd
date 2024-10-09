@@ -1,5 +1,6 @@
-package com.dmforu.crawling.notice.department
+package com.dmforu.admin.scheduler.crawling
 
+import com.dmforu.crawling.DepartmentNoticeParser
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.NoticeRepository
 import com.dmforu.domain.notice.Major

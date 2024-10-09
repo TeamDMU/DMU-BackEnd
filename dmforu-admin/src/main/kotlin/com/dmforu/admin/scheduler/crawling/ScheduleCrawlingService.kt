@@ -1,5 +1,6 @@
-package com.dmforu.crawling.schedule
+package com.dmforu.admin.scheduler.crawling
 
+import com.dmforu.crawling.ScheduleParser
 import com.dmforu.domain.schedule.ScheduleService
 
 class ScheduleCrawlingService(

@@ -1,5 +1,6 @@
-package com.dmforu.crawling.diet
+package com.dmforu.admin.scheduler.crawling
 
+import com.dmforu.crawling.DietParser
 import com.dmforu.domain.diet.DietService
 
 class DietCrawlingService(

@@ -1,8 +1,5 @@
-package com.dmforu.crawling.notice.department
+package com.dmforu.crawling
 
-import com.dmforu.crawling.Parser
-import com.dmforu.crawling.notice.UrlGenerator
-import com.dmforu.crawling.WebPageLoader
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.Major
 import org.springframework.context.annotation.Scope
