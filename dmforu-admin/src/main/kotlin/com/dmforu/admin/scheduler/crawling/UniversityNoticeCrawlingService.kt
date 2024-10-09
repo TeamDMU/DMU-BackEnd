@@ -4,6 +4,7 @@ import com.dmforu.crawling.UniversityNoticeParser
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.NoticeCrawlWriter
 import org.springframework.beans.factory.ObjectProvider
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 
 
@@ -17,6 +18,7 @@ class UniversityNoticeCrawlingService(
      * 데이터베이스에 저장된 공지사항이 존재한다면, 최신 공지사항만 크롤링하여 업데이트 한다. <br></br>
      * 평일 오전 10시, 오후 17시 자동으로 메서드를 실행한다.
      */
+    @Scheduled(cron = "0 */10 9-19 * * MON-FRI")
     fun crawling() {
         val parser: UniversityNoticeParser = prototypeBeanProvider.getObject()
         val maxNumber: Int? = noticeCrawlWriter.findMaxNumberByType("대학")
