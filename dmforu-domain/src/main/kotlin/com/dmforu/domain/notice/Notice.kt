@@ -20,4 +20,12 @@ data class Notice(
 
     // 공지사항 URL
     val url: String
-)
+) {
+    fun isNumberLessThanOrEqualTo(number: Int): Boolean {
+        return this.number <= number
+    }
+
+    fun isLastInType(): Boolean{
+        return this.number == 1
+    }
+}
