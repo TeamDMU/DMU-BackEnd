@@ -41,6 +41,10 @@ internal class NoticeEntityRepository(
         return universityNoticePage?.mapNotNull { it?.toNotice() }?.toList().orEmpty()
     }
 
+    override fun findMaxNumberByType(type: String): Int? {
+        return noticeJpaRepository.findMaxNumberByType(type)
+    }
+
     private fun pageRequest(page: Int, size: Int): PageRequest {
         val pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "number"))
         return pageable
