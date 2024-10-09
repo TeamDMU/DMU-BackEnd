@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 class ScheduleWriter(
     private val scheduleRepository: ScheduleRepository
 ) {
-    fun write(schedules: List<Schedule.Year>) {
+    fun overwrite(schedules: List<Schedule.Year>) {
         scheduleRepository.write(schedules)
     }
 }

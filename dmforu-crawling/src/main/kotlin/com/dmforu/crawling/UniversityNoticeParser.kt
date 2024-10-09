@@ -1,11 +1,9 @@
-package com.dmforu.crawling.notice.university
+package com.dmforu.crawling
 
-import com.dmforu.crawling.Parser
-import com.dmforu.crawling.notice.UrlGenerator
-import com.dmforu.crawling.WebPageLoader
 import com.dmforu.domain.notice.Notice
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
+import java.lang.NumberFormatException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -31,7 +29,7 @@ class UniversityNoticeParser : UrlGenerator(), Parser<Notice> {
 
             try {
                 number = row.select(".td-num").text().toInt()
-            } catch (e: java.lang.NumberFormatException) {
+            } catch (e: NumberFormatException) {
                 continue
             }
 

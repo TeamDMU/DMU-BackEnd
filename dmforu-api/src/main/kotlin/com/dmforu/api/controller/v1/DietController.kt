@@ -1,7 +1,7 @@
 package com.dmforu.api.controller.v1
 
 import com.dmforu.domain.diet.Diet
-import com.dmforu.domain.diet.DietService
+import com.dmforu.domain.diet.DietReader
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 @Tag(name = "식단")
 @RestController
 class DietController(
-    private val dietService: DietService
+    private val dietReader: DietReader
 ) {
     @Operation(
         summary = "[구버전] 식단표 API",
@@ -19,7 +19,7 @@ class DietController(
     )
     @GetMapping("/api/v1/dmu/cafeteria")
     fun readDietOld(): ResponseEntity<List<Diet>> {
-        return ResponseEntity.ok().body(dietService.read())
+        return ResponseEntity.ok().body(dietReader.read())
     }
 
     @Operation(
@@ -28,6 +28,6 @@ class DietController(
     )
     @GetMapping("/api/v1/cafeteria")
     fun readDiet(): ResponseEntity<List<Diet>> {
-        return ResponseEntity.ok().body(dietService.read())
+        return ResponseEntity.ok().body(dietReader.read())
     }
 }

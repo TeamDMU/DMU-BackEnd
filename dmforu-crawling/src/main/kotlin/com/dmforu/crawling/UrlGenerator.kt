@@ -1,4 +1,4 @@
-package com.dmforu.crawling.notice
+package com.dmforu.crawling
 
 abstract class UrlGenerator {
     protected abstract fun generateSearchUrl(): String

@@ -2,7 +2,7 @@ rootProject.name = "DMU-BackEnd"
 
 include(
     "dmforu-api",
-    "dmforu-batch",
+    "dmforu-admin",
     "dmforu-domain",
     "dmforu-crawling",
     "dmforu-storage:db-mysql",

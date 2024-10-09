@@ -1,15 +1,17 @@
-package com.dmforu.crawling.notice.department
+package com.dmforu.admin.scheduler.crawling
 
+import com.dmforu.crawling.DepartmentNoticeParser
 import com.dmforu.domain.notice.Notice
-import com.dmforu.domain.notice.NoticeRepository
 import com.dmforu.domain.notice.Major
+import com.dmforu.domain.notice.NoticeCrawlWriter
 import org.springframework.beans.factory.ObjectProvider
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 
 @Service
 class DepartmentNoticeCrawlingService(
     private val prototypeBeanProvider: ObjectProvider<DepartmentNoticeParser>,
-    private val noticeRepository: NoticeRepository,
+    private val noticeCrawlWriter: NoticeCrawlWriter
 ) {
     /**
      * Major 열거형의 모든 값을 반복하여 모든 학과의 공지사항을 크롤링한다. <br></br>
@@ -35,7 +37,7 @@ class DepartmentNoticeCrawlingService(
 
         parser.initialize(major)
 
-        val maxNumber: Int? = noticeRepository.findMaxNumberByType(major.type)
+        val maxNumber: Int? = noticeCrawlWriter.findMaxNumberByType(major.type)
         val currentMaxNumber = maxNumber ?: 0
 
         while (true) {
@@ -64,7 +66,7 @@ class DepartmentNoticeCrawlingService(
                 return false
             }
 
-            noticeRepository.write(notice)
+            noticeCrawlWriter.write(notice)
             // TODO: FCM 메세지 전송을 위한 이벤트 트리거
 //            eventPublisher!!.publishEvent(notice)
             if (notice.isLastInType()) {
