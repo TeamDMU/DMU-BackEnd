@@ -8,7 +8,8 @@ import org.springframework.boot.runApplication
         "com.dmforu.api",
         "com.dmforu.domain",
         "com.dmforu.crawling",
-        "com.dmforu.storage.db.redis"
+        "com.dmforu.storage.db.redis",
+        "com.dmforu.storage.db.mysql"
     ]
 )
 class ApiApplication
