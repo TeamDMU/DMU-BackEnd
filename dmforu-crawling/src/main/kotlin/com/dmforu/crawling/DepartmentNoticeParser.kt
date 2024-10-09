@@ -4,6 +4,7 @@ import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.Major
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
+import java.lang.NumberFormatException
 import java.time.LocalDate
 
 @Scope("prototype")
@@ -35,7 +36,7 @@ class DepartmentNoticeParser : UrlGenerator(), Parser<Notice> {
 
             try {
                 number = row.select(".td-num").text().toInt()
-            } catch (e: java.lang.NumberFormatException) {
+            } catch (e: NumberFormatException) {
                 continue
             }
 
