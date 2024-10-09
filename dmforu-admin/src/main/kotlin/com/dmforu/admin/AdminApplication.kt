@@ -1,19 +1,19 @@
-package com.dmforu.batch
+package com.dmforu.admin
 
-import com.dmforu.crawling.diet.DietParser
-import com.dmforu.domain.diet.DietRepository
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication(
     scanBasePackages = [
+        "com.dmforu.admin",
         "com.dmforu.domain",
         "com.dmforu.crawling",
-        "com.dmforu.storage.db.redis"
+        "com.dmforu.storage.db.redis",
+        "com.dmforu.storage.db.mysql"
     ]
 )
-class BatchApplication
+class AdminApplication
 
 fun main(args: Array<String>) {
-    runApplication<BatchApplication>(*args)
+    runApplication<AdminApplication>(*args)
 }

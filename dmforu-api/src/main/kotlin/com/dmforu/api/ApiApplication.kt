@@ -7,7 +7,6 @@ import org.springframework.boot.runApplication
     scanBasePackages = [
         "com.dmforu.api",
         "com.dmforu.domain",
-        "com.dmforu.crawling",
         "com.dmforu.storage.db.redis",
         "com.dmforu.storage.db.mysql"
     ]

@@ -1,10 +1,10 @@
-package com.dmforu.batch
+package com.dmforu.admin
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class BatchApplicationTests {
+class AdminApplicationTests {
 
     @Test
     fun contextLoads() {
