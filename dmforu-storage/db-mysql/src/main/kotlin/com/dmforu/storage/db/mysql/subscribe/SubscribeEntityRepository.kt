@@ -36,14 +36,28 @@ internal class SubscribeEntityRepository(
 
         subscribe.changeKeywords(keywords)
 
-        subscribe.subscribeKeywords()
+        subscribe.subscribeKeyword()
     }
 
     @Transactional
-    override fun findByIdAndUnsubscribeKeywords(token: String) {
+    override fun findByIdAndUpdateKeywords(token: String, keywords: List<String>) {
         val subscribe = findNotNullById(token)
 
-        subscribe.unsubscribeKeywords()
+        subscribe.changeKeywords(keywords)
+    }
+
+    @Transactional
+    override fun findByIdAndUpdateKeywordSubscribe(token: String) {
+        val subscribe = findNotNullById(token)
+
+        subscribe.subscribeKeyword()
+    }
+
+    @Transactional
+    override fun findByIdAndUpdateKeywordUnsubscribe(token: String) {
+        val subscribe = findNotNullById(token)
+
+        subscribe.unsubscribeKeyword()
     }
 
     private fun findNotNullById(token: String): SubscribeEntity {
