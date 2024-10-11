@@ -15,7 +15,7 @@ data class RegisterSubscribeRequest (
             department = department,
             keywords = keywords,
             isDepartmentSubscribed = isDepartmentSubscribed,
-            areKeywordsSubscribed = areKeywordSubscribed
+            isKeywordSubscribed = areKeywordSubscribed
         )
     }
 }

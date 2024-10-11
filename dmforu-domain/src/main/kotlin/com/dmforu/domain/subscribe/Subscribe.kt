@@ -5,7 +5,7 @@ data class Subscribe(
     var department: String,
     var keywords: List<String>,
     var isDepartmentSubscribed: Boolean,
-    var areKeywordsSubscribed: Boolean,
+    var isKeywordSubscribed: Boolean,
 ) {
     fun subscribeDepartment() {
         this.isDepartmentSubscribed = true;
@@ -15,11 +15,11 @@ data class Subscribe(
         this.isDepartmentSubscribed = false;
     }
 
-    fun subscribeKeywords() {
-        this.areKeywordsSubscribed = true;
+    fun subscribeKeyword() {
+        this.isKeywordSubscribed = true;
     }
 
-    fun unsubscribeKeywords() {
-        this.areKeywordsSubscribed = false;
+    fun unsubscribeKeyword() {
+        this.isKeywordSubscribed = false;
     }
 }

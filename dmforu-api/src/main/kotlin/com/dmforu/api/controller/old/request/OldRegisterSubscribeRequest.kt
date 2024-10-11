@@ -16,7 +16,7 @@ data class OldRegisterSubscribeRequest(
             department = department,
             keywords = topic,
             isDepartmentSubscribed = isDepartmentSubscribed,
-            areKeywordsSubscribed = areKeywordsSubscribed
+            isKeywordSubscribed = areKeywordsSubscribed
         )
     }
 }

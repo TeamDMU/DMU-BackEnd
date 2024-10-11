@@ -22,7 +22,7 @@ internal class SubscribeEntity(
     var isDepartmentSubscribed: Boolean,
 
     @Column(name = "keyword_onoff")
-    var areKeywordsSubscribed: Boolean,
+    var isKeywordSubscribed: Boolean,
 ) {
     constructor() : this("", "", emptyList(), false, false)
 
@@ -33,19 +33,9 @@ internal class SubscribeEntity(
                 department = subscribe.department,
                 keywords = subscribe.keywords,
                 isDepartmentSubscribed = false,
-                areKeywordsSubscribed = false
+                isKeywordSubscribed = false
             )
         }
-    }
-
-    fun toSubscribe(): Subscribe {
-        return Subscribe(
-            token = token,
-            department = department,
-            keywords = keywords,
-            isDepartmentSubscribed = isDepartmentSubscribed,
-            areKeywordsSubscribed = areKeywordsSubscribed
-        )
     }
 
     fun changeDepartment(department: String) {
@@ -64,11 +54,11 @@ internal class SubscribeEntity(
         this.keywords = keywords
     }
 
-    fun subscribeKeywords() {
-        this.areKeywordsSubscribed = true
+    fun subscribeKeyword() {
+        this.isKeywordSubscribed = true
     }
 
-    fun unsubscribeKeywords() {
-        this.areKeywordsSubscribed = false
+    fun unsubscribeKeyword() {
+        this.isKeywordSubscribed = false
     }
 }
