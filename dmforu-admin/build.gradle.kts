@@ -11,8 +11,4 @@ dependencies {
     implementation(project(":dmforu-crawling"))
     runtimeOnly(project(":dmforu-storage:db-mysql"))
     runtimeOnly(project(":dmforu-storage:db-redis"))
-
-    // Jackson Library
-    implementation("com.fasterxml.jackson.core:jackson-databind")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 }
