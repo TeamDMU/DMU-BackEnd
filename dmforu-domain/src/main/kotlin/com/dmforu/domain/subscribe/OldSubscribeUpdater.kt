@@ -14,7 +14,7 @@ class OldSubscribeUpdater(
     }
 
     fun unsubscribeDepartment(token: String) {
-        subscribeRepository.findByIdAndUnsubscribeDepartment(token = token)
+        subscribeRepository.findByIdAndUpdateDepartmentUnsubscribe(token = token)
     }
 
     fun subscribeKeywords(token: String, keywords: List<String>) {

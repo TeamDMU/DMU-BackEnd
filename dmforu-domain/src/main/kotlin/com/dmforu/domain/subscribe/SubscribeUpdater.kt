@@ -18,4 +18,17 @@ class SubscribeUpdater(
 
         subscribeRepository.findByIdAndUpdateKeywordUnsubscribe(token)
     }
+
+    fun updateDepartment(token: String, department: String) {
+        subscribeRepository.findByIdAndUpdateDepartment(token, department)
+    }
+
+    fun updateDepartmentSubscribeStatus(token: String, departmentSubscribeStatus: Boolean) {
+        if (departmentSubscribeStatus) {
+            subscribeRepository.findByIdAndUpdateDepartmentSubscribe(token)
+            return
+        }
+
+        subscribeRepository.findByIdAndUpdateDepartmentUnsubscribe(token)
+    }
 }

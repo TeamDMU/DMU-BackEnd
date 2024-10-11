@@ -10,11 +10,13 @@ import org.springframework.stereotype.Repository
 internal class SubscribeEntityRepository(
     private val subscribeJpaRepository: SubscribeJpaRepository,
 ) : SubscribeRepository, OldSubscribeRepository {
+
     override fun save(subscribe: Subscribe) {
         subscribeJpaRepository.save(SubscribeEntity.from(subscribe))
     }
 
     @Transactional
+    @Deprecated("구버전 호환성을 위해 남겨둔 메서드입니다.")
     override fun findByIdAndSubscribeDepartment(token: String, department: String) {
         val subscribe = findNotNullById(token)
 
@@ -24,13 +26,28 @@ internal class SubscribeEntityRepository(
     }
 
     @Transactional
-    override fun findByIdAndUnsubscribeDepartment(token: String) {
+    override fun findByIdAndUpdateDepartmentUnsubscribe(token: String) {
         val subscribe = findNotNullById(token)
 
         subscribe.unsubscribeDepartment()
     }
 
     @Transactional
+    override fun findByIdAndUpdateDepartment(token: String, department: String) {
+        val subscribe = findNotNullById(token)
+
+        subscribe.changeDepartment(department)
+    }
+
+    @Transactional
+    override fun findByIdAndUpdateDepartmentSubscribe(token: String) {
+        val subscribe = findNotNullById(token)
+
+        subscribe.subscribeDepartment()
+    }
+
+    @Transactional
+    @Deprecated("구버전 호환성을 위해 남겨둔 메서드입니다.")
     override fun findByIdAndSubscribeKeywords(token: String, keywords: List<String>) {
         val subscribe = findNotNullById(token)
 

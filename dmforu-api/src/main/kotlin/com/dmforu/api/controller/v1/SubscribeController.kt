@@ -1,8 +1,6 @@
 package com.dmforu.api.controller.v1
 
-import com.dmforu.api.controller.v1.request.RegisterSubscribeRequest
-import com.dmforu.api.controller.v1.request.UpdateKeywordSubscribeStatusRequest
-import com.dmforu.api.controller.v1.request.UpdateSubscribeKeywordsRequest
+import com.dmforu.api.controller.v1.request.*
 import com.dmforu.domain.subscribe.SubscribeUpdater
 import com.dmforu.domain.subscribe.SubscribeWriter
 import io.swagger.v3.oas.annotations.Operation
@@ -34,10 +32,24 @@ class SubscribeController(
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 
-    @Operation(summary = "키워드 알림 상태 API", description = "키워드 알림 상태를 수정한다.")
+    @Operation(summary = "키워드 알림 상태 변경 API", description = "키워드 알림 상태를 변경한다.")
     @PatchMapping("/api/v1/subscribe/keyword/status")
-    fun updateSubscribeKeywordStatus(@RequestBody request: UpdateKeywordSubscribeStatusRequest): ResponseEntity<Void> {
+    fun updateSubscribeKeywordStatus(@RequestBody request: UpdateSubscribeStatusRequest): ResponseEntity<Void> {
         subscribeUpdater.updateKeywordSubscribeStatus(request.token, request.isSubscribed)
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+    }
+
+    @Operation(summary = "학과 수정 API", description = "학과 정보를 수정한다.")
+    @PatchMapping("/api/v1/subscribe/department")
+    fun updateSubscribeDepartment(@RequestBody request: UpdateSubscribeDepartmentRequest): ResponseEntity<Void> {
+        subscribeUpdater.updateDepartment(request.token, request.department)
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+    }
+
+    @Operation(summary = "학과 알림 상태 변경 API", description = "학과 알림 상태를 변경한다.")
+    @PatchMapping("/api/v1/subscribe/department/status")
+    fun updateSubscribeDepartmentStatus(@RequestBody request: UpdateSubscribeStatusRequest): ResponseEntity<Void> {
+        subscribeUpdater.updateDepartmentSubscribeStatus(token = request.token, request.isSubscribed)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 }

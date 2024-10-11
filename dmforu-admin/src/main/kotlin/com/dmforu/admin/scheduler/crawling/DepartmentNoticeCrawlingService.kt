@@ -33,7 +33,7 @@ class DepartmentNoticeCrawlingService(
      * @param major 학과 정보
      */
     private fun crawlMajorDepartment(major: Major) {
-        val parser = prototypeBeanProvider.getObject(major)
+        val parser = prototypeBeanProvider.getObject()
 
         parser.initialize(major)
 
