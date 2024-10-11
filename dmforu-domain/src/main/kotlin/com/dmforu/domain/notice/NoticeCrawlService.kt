@@ -3,7 +3,7 @@ package com.dmforu.domain.notice
 import org.springframework.stereotype.Component
 
 @Component
-class NoticeCrawlWriter(
+class NoticeCrawlService(
     private val noticeRepository: NoticeRepository
 ) {
     fun findMaxNumberByType(type: String): Int? {
