@@ -1,4 +1,4 @@
-package com.dmforu.api.controller.v1.request
+package com.dmforu.api.controller.old.request
 
 data class OldKeywordsSubscribeRequest (
     val token: String,
