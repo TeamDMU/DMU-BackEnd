@@ -1,6 +1,6 @@
 package com.dmforu.api.controller.v1
 
-import com.dmforu.api.controller.old.request.RegisterSubscribeRequest
+import com.dmforu.api.controller.v1.request.RegisterSubscribeRequest
 import com.dmforu.api.controller.v1.request.UpdateKeywordSubscribeStatusRequest
 import com.dmforu.api.controller.v1.request.UpdateSubscribeKeywordsRequest
 import com.dmforu.domain.subscribe.SubscribeUpdater

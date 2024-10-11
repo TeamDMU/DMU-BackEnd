@@ -1,4 +1,4 @@
-package com.dmforu.api.controller.old.request
+package com.dmforu.api.controller.v1.request
 
 import com.dmforu.domain.subscribe.Subscribe
 
