@@ -3,8 +3,10 @@ package com.dmforu.fcm
 import com.dmforu.admin.message.MessageSender
 import com.dmforu.admin.message.NoticeMessage
 import com.google.firebase.messaging.FirebaseMessaging
+import org.springframework.stereotype.Component
 
-class FirebaseMessageSender(
+@Component
+internal class FirebaseMessageSender(
     private val firebaseMessageConverter: FirebaseMessageConverter,
 ) : MessageSender {
 

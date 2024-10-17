@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets
 
 @Configuration
 @EntityScan(basePackages = ["com.dmforu.fcm"])
-class FCMConfig {
+internal class FCMConfig {
     @Bean
     @Throws(IOException::class)
     fun someAppProdFirebaseApp(): FirebaseApp {
