@@ -10,4 +10,7 @@ interface SubscribeRepository {
     fun findByIdAndUpdateDepartment(token: String, department: String)
     fun findByIdAndUpdateDepartmentSubscribe(token: String)
     fun findByIdAndUpdateDepartmentUnsubscribe(token: String)
+
+    fun findTokensByDepartment(department: String): List<String>
+    fun findTokensContainingKeyword(keyword: String): List<String>
 }
