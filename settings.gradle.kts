@@ -5,6 +5,7 @@ include(
     "dmforu-admin",
     "dmforu-domain",
     "dmforu-crawling",
+    "dmforu-fcm",
     "dmforu-storage:db-mysql",
     "dmforu-storage:db-redis"
 )

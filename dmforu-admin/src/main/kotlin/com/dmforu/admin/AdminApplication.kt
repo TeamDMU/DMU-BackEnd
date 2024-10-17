@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling
         "com.dmforu.admin",
         "com.dmforu.domain",
         "com.dmforu.crawling",
+        "com.dmforu.fcm",
         "com.dmforu.storage.db.redis",
         "com.dmforu.storage.db.mysql"
     ]

@@ -9,6 +9,8 @@ tasks.getByName("jar") {
 dependencies {
     implementation(project(":dmforu-domain"))
     implementation(project(":dmforu-crawling"))
+
+    runtimeOnly(project(":dmforu-fcm"))
     runtimeOnly(project(":dmforu-storage:db-mysql"))
     runtimeOnly(project(":dmforu-storage:db-redis"))
 }
