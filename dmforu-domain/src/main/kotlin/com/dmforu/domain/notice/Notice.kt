@@ -28,4 +28,9 @@ data class Notice(
     fun isLastInType(): Boolean{
         return this.number == 1
     }
+
+    fun isUniversityNotice(): Boolean{
+        return "대학".equals(this.type)
+    }
+
 }
