@@ -24,6 +24,10 @@ class MessageService(
 
         val tokens = subscribeReader.getTokensBySubscribedToKeyword(keyword = keyword)
 
+        if (tokens.isEmpty()) {
+            return
+        }
+
         val message = NoticeMessage.createUniversityNoticeMessage(notice = notice, keyword = keyword)
 
         messageSender.sendNoticeMessage(message = message, tokens = tokens)
@@ -31,6 +35,10 @@ class MessageService(
 
     private fun sendDepartmentNoticeMessage(notice: Notice) {
         val tokens = subscribeReader.getTokensBySubscribedToDepartment(department = notice.type)
+
+        if (tokens.isEmpty()) {
+            return
+        }
 
         val message = NoticeMessage.createDepartmentNoticeMessage(notice = notice)
 
