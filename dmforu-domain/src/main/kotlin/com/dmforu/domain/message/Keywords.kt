@@ -1,4 +1,4 @@
-package com.dmforu.admin.message
+package com.dmforu.domain.message
 
 enum class Keywords (val korean: String){
     EXAM("시험"),

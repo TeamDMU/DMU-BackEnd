@@ -1,6 +1,6 @@
 package com.dmforu.fcm
 
-import com.dmforu.admin.message.NoticeMessage
+import com.dmforu.domain.message.NoticeMessage
 import com.google.firebase.messaging.MulticastMessage
 import com.google.firebase.messaging.Notification
 import org.springframework.stereotype.Component

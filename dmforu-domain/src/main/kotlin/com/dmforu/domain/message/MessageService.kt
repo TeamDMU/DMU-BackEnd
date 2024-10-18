@@ -1,6 +1,6 @@
-package com.dmforu.admin.message
+package com.dmforu.domain.message
 
-import com.dmforu.admin.message.filter.keywordFilter
+import com.dmforu.domain.message.filter.keywordFilter
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.subscribe.SubscribeReader
 import org.springframework.stereotype.Service

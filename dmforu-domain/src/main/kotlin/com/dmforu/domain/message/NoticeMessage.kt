@@ -1,4 +1,4 @@
-package com.dmforu.admin.message
+package com.dmforu.domain.message
 
 import com.dmforu.domain.notice.Notice
 
