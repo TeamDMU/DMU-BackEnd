@@ -9,10 +9,8 @@ tasks.getByName("jar") {
 dependencies {
     implementation(project(":dmforu-domain"))
     implementation(project(":dmforu-crawling"))
+
+    runtimeOnly(project(":dmforu-fcm"))
     runtimeOnly(project(":dmforu-storage:db-mysql"))
     runtimeOnly(project(":dmforu-storage:db-redis"))
-
-    // Jackson Library
-    implementation("com.fasterxml.jackson.core:jackson-databind")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 }

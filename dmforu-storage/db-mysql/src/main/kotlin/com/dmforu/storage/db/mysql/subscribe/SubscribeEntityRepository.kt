@@ -77,6 +77,14 @@ internal class SubscribeEntityRepository(
         subscribe.unsubscribeKeyword()
     }
 
+    override fun findTokensByDepartment(department: String): List<String> {
+        return subscribeJpaRepository.findTokensByDepartment(department)
+    }
+
+    override fun findTokensContainingKeyword(keyword: String): List<String> {
+        return subscribeJpaRepository.findTokensContainingKeyword(keyword)
+    }
+
     private fun findNotNullById(token: String): SubscribeEntity {
         return subscribeJpaRepository.findById(token).orElseThrow { throw IllegalArgumentException("존재하지 않은 토큰입니다.") }
     }
