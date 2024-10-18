@@ -42,3 +42,4 @@ out/
 ### Configuration Settings ###
 **/application.yml
 **/*.yml
+**/fire-base-key.json

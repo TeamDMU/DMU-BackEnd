@@ -5,9 +5,9 @@ include(
     "dmforu-admin",
     "dmforu-domain",
     "dmforu-crawling",
-    "dmforu-fcm",
-    "dmforu-storage:db-mysql",
-    "dmforu-storage:db-redis"
+    "dmforu-infra:fcm",
+    "dmforu-infra:storage:db-mysql",
+    "dmforu-infra:storage:db-redis"
 )
 
 pluginManagement {
