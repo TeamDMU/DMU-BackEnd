@@ -21,6 +21,8 @@ class Notice private constructor(
                 url = url
             )
         }
+
+        private const val UNIVERSITY: String = "대학"
     }
 
     fun isNumberLessThanOrEqualTo(number: Int): Boolean {
@@ -32,7 +34,7 @@ class Notice private constructor(
     }
 
     fun isUniversityNotice(): Boolean {
-        return "대학" == this.type
+        return UNIVERSITY == this.type
     }
 
     override fun equals(other: Any?): Boolean {
