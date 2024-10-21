@@ -2,29 +2,47 @@ package com.dmforu.domain.subscribe
 
 import org.springframework.stereotype.Service
 
+@Deprecated("구버전 사용자를 위해 남겨둔 Updater 입니다.")
 @Service
 class OldSubscribeUpdater(
-    private val subscribeRepository: OldSubscribeRepository,
+    private val subscribeReader: SubscribeReader,
+    private val subscribeWriter: SubscribeWriter,
 ) {
+    @Deprecated("구버전 사용자를 위해 남겨둔 메서드입니다.")
     fun subscribeDepartment(token: String, department: String) {
-        subscribeRepository.findByIdAndSubscribeDepartment(
-            token = token,
-            department = department
-        )
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.changeDepartment(department)
+        subscribe.subscribeDepartment()
+
+        subscribeWriter.write(subscribe)
     }
 
+    @Deprecated("구버전 사용자를 위해 남겨둔 메서드입니다.")
     fun unsubscribeDepartment(token: String) {
-        subscribeRepository.findByIdAndUpdateDepartmentUnsubscribe(token = token)
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.unsubscribeDepartment()
+
+        subscribeWriter.write(subscribe)
     }
 
+    @Deprecated("구버전 사용자를 위해 남겨둔 메서드입니다.")
     fun subscribeKeywords(token: String, keywords: List<String>) {
-        subscribeRepository.findByIdAndSubscribeKeywords(
-            token = token,
-            keywords = keywords
-        )
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.changeKeywords(keywords)
+        subscribe.subscribeKeyword()
+
+        subscribeWriter.write(subscribe)
     }
 
+    @Deprecated("구버전 사용자를 위해 남겨둔 메서드입니다.")
     fun unsubscribeKeywords(token: String) {
-        subscribeRepository.findByIdAndUpdateKeywordUnsubscribe(token = token)
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.unsubscribeKeyword()
+
+        subscribeWriter.write(subscribe)
     }
 }

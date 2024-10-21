@@ -2,6 +2,7 @@ package com.dmforu.api.controller.old.request
 
 import com.dmforu.domain.subscribe.Subscribe
 
+@Deprecated("구버전 사용자를 위해 남겨둔 DTO 입니다.")
 data class OldRegisterSubscribeRequest(
     val token: String,
     val department: String,
@@ -11,7 +12,7 @@ data class OldRegisterSubscribeRequest(
         val isDepartmentSubscribed = department.isNotBlank()
         val areKeywordsSubscribed = topic.isNotEmpty()
 
-        return Subscribe(
+        return Subscribe.of(
             token = token,
             department = department,
             keywords = topic,

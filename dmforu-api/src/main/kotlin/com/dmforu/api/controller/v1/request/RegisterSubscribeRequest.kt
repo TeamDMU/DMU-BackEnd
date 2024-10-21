@@ -10,7 +10,7 @@ data class RegisterSubscribeRequest (
     val areKeywordSubscribed: Boolean,
 ) {
     fun toSubscribe(): Subscribe {
-        return Subscribe(
+        return Subscribe.of(
             token = token,
             department = department,
             keywords = keywords,
