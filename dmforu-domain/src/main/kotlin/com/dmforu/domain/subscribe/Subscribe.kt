@@ -1,25 +1,48 @@
 package com.dmforu.domain.subscribe
 
-data class Subscribe(
-    val token: String,
-    var department: String,
-    var keywords: List<String>,
-    var isDepartmentSubscribed: Boolean,
-    var isKeywordSubscribed: Boolean,
+class Subscribe(
+    token: String,
+    department: String,
+    keywords: List<String>,
+    isDepartmentSubscribed: Boolean,
+    isKeywordSubscribed: Boolean,
 ) {
+    val token: String = token
+
+    var department: String = department
+        private set
+
+    var keywords: List<String> = keywords
+        private set
+
+    var isDepartmentSubscribed: Boolean = isDepartmentSubscribed
+        private set
+
+    var isKeywordSubscribed: Boolean = isKeywordSubscribed
+        private set
+
+    fun changeDepartment(department: String) {
+        this.department = department
+    }
+
     fun subscribeDepartment() {
-        this.isDepartmentSubscribed = true;
+        this.isDepartmentSubscribed = true
     }
 
     fun unsubscribeDepartment() {
-        this.isDepartmentSubscribed = false;
+        this.isDepartmentSubscribed = false
+    }
+
+    fun changeKeywords(keywords: List<String>) {
+        this.keywords = keywords
     }
 
     fun subscribeKeyword() {
-        this.isKeywordSubscribed = true;
+        this.isKeywordSubscribed = true
     }
 
     fun unsubscribeKeyword() {
-        this.isKeywordSubscribed = false;
+        this.isKeywordSubscribed = false
     }
+
 }

@@ -15,7 +15,7 @@ internal class SubscribeEntity(
     var department: String,
 
     @Convert(converter = StringListConverter::class)
-    @Column(name = "keywords_list",nullable = true)
+    @Column(name = "keywords_list", nullable = true)
     var keywords: List<String>,
 
     @Column(name = "department_onoff")
@@ -32,10 +32,20 @@ internal class SubscribeEntity(
                 token = subscribe.token,
                 department = subscribe.department,
                 keywords = subscribe.keywords,
-                isDepartmentSubscribed = false,
-                isKeywordSubscribed = false
+                isDepartmentSubscribed = subscribe.isDepartmentSubscribed,
+                isKeywordSubscribed = subscribe.isKeywordSubscribed,
             )
         }
+    }
+
+    fun toSubscribe(): Subscribe {
+        return Subscribe(
+            token = token,
+            department = department,
+            keywords = keywords,
+            isDepartmentSubscribed = isDepartmentSubscribed,
+            isKeywordSubscribed = isKeywordSubscribed
+        )
     }
 
     fun changeDepartment(department: String) {

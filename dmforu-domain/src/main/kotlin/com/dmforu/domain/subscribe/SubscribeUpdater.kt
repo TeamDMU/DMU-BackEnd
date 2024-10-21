@@ -4,31 +4,56 @@ import org.springframework.stereotype.Service
 
 @Service
 class SubscribeUpdater(
-    private val subscribeRepository: SubscribeRepository,
+    private val subscribeReader: SubscribeReader,
+    private val subscribeWriter: SubscribeWriter,
 ) {
     fun updateKeywords(token: String, keywords: List<String>) {
-        subscribeRepository.findByIdAndUpdateKeywords(token, keywords)
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.changeKeywords(keywords)
+
+        subscribeWriter.write(subscribe)
     }
 
     fun updateKeywordSubscribeStatus(token: String, keywordSubscribeStatus: Boolean) {
         if (keywordSubscribeStatus) {
-            subscribeRepository.findByIdAndUpdateKeywordSubscribe(token)
-            return
+            val subscribe = subscribeReader.findById(token)
+
+            subscribe.subscribeKeyword()
+
+            subscribeWriter.write(subscribe)
         }
 
-        subscribeRepository.findByIdAndUpdateKeywordUnsubscribe(token)
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.unsubscribeKeyword()
+
+        subscribeWriter.write(subscribe)
     }
 
     fun updateDepartment(token: String, department: String) {
-        subscribeRepository.findByIdAndUpdateDepartment(token, department)
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.changeDepartment(department)
+
+        subscribeWriter.write(subscribe)
     }
 
     fun updateDepartmentSubscribeStatus(token: String, departmentSubscribeStatus: Boolean) {
         if (departmentSubscribeStatus) {
-            subscribeRepository.findByIdAndUpdateDepartmentSubscribe(token)
+            val subscribe = subscribeReader.findById(token)
+
+            subscribe.subscribeDepartment()
+
+            subscribeWriter.write(subscribe)
+
             return
         }
 
-        subscribeRepository.findByIdAndUpdateDepartmentUnsubscribe(token)
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.unsubscribeDepartment()
+
+        subscribeWriter.write(subscribe)
     }
 }
