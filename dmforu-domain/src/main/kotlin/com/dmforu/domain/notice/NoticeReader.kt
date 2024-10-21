@@ -17,4 +17,8 @@ class NoticeReader(
     fun readUniversityNotice(page: Int, size: Int): List<Notice> {
         return noticeRepository.findUniversityNotices(page, size)
     }
+
+    fun findMaxNumberByType(type: String): Int? {
+        return noticeRepository.findMaxNumberByType(type)
+    }
 }
