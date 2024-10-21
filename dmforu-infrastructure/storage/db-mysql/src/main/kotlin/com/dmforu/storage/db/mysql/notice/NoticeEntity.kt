@@ -45,7 +45,7 @@ internal class NoticeEntity(
     }
 
     fun toNotice(): Notice {
-        return Notice(
+        return Notice.of(
             number = this.number,
             type = this.type,
             date = this.date,
