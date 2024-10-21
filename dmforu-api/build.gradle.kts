@@ -8,9 +8,9 @@ tasks.getByName("jar") {
 
 dependencies {
     implementation(project(":dmforu-domain"))
-    implementation(project(":dmforu-crawling"))
-    runtimeOnly(project(":dmforu-storage:db-mysql"))
-    runtimeOnly(project(":dmforu-storage:db-redis"))
+
+    runtimeOnly(project(":dmforu-infrastructure:storage:db-mysql"))
+    runtimeOnly(project(":dmforu-infrastructure:storage:db-redis"))
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")

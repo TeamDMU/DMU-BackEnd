@@ -1,6 +1,8 @@
-package com.dmforu.domain.message
+package com.dmforu.admin.message
 
-import com.dmforu.domain.message.filter.keywordFilter
+import com.dmforu.domain.message.Keywords
+import com.dmforu.domain.message.MessageSender
+import com.dmforu.domain.message.NoticeMessage
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.subscribe.SubscribeReader
 import org.springframework.stereotype.Service
@@ -43,5 +45,24 @@ class MessageService(
         val message = NoticeMessage.createDepartmentNoticeMessage(notice = notice)
 
         messageSender.sendNoticeMessage(message = message, tokens = tokens)
+    }
+
+    private fun keywordFilter(title: String): String? {
+        Keywords.entries.forEach {
+            if (title.contains(it.korean)) {
+                return it.korean
+            }
+        }
+
+        val whiteSpaceRemovedTitle = title.replace(" ", "")
+        if (whiteSpaceRemovedTitle.contains("중간고사")) {
+            return "시험"
+        }
+
+        if (whiteSpaceRemovedTitle.contains("기말고사")) {
+            return "시험"
+        }
+
+        return null
     }
 }

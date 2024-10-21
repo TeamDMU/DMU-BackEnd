@@ -2,15 +2,19 @@ package com.dmforu.admin.scheduler.crawling
 
 import com.dmforu.crawling.UniversityNoticeParser
 import com.dmforu.domain.notice.Notice
-import com.dmforu.domain.notice.NoticeCrawlService
+import com.dmforu.domain.notice.NoticeReader
+import com.dmforu.domain.notice.NoticeWriter
 import org.springframework.beans.factory.ObjectProvider
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 
 
 @Service
 class UniversityNoticeCrawlingService(
     private val prototypeBeanProvider: ObjectProvider<UniversityNoticeParser>,
-    private val noticeCrawlService: NoticeCrawlService
+    private val applicationEventPublisher: ApplicationEventPublisher,
+    private val noticeWriter: NoticeWriter,
+    private val noticeReader: NoticeReader,
 ) {
     /**
      * 모든 대학 공지사항을 크롤링한다. <br></br>
@@ -19,7 +23,7 @@ class UniversityNoticeCrawlingService(
      */
     fun crawling() {
         val parser: UniversityNoticeParser = prototypeBeanProvider.getObject()
-        val maxNumber: Int? = noticeCrawlService.findMaxNumberByType("대학")
+        val maxNumber: Int? = noticeReader.findMaxNumberByType("대학")
         val currentMaxNumber = maxNumber ?: 0
 
         while (true) {
@@ -46,8 +50,10 @@ class UniversityNoticeCrawlingService(
             if (notice.isNumberLessThanOrEqualTo(currentMaxNumber)) {
                 return false
             }
-            noticeCrawlService.write(notice)
-//            eventPublisher!!.publishEvent(notice)
+
+            noticeWriter.write(notice)
+            applicationEventPublisher.publishEvent(notice)
+
             if (notice.isLastInType()) {
                 return false
             }

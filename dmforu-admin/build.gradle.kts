@@ -10,7 +10,7 @@ dependencies {
     implementation(project(":dmforu-domain"))
     implementation(project(":dmforu-crawling"))
 
-    runtimeOnly(project(":dmforu-fcm"))
-    runtimeOnly(project(":dmforu-storage:db-mysql"))
-    runtimeOnly(project(":dmforu-storage:db-redis"))
+    runtimeOnly(project(":dmforu-infrastructure:fcm"))
+    runtimeOnly(project(":dmforu-infrastructure:storage:db-mysql"))
+    runtimeOnly(project(":dmforu-infrastructure:storage:db-redis"))
 }

@@ -1,6 +1,5 @@
 package com.dmforu.admin.message
 
-import com.dmforu.domain.message.MessageService
 import com.dmforu.domain.notice.Notice
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
