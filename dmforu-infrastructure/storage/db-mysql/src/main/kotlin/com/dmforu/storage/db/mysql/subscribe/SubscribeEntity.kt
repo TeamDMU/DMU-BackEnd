@@ -48,27 +48,4 @@ internal class SubscribeEntity(
         )
     }
 
-    fun changeDepartment(department: String) {
-        this.department = department
-    }
-
-    fun subscribeDepartment() {
-        this.isDepartmentSubscribed = true
-    }
-
-    fun unsubscribeDepartment() {
-        this.isDepartmentSubscribed = false
-    }
-
-    fun changeKeywords(keywords: List<String>) {
-        this.keywords = keywords
-    }
-
-    fun subscribeKeyword() {
-        this.isKeywordSubscribed = true
-    }
-
-    fun unsubscribeKeyword() {
-        this.isKeywordSubscribed = false
-    }
 }
