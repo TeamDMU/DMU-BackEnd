@@ -2,7 +2,6 @@ package com.dmforu.admin.scheduler.crawling
 
 import com.dmforu.crawling.UniversityNoticeParser
 import com.dmforu.domain.notice.Notice
-import com.dmforu.domain.notice.NoticeCrawlService
 import com.dmforu.domain.notice.NoticeReader
 import com.dmforu.domain.notice.NoticeWriter
 import org.springframework.beans.factory.ObjectProvider
