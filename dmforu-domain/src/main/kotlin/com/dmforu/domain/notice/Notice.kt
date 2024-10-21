@@ -2,35 +2,67 @@ package com.dmforu.domain.notice
 
 import java.time.LocalDate
 
-data class Notice(
-    // 공지사항 번호
+class Notice private constructor(
     val number: Int,
-
-    // 공지사항 종류
     val type: String,
-
-    // 공지사항 날짜
     val date: LocalDate,
-
-    // 공지사항 제목
     val title: String,
-
-    // 공지사항 작성자
     val author: String,
-
-    // 공지사항 URL
-    val url: String
+    val url: String,
 ) {
+    companion object {
+        fun of(number: Int, type: String, date: LocalDate, title: String, author: String, url: String): Notice {
+            return Notice(
+                number = number,
+                type = type,
+                date = date,
+                title = title,
+                author = author,
+                url = url
+            )
+        }
+    }
+
     fun isNumberLessThanOrEqualTo(number: Int): Boolean {
         return this.number <= number
     }
 
-    fun isLastInType(): Boolean{
+    fun isLastInType(): Boolean {
         return this.number == 1
     }
 
-    fun isUniversityNotice(): Boolean{
-        return "대학".equals(this.type)
+    fun isUniversityNotice(): Boolean {
+        return "대학" == this.type
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Notice
+
+        if (number != other.number) return false
+        if (type != other.type) return false
+        if (date != other.date) return false
+        if (title != other.title) return false
+        if (author != other.author) return false
+        if (url != other.url) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = number
+        result = 31 * result + type.hashCode()
+        result = 31 * result + date.hashCode()
+        result = 31 * result + title.hashCode()
+        result = 31 * result + author.hashCode()
+        result = 31 * result + url.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "Notice(number=$number, type='$type', date=$date, title='$title', author='$author', url='$url')"
     }
 
 }

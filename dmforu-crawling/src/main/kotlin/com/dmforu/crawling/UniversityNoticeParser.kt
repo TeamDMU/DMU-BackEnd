@@ -38,7 +38,7 @@ class UniversityNoticeParser : UrlGenerator(), Parser<Notice> {
             val url = generateUrlFromSearch(row.select(".td-subject a").attr("href"))
             val date = LocalDate.parse(row.select(".td-date").text(), DATE_FORMATTER)
 
-            val universityNotice = Notice(
+            val universityNotice = Notice.of(
                 number = number,
                 type = NOTICE_TYPE,
                 date = date,
