@@ -12,7 +12,7 @@ data class OldRegisterSubscribeRequest(
         val isDepartmentSubscribed = department.isNotBlank()
         val areKeywordsSubscribed = topic.isNotEmpty()
 
-        return Subscribe(
+        return Subscribe.of(
             token = token,
             department = department,
             keywords = topic,

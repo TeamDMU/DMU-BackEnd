@@ -39,7 +39,7 @@ internal class SubscribeEntity(
     }
 
     fun toSubscribe(): Subscribe {
-        return Subscribe(
+        return Subscribe.of(
             token = token,
             department = department,
             keywords = keywords,

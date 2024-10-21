@@ -1,11 +1,11 @@
 package com.dmforu.domain.subscribe
 
-class Subscribe(
+class Subscribe private constructor(
     token: String,
     department: String,
     keywords: List<String>,
     isDepartmentSubscribed: Boolean,
-    isKeywordSubscribed: Boolean,
+    isKeywordSubscribed: Boolean
 ) {
     val token: String = token
 
@@ -20,6 +20,24 @@ class Subscribe(
 
     var isKeywordSubscribed: Boolean = isKeywordSubscribed
         private set
+
+    companion object {
+        fun of(
+            token: String,
+            department: String,
+            keywords: List<String>,
+            isDepartmentSubscribed: Boolean,
+            isKeywordSubscribed: Boolean,
+        ): Subscribe {
+            return Subscribe(
+                token = token,
+                department = department,
+                keywords = keywords,
+                isDepartmentSubscribed = isDepartmentSubscribed,
+                isKeywordSubscribed = isKeywordSubscribed
+            )
+        }
+    }
 
     fun changeDepartment(department: String) {
         this.department = department
