@@ -22,6 +22,8 @@ class SubscribeUpdater(
             subscribe.subscribeKeyword()
 
             subscribeWriter.write(subscribe)
+
+            return
         }
 
         val subscribe = subscribeReader.findById(token)
