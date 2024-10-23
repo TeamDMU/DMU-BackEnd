@@ -1,5 +1,8 @@
 package com.dmforu.domain.notice
 
+import com.dmforu.domain.Generated
+
+@Generated
 enum class Major(val type: String, val majorPath: String, val noticePath: String) {
     // 기계공학부
     MECHANICAL_ENGINEERING_DEPARTMENT("기계공학과", "dmu_23205", "1707"),

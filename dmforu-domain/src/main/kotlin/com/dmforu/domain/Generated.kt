@@ -1,11 +1,9 @@
 package com.dmforu.domain
 
-import java.lang.annotation.Documented
 import kotlin.annotation.AnnotationRetention.RUNTIME
-import kotlin.annotation.AnnotationTarget.TYPE
-import kotlin.annotation.AnnotationTarget.FUNCTION
+import kotlin.annotation.AnnotationTarget.*
 
-@Documented
+@MustBeDocumented
 @Retention(RUNTIME)
-@Target(TYPE, FUNCTION)
+@Target(TYPE, FUNCTION, CLASS)
 annotation class Generated
