@@ -1,5 +1,6 @@
 package com.dmforu.domain.message
 
+import com.dmforu.domain.Generated
 import com.dmforu.domain.notice.Notice
 
 class NoticeMessage {
@@ -38,6 +39,35 @@ class NoticeMessage {
         return addedPrefixTitle
             .append("[ ").append(keyword).append(" ] ")
             .append(" 키워드 알림 도착").toString()
+    }
+
+    @Generated
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as NoticeMessage
+
+        if (title != other.title) return false
+        if (type != other.type) return false
+        if (body != other.body) return false
+        if (url != other.url) return false
+
+        return true
+    }
+
+    @Generated
+    override fun hashCode(): Int {
+        var result = title.hashCode()
+        result = 31 * result + type.hashCode()
+        result = 31 * result + body.hashCode()
+        result = 31 * result + url.hashCode()
+        return result
+    }
+
+    @Generated
+    override fun toString(): String {
+        return "NoticeMessage(title='$title', type='$type', body='$body', url='$url')"
     }
 }
 

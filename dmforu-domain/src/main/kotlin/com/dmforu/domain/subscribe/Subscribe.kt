@@ -1,5 +1,7 @@
 package com.dmforu.domain.subscribe
 
+import com.dmforu.domain.Generated
+
 class Subscribe private constructor(
     val token: String,
     department: String,
@@ -61,6 +63,7 @@ class Subscribe private constructor(
         this.isKeywordSubscribed = false
     }
 
+    @Generated
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -76,6 +79,7 @@ class Subscribe private constructor(
         return true
     }
 
+    @Generated
     override fun hashCode(): Int {
         var result = token.hashCode()
         result = 31 * result + department.hashCode()
@@ -85,6 +89,7 @@ class Subscribe private constructor(
         return result
     }
 
+    @Generated
     override fun toString(): String {
         return "Subscribe(token='$token', department='$department', keywords=$keywords, isDepartmentSubscribed=$isDepartmentSubscribed, isKeywordSubscribed=$isKeywordSubscribed)"
     }

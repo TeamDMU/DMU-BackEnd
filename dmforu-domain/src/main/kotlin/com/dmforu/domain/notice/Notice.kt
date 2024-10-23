@@ -1,5 +1,6 @@
 package com.dmforu.domain.notice
 
+import com.dmforu.domain.Generated
 import java.time.LocalDate
 
 class Notice private constructor(
@@ -37,6 +38,7 @@ class Notice private constructor(
         return UNIVERSITY == this.type
     }
 
+    @Generated
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -53,6 +55,7 @@ class Notice private constructor(
         return true
     }
 
+    @Generated
     override fun hashCode(): Int {
         var result = number
         result = 31 * result + type.hashCode()
@@ -63,6 +66,7 @@ class Notice private constructor(
         return result
     }
 
+    @Generated
     override fun toString(): String {
         return "Notice(number=$number, type='$type', date=$date, title='$title', author='$author', url='$url')"
     }
