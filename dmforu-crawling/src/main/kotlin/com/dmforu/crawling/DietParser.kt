@@ -39,7 +39,7 @@ class DietParser : Parser<Diet> {
             ?.map { it.trim() }
             ?: emptyList()
 
-        return Diet(parsedDate, menus)
+        return Diet.of(parsedDate, menus)
     }
 
     companion object {

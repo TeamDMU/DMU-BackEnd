@@ -1,3 +1,4 @@
 dependencies {
-    compileOnly("org.springframework:spring-context")
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("org.assertj:assertj-core")
 }

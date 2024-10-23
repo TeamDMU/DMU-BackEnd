@@ -1,9 +1,6 @@
 package com.dmforu.domain.subscribe
 
-import org.springframework.stereotype.Service
-
 @Deprecated("구버전 사용자를 위해 남겨둔 Updater 입니다.")
-@Service
 class OldSubscribeUpdater(
     private val subscribeReader: SubscribeReader,
     private val subscribeWriter: SubscribeWriter,

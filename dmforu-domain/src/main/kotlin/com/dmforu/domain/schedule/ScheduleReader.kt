@@ -1,8 +1,5 @@
 package com.dmforu.domain.schedule
 
-import org.springframework.stereotype.Component
-
-@Component
 class ScheduleReader(
     private val scheduleRepository: ScheduleRepository
 ) {

@@ -1,5 +1,8 @@
 package com.dmforu.domain.message
 
+import com.dmforu.domain.Generated
+
+@Generated
 enum class Keywords (val korean: String){
     EXAM("시험"),
     SIGN_UP("수강"),

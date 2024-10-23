@@ -1,30 +1,44 @@
 package com.dmforu.domain.schedule
 
-data class Schedule(
-    val date: String,
-    val content: String
+class Schedule private constructor(
+    dateArray: Array<String>,
+    val content: String,
 ) {
-    private constructor() : this("", "")
+    val date: String = dateConverter(dateArray)
 
-    constructor(dateArray: Array<String>, content: String) : this(
-        dateArray.joinToString(
+    companion object {
+        fun of(dateArray: Array<String>, content: String): Schedule {
+            return Schedule(dateArray, content)
+        }
+    }
+
+    class Month private constructor(
+        val month: Int,
+        val monthSchedule: List<Schedule>,
+    ) {
+        companion object {
+            fun of(month: Int, monthSchedule: List<Schedule>): Month {
+                return Month(month, monthSchedule)
+            }
+        }
+    }
+
+    class Year private constructor(
+        val year: Int,
+        val yearSchedule: List<Month>,
+    ) {
+        companion object {
+            fun of(year: Int, yearSchedule: List<Month>): Year {
+                return Year(year, yearSchedule)
+            }
+        }
+    }
+
+    private fun dateConverter(dateArray: Array<String>): String {
+        return dateArray.joinToString(
             prefix = "[",
             separator = ", ",
             postfix = "]"
-        ), content
-    )
-
-    data class Month(
-        val month: Int,
-        val monthSchedule: List<Schedule>
-    ) {
-        private constructor() : this(0, emptyList())
-    }
-
-    data class Year(
-        val year: Int,
-        val yearSchedule: List<Month>
-    ) {
-        private constructor() : this(0, emptyList())
+        )
     }
 }
