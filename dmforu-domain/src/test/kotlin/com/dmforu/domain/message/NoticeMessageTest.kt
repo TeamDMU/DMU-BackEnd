@@ -13,6 +13,8 @@ class NoticeMessageTest {
     @Test
     fun createUniversityNoticeMessage() {
         // given
+        val keyword = "시험"
+
         val notice = Notice.of(
             number = 10,
             type = "대학",
@@ -22,13 +24,14 @@ class NoticeMessageTest {
             url = "https://www.test.com"
         )
 
-        val keyword = "시험"
-
         // when
         val message = NoticeMessage.createUniversityNoticeMessage(notice = notice, keyword = keyword)
 
         // then
         assertThat(message.title).isEqualTo("[ " + keyword + " ]  키워드 알림 도착")
+        assertThat(message.type).isEqualTo(notice.type)
+        assertThat(message.url).isEqualTo(notice.url)
+        assertThat(message.body).isEqualTo(notice.title)
 
     }
 
@@ -50,6 +53,9 @@ class NoticeMessageTest {
 
         // then
         assertThat(message.title).isEqualTo("[ " + notice.type + " ]  키워드 알림 도착")
+        assertThat(message.type).isEqualTo(notice.type)
+        assertThat(message.url).isEqualTo(notice.url)
+        assertThat(message.body).isEqualTo(notice.title)
 
     }
 }
