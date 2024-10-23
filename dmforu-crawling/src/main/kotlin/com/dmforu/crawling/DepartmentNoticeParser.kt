@@ -10,7 +10,7 @@ import java.util.regex.Pattern
 
 class DepartmentNoticeParser(
     private val webPageLoader: WebPageLoader<Document>,
-) : UrlGenerator(), Parser<Notice> {
+) : Parser<Notice> {
 
     private lateinit var major: Major
     private var pageNumber: Int = 1
@@ -66,7 +66,7 @@ class DepartmentNoticeParser(
      *
      * @return URL
      */
-    protected override fun generateSearchUrl(): String {
+    private fun generateSearchUrl(): String {
         return java.lang.String.format(
             "https://www.dongyang.ac.kr/%s/%s/subview.do?page=%d",
             major.majorPath, major.noticePath, pageNumber++
@@ -80,7 +80,7 @@ class DepartmentNoticeParser(
      * @return URL
      * @throws IllegalArgumentException Matcher를 통해 URL을 생성할 수 없는 경우 예외 발생
      */
-    protected override fun generateUrlFromSearch(url: String): String {
+    private fun generateUrlFromSearch(url: String): String {
         // URL에서 정보를 추출하기 위한 Matcher 생성
 
         val matcher = pattern.matcher(url)

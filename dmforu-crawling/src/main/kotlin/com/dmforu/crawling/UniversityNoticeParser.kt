@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter
 
 class UniversityNoticeParser(
     private val webPageLoader: WebPageLoader<Document>
-) : UrlGenerator(), Parser<Notice> {
+) :  Parser<Notice> {
     private var pageNumber = 1
 
     /**
@@ -57,7 +57,7 @@ class UniversityNoticeParser(
      *
      * @return URL
      */
-    protected override fun generateSearchUrl(): String {
+    private fun generateSearchUrl(): String {
         return String.format(SEARCH_URL, pageNumber++)
     }
 
@@ -67,7 +67,7 @@ class UniversityNoticeParser(
      * @param url URL 파싱결과
      * @return 공지사항 URL
      */
-    protected override fun generateUrlFromSearch(url: String): String {
+    private fun generateUrlFromSearch(url: String): String {
         return String.format(RESULT_URL, url)
     }
 
