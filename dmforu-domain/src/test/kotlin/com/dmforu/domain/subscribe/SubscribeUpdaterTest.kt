@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.*
@@ -29,7 +30,7 @@ class SubscribeUpdaterTest {
         val keywords = listOf("봉사", "장학")
         val subscribe = mock(Subscribe::class.java)
 
-        `when`(subscribeReader.findById(token)).thenReturn(subscribe)
+        given(subscribeReader.findById(token)).willReturn(subscribe)
 
         // when
         subscribeUpdater.updateKeywords(token, keywords)
@@ -48,7 +49,7 @@ class SubscribeUpdaterTest {
         val keywordSubscribeStatus = true
         val subscribe = mock(Subscribe::class.java)
 
-        `when`(subscribeReader.findById(token)).thenReturn(subscribe)
+        given(subscribeReader.findById(token)).willReturn(subscribe)
 
         // when
         subscribeUpdater.updateKeywordSubscribeStatus(token, keywordSubscribeStatus)
@@ -67,7 +68,7 @@ class SubscribeUpdaterTest {
         val keywordSubscribeStatus = false
         val subscribe = mock(Subscribe::class.java)
 
-        `when`(subscribeReader.findById(token)).thenReturn(subscribe)
+        given(subscribeReader.findById(token)).willReturn(subscribe)
 
         // when
         subscribeUpdater.updateKeywordSubscribeStatus(token, keywordSubscribeStatus)
@@ -86,7 +87,7 @@ class SubscribeUpdaterTest {
         val department = "컴퓨터소프트웨어공학과"
         val subscribe = mock(Subscribe::class.java)
 
-        `when`(subscribeReader.findById(token)).thenReturn(subscribe)
+        given(subscribeReader.findById(token)).willReturn(subscribe)
 
         // when
         subscribeUpdater.updateDepartment(token, department)
@@ -105,7 +106,7 @@ class SubscribeUpdaterTest {
         val departmentSubscribeStatus = true
         val subscribe = mock(Subscribe::class.java)
 
-        `when`(subscribeReader.findById(token)).thenReturn(subscribe)
+        given(subscribeReader.findById(token)).willReturn(subscribe)
 
         // when
         subscribeUpdater.updateDepartmentSubscribeStatus(token, departmentSubscribeStatus)
@@ -124,7 +125,7 @@ class SubscribeUpdaterTest {
         val departmentSubscribeStatus = false
         val subscribe = mock(Subscribe::class.java)
 
-        `when`(subscribeReader.findById(token)).thenReturn(subscribe)
+        given(subscribeReader.findById(token)).willReturn(subscribe)
 
         // when
         subscribeUpdater.updateDepartmentSubscribeStatus(token, departmentSubscribeStatus)
