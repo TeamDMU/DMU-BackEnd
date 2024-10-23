@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service
 class UniversityNoticeCrawlingService(
     private val prototypeBeanProvider: ObjectProvider<UniversityNoticeParser>,
     private val applicationEventPublisher: ApplicationEventPublisher,
-    private val noticeWriter: NoticeWriter,
     private val noticeReader: NoticeReader,
+    private val noticeWriter: NoticeWriter,
 ) {
     /**
      * 모든 대학 공지사항을 크롤링한다. <br></br>

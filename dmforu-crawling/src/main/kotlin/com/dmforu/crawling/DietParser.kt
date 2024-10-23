@@ -2,11 +2,9 @@ package com.dmforu.crawling
 
 import com.dmforu.domain.diet.Diet
 import org.jsoup.nodes.Element
-import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-@Service
 class DietParser : Parser<Diet> {
     override fun parse(): List<Diet> {
         val document = WebPageLoader.getHTML(DMU_DIET_URL)

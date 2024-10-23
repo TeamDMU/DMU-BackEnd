@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service
 @Service
 class DepartmentNoticeCrawlingService(
     private val prototypeBeanProvider: ObjectProvider<DepartmentNoticeParser>,
-    private val noticeWriter: NoticeWriter,
-    private val noticeReader: NoticeReader,
     private val applicationEventPublisher: ApplicationEventPublisher,
+    private val noticeReader: NoticeReader,
+    private val noticeWriter: NoticeWriter,
 ) {
     /**
      * Major 열거형의 모든 값을 반복하여 모든 학과의 공지사항을 크롤링한다. <br></br>

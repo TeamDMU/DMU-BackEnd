@@ -1,14 +1,10 @@
 package com.dmforu.crawling
 
 import com.dmforu.domain.notice.Notice
-import org.springframework.context.annotation.Scope
-import org.springframework.stereotype.Component
 import java.lang.NumberFormatException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-@Scope("prototype")
-@Component
 class UniversityNoticeParser : UrlGenerator(), Parser<Notice> {
     private var pageNumber = 1
 

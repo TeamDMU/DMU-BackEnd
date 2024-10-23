@@ -2,15 +2,11 @@ package com.dmforu.crawling
 
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.Major
-import org.springframework.context.annotation.Scope
-import org.springframework.stereotype.Component
 import java.lang.NumberFormatException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.regex.Pattern
 
-@Scope("prototype")
-@Component
 class DepartmentNoticeParser : UrlGenerator(), Parser<Notice> {
 
     private lateinit var major: Major

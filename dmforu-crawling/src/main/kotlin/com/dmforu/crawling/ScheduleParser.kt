@@ -2,11 +2,9 @@ package com.dmforu.crawling
 
 import com.dmforu.domain.schedule.Schedule
 import org.jsoup.nodes.Element
-import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.ZoneId
 
-@Service
 class ScheduleParser : Parser<Schedule.Year> {
     override fun parse(): List<Schedule.Year> {
         val currentYear = LocalDate.now(ZoneId.of(TIME_ZONE)).year
