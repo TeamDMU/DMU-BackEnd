@@ -1,8 +1,5 @@
 package com.dmforu.domain.subscribe
 
-import org.springframework.stereotype.Service
-
-@Service
 class SubscribeWriter(
     private val subscribeRepository: SubscribeRepository,
 ) {

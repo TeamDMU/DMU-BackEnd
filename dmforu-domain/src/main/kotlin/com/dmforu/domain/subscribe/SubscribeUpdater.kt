@@ -1,8 +1,5 @@
 package com.dmforu.domain.subscribe
 
-import org.springframework.stereotype.Service
-
-@Service
 class SubscribeUpdater(
     private val subscribeReader: SubscribeReader,
     private val subscribeWriter: SubscribeWriter,
@@ -17,20 +14,11 @@ class SubscribeUpdater(
 
     fun updateKeywordSubscribeStatus(token: String, keywordSubscribeStatus: Boolean) {
         if (keywordSubscribeStatus) {
-            val subscribe = subscribeReader.findById(token)
-
-            subscribe.subscribeKeyword()
-
-            subscribeWriter.write(subscribe)
-
+            subscribeToKeywords(token)
             return
         }
 
-        val subscribe = subscribeReader.findById(token)
-
-        subscribe.unsubscribeKeyword()
-
-        subscribeWriter.write(subscribe)
+        unsubscribeToKeywords(token)
     }
 
     fun updateDepartment(token: String, department: String) {
@@ -43,15 +31,38 @@ class SubscribeUpdater(
 
     fun updateDepartmentSubscribeStatus(token: String, departmentSubscribeStatus: Boolean) {
         if (departmentSubscribeStatus) {
-            val subscribe = subscribeReader.findById(token)
-
-            subscribe.subscribeDepartment()
-
-            subscribeWriter.write(subscribe)
-
+            subscribeToDepartment(token)
             return
         }
 
+        unsubscribeToDepartment(token)
+    }
+
+    private fun subscribeToKeywords(token: String) {
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.subscribeKeyword()
+
+        subscribeWriter.write(subscribe)
+    }
+
+    private fun unsubscribeToKeywords(token: String) {
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.unsubscribeKeyword()
+
+        subscribeWriter.write(subscribe)
+    }
+
+    private fun subscribeToDepartment(token: String) {
+        val subscribe = subscribeReader.findById(token)
+
+        subscribe.subscribeDepartment()
+
+        subscribeWriter.write(subscribe)
+    }
+
+    private fun unsubscribeToDepartment(token: String) {
         val subscribe = subscribeReader.findById(token)
 
         subscribe.unsubscribeDepartment()
