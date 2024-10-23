@@ -8,6 +8,5 @@ dependencies {
     testImplementation(project(":dmforu-domain"))
     testImplementation("org.mockito:mockito-core")
     testImplementation("org.mockito:mockito-junit-jupiter")
-    testImplementation("org.mockito:mockito-inline:5.2.0")
     testImplementation("org.assertj:assertj-core")
 }
