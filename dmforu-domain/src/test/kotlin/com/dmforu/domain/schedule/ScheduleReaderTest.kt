@@ -22,7 +22,7 @@ class ScheduleReaderTest {
     @InjectMocks
     private lateinit var scheduleReader: ScheduleReader
 
-    @DisplayName("학사 일정이 존재하는 경우 학사 일정을 불러온다.")
+    @DisplayName("학사 일정을 불러온다.")
     @Test
     fun read() {
         // given
@@ -39,7 +39,7 @@ class ScheduleReaderTest {
         given(scheduleReader.read()).willReturn(expectedSchedules)
 
         // when
-        val schedules = scheduleReader.read()
+        scheduleReader.read()
 
         // then
         verify(scheduleRepository).read()
@@ -53,7 +53,7 @@ class ScheduleReaderTest {
         given(scheduleReader.read()).willReturn(null)
 
         // when // then
-        assertThatThrownBy{scheduleReader.read() }
+        assertThatThrownBy { scheduleReader.read() }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("No schedule exists 관리자 에러")
 
