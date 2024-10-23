@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 import java.lang.NumberFormatException
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.regex.Pattern
 
 @Scope("prototype")
 @Component
@@ -93,9 +95,7 @@ class DepartmentNoticeParser : UrlGenerator(), Parser<Notice> {
     }
 
     companion object {
-        private val pattern: java.util.regex.Pattern =
-            java.util.regex.Pattern.compile("\\('([^']+)'\\,'([^']+)'\\,'([^']+)'\\,'([^']+)'")
-        private val formatter: java.time.format.DateTimeFormatter =
-            java.time.format.DateTimeFormatter.ofPattern("yyyy.MM.dd")
+        private val pattern: Pattern = Pattern.compile("\\('([^']+)'\\,'([^']+)'\\,'([^']+)'\\,'([^']+)'")
+        private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
     }
 }
