@@ -1,8 +1,5 @@
 package com.dmforu.domain.notice
 
-import org.springframework.stereotype.Component
-
-@Component
 class NoticeReader(
     private val noticeRepository: NoticeRepository
 ) {
