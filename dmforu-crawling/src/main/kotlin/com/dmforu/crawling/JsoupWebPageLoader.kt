@@ -4,14 +4,8 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.IOException
 
-object WebPageLoader {
-
-    @JvmStatic
-    fun getHTML(url: String?): Document {
-        if (url.isNullOrBlank()) {
-            throw IllegalArgumentException("URL이 비어있거나 잘못되었습니다.")
-        }
-
+class JsoupWebPageLoader : WebPageLoader<Document> {
+    override fun getHTML(url: String): Document {
         return try {
             Jsoup.connect(url).get()
         } catch (e: IOException) {

@@ -1,13 +1,16 @@
 package com.dmforu.crawling
 
 import com.dmforu.domain.diet.Diet
+import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class DietParser : Parser<Diet> {
+class DietParser (
+    private val webPageLoader: WebPageLoader<Document>
+) : Parser<Diet> {
     override fun parse(): List<Diet> {
-        val document = WebPageLoader.getHTML(DMU_DIET_URL)
+        val document = webPageLoader.getHTML(DMU_DIET_URL)
         val rows = document.select(TABLE_SELECTOR)
 
         return rows.mapNotNull { row -> parseDiet(row) }

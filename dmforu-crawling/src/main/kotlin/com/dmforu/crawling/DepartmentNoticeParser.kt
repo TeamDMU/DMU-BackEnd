@@ -2,12 +2,15 @@ package com.dmforu.crawling
 
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.Major
+import org.jsoup.nodes.Document
 import java.lang.NumberFormatException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.regex.Pattern
 
-class DepartmentNoticeParser : UrlGenerator(), Parser<Notice> {
+class DepartmentNoticeParser(
+    private val webPageLoader: WebPageLoader<Document>,
+) : UrlGenerator(), Parser<Notice> {
 
     private lateinit var major: Major
     private var pageNumber: Int = 1
@@ -25,7 +28,7 @@ class DepartmentNoticeParser : UrlGenerator(), Parser<Notice> {
 
         val departmentNotices: MutableList<Notice> = java.util.ArrayList<Notice>()
 
-        val document = WebPageLoader.getHTML(generateSearchUrl())
+        val document = webPageLoader.getHTML(generateSearchUrl())
 
         val rows = document.select(".board-table tbody tr")
 
