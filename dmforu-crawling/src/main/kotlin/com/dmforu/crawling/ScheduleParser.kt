@@ -14,7 +14,7 @@ class ScheduleParser : Parser<Schedule.Year> {
         // 작년부터 내년의 일정을 가져온다.
         return (currentYear - 1..currentYear + 1).map { year ->
             val yearSchedule = fetchYearSchedule(year)
-            Schedule.Year(year, yearSchedule)
+            Schedule.Year.of(year, yearSchedule)
         }
     }
 
@@ -41,7 +41,7 @@ class ScheduleParser : Parser<Schedule.Year> {
         val scheduleTable = monthTable.select(MONTH_SCHEDULE_SELECTOR)
         val monthSchedule = scheduleTable.map { schedule -> parseSchedule(schedule) }
 
-        return Schedule.Month(month, monthSchedule)
+        return Schedule.Month.of(month, monthSchedule)
     }
 
     private fun extractMonth(monthText: String): Int {
@@ -68,7 +68,7 @@ class ScheduleParser : Parser<Schedule.Year> {
 
         val content = schedule.select(SCHEDULE_CONTENT_SELECTOR).text()
 
-        return Schedule(dates.toTypedArray(), content)
+        return Schedule.of(dates.toTypedArray(), content)
     }
 
     companion object {
