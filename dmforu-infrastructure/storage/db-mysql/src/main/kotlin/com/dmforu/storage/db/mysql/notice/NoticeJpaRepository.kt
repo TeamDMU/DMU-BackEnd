@@ -13,7 +13,7 @@ internal interface NoticeJpaRepository : JpaRepository<NoticeEntity, Long> {
      * @Return type에 알맞는 최신 공지사항 번호, 만약 공지사항이 존재하지 않다면 Null을 반환한다.
      */
     @Query("SELECT MAX(e.number) FROM NoticeEntity e WHERE e.type = :type")
-    fun findMaxNumberByType(@Param("type") type: String?): Int?
+    fun findMaxNumberByType(@Param("type") type: String): Int?
 
     /**
      * 원하는 타입의 공지사항을 페이징네이션하는 메서드
@@ -22,7 +22,7 @@ internal interface NoticeJpaRepository : JpaRepository<NoticeEntity, Long> {
      * @param pageable  페이지 단위
      * @return 학과의 공지사항을 페이지 단위에 맞게 반환한다.
      */
-    fun findByType(type: String, pageable: Pageable): Page<NoticeEntity>?
+    fun findByType(type: String, pageable: Pageable): Page<NoticeEntity>
 
     /**
      * 학과, 대학 공지사항을 검색하는 메서드 <br></br>
@@ -36,6 +36,6 @@ internal interface NoticeJpaRepository : JpaRepository<NoticeEntity, Long> {
         value = "SELECT * FROM notice WHERE REPLACE(title, ' ', '') LIKE CONCAT('%', REPLACE(?1, ' ', ''), '%') AND type IN (?2, '대학')",
         nativeQuery = true
     )
-    fun findBySearchWordAndDepartment(searchWord: String?, department: String?, pageable: Pageable?): Page<NoticeEntity?>?
+    fun findBySearchWordAndDepartment(searchWord: String, department: String, pageable: Pageable): Page<NoticeEntity>
 
 }
