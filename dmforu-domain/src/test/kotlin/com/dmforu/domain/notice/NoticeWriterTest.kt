@@ -36,7 +36,7 @@ class NoticeWriterTest {
         noticeWriter.write(notice)
 
         // then
-        verify(noticeRepository).write(notice)
+        verify(noticeRepository).save(notice)
 
     }
 }

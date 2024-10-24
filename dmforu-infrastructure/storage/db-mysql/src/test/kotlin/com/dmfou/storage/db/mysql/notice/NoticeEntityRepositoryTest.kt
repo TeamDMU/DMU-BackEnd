@@ -35,7 +35,7 @@ class NoticeEntityRepositoryTest {
 
     @DisplayName("공지를 저장할 수 있다.")
     @Test
-    fun write() {
+    fun save() {
         // given
         val date = LocalDate.of(2024, 10, 23)
         val notice = Notice.of(
@@ -48,7 +48,7 @@ class NoticeEntityRepositoryTest {
         )
 
         // when
-        noticeEntityRepository.write(notice)
+        noticeEntityRepository.save(notice)
 
         // then
         val notices = noticeRepository.findAll()

@@ -13,7 +13,7 @@ internal class NoticeEntityRepository(
 ) : NoticeRepository {
 
     @Transactional
-    override fun write(notice: Notice) {
+    override fun save(notice: Notice) {
         noticeJpaRepository.save(NoticeEntity.from(notice))
     }
 
