@@ -3,7 +3,7 @@ package com.dmforu.crawling
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.Major
 import org.jsoup.nodes.Document
-import java.lang.NumberFormatException
+import org.jsoup.nodes.Element
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.regex.Pattern
@@ -25,40 +25,32 @@ class DepartmentNoticeParser(
      * @return 학과 공지사항 목록
      */
     override fun parse(): List<Notice> {
-
-        val departmentNotices: MutableList<Notice> = java.util.ArrayList<Notice>()
-
+        val departmentNotices: MutableList<Notice> = mutableListOf()
         val document = webPageLoader.getHTML(generateSearchUrl())
 
         val rows = document.select(".board-table tbody tr")
-
-        for (row in rows) {
-            var number: Int
-
-            try {
-                number = row.select(".td-num").text().toInt()
-            } catch (e: NumberFormatException) {
-                continue
-            }
-
-            val title = row.select(".td-subject a").text()
-            val author = row.select(".td-write").text()
-            val url = generateUrlFromSearch(row.select(".td-subject a").attr("href"))
-            val date = LocalDate.parse(row.select(".td-date").text(), formatter)
-
-            val departmentNotice = Notice.of(
-                number = number,
-                type = major.type,
-                date = date,
-                title = title,
-                author = author,
-                url = url,
-            )
-
-            departmentNotices.add(departmentNotice)
+        rows.forEach { row ->
+            departmentNotices.add(parseRow(row))
         }
 
         return departmentNotices
+    }
+
+    private fun parseRow(row: Element): Notice {
+        val number = row.select(".td-num").text().toInt()
+        val title = row.select(".td-subject a").text()
+        val author = row.select(".td-write").text()
+        val url = generateUrlFromSearch(row.select(".td-subject a").attr("href"))
+        val date = LocalDate.parse(row.select(".td-date").text(), formatter)
+
+        return Notice.of(
+            number = number,
+            type = major.type,
+            date = date,
+            title = title,
+            author = author,
+            url = url,
+        )
     }
 
     /**
