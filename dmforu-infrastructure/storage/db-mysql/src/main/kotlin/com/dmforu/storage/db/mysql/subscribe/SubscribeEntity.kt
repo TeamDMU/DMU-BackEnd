@@ -12,19 +12,19 @@ internal class SubscribeEntity(
     val token: String,
 
     @Column(nullable = true)
-    var department: String,
+    val department: String,
 
     @Convert(converter = StringListConverter::class)
     @Column(name = "keywords_list", nullable = true)
-    var keywords: List<String>,
+    val keywords: List<String>,
 
     @Column(name = "department_onoff")
-    var isDepartmentSubscribed: Boolean,
+    val isDepartmentSubscribed: Boolean,
 
     @Column(name = "keyword_onoff")
-    var isKeywordSubscribed: Boolean,
+    val isKeywordSubscribed: Boolean,
 ) {
-    constructor() : this("", "", emptyList(), false, false)
+    protected constructor() : this("", "", emptyList(), false, false)
 
     companion object {
         fun from(subscribe: Subscribe): SubscribeEntity {
