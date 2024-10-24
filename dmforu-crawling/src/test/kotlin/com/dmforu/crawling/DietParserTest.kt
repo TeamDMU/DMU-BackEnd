@@ -1,7 +1,5 @@
-package com.dmforu.crawling.schedule
+package com.dmforu.crawling
 
-import com.dmforu.crawling.DietParser
-import com.dmforu.crawling.WebPageLoader
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.tuple
 import org.jsoup.nodes.Document
