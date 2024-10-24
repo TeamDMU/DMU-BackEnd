@@ -1,11 +1,8 @@
-package com.dmfou.storage.db.mysql.subscribe
+package com.dmforu.storage.db.mysql.subscribe
 
 import com.dmforu.domain.subscribe.Subscribe
 import com.dmforu.storage.db.mysql.config.MysqlJpaConfig
-import com.dmforu.storage.db.mysql.subscribe.SubscribeEntity
-import com.dmforu.storage.db.mysql.subscribe.SubscribeEntityRepository
-import com.dmforu.storage.db.mysql.subscribe.SubscribeJpaRepository
-import com.dmfou.storage.db.mysql.MysqlApplicationTest
+import com.dmforu.storage.db.mysql.MysqlApplicationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.tuple
 import org.junit.jupiter.api.AfterEach

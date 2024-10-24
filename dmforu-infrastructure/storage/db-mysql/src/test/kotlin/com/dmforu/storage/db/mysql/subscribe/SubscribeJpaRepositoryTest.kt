@@ -1,4 +1,4 @@
-package com.dmfou.storage.db.mysql.subscribe
+package com.dmforu.storage.db.mysql.subscribe
 
 import com.dmforu.domain.subscribe.Subscribe
 import com.dmforu.storage.db.mysql.config.MysqlJpaConfig

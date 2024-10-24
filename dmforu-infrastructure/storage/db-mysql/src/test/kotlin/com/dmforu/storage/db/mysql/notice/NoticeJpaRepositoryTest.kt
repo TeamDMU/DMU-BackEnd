@@ -1,9 +1,7 @@
-package com.dmfou.storage.db.mysql.notice
+package com.dmforu.storage.db.mysql.notice
 
 import com.dmforu.domain.notice.Notice
 import com.dmforu.storage.db.mysql.config.MysqlJpaConfig
-import com.dmforu.storage.db.mysql.notice.NoticeEntity
-import com.dmforu.storage.db.mysql.notice.NoticeJpaRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.tuple
 import org.junit.jupiter.api.DisplayName
