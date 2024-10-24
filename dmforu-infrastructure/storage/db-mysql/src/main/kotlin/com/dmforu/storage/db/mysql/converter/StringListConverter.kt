@@ -1,5 +1,6 @@
 package com.dmforu.storage.db.mysql.converter
 
+import com.dmforu.storage.db.mysql.exception.StringListConverterException
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -15,7 +16,7 @@ class StringListConverter : AttributeConverter<List<String>, String> {
         try {
             return mapper.writeValueAsString(datas)
         } catch (e: JsonProcessingException) {
-            throw IllegalArgumentException("Error converting list to JSON: ${e.message}", e)
+            throw StringListConverterException("List를 String으로 변환하던 중 문제가 발생했습니다.", e)
         }
     }
 
@@ -23,7 +24,7 @@ class StringListConverter : AttributeConverter<List<String>, String> {
         try {
             return mapper.readValue(data, object : TypeReference<List<String>>() {})
         } catch (e: JsonProcessingException) {
-            throw IllegalArgumentException("Error converting JSON to list: ${e.message}", e)
+            throw StringListConverterException("String을 List로 변환하던 중 문제가 발생했습니다.", e)
         }
     }
 }

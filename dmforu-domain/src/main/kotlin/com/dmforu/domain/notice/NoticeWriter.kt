@@ -4,6 +4,6 @@ class NoticeWriter(
     private val noticeRepository: NoticeRepository,
 ) {
     fun write(notice: Notice) {
-        noticeRepository.write(notice)
+        noticeRepository.save(notice)
     }
 }

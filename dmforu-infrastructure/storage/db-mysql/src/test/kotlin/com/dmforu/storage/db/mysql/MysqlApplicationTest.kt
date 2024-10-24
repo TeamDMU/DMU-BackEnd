@@ -1,0 +1,8 @@
+package com.dmforu.storage.db.mysql
+
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan
+
+@ConfigurationPropertiesScan
+@SpringBootApplication
+class MysqlApplicationTest

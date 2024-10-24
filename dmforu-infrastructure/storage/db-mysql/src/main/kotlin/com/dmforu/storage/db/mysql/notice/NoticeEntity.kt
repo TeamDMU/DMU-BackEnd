@@ -7,7 +7,7 @@ import java.time.LocalDate
 
 @Table(name = "notice")
 @Entity
-internal class NoticeEntity(
+internal class NoticeEntity private constructor(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
@@ -29,7 +29,7 @@ internal class NoticeEntity(
     // 공지사항 URL
     val url: String
 ) {
-    constructor() : this(null, 0, "", LocalDate.now(), "", "", "")
+    protected constructor() : this(null, 0, "", LocalDate.now(), "", "", "")
 
     companion object {
         fun from(notice: Notice): NoticeEntity {
