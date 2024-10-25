@@ -1,5 +1,5 @@
-package com.dmforu.crawling
+package com.dmforu.crawling.loader
 
 interface HtmlLoader<Result> {
-    fun getHTML(url: String): Result
+    fun get(url: String): Result
 }

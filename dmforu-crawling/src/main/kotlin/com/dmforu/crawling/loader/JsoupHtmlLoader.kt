@@ -1,16 +1,18 @@
-package com.dmforu.crawling
+package com.dmforu.crawling.loader
 
+import com.dmforu.crawling.exception.HtmlLoadException
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.IOException
 
-class JsoupHtmlLoader : HtmlLoader<Document> {
-    override fun getHTML(url: String): Document {
+class JsoupHtmlLoader(
+    private val connectionProvider : (String) -> Document = { Jsoup.connect(it).get() }
+) : HtmlLoader<Document> {
+    override fun get(url: String): Document {
         return try {
-            Jsoup.connect(url).get()
+            connectionProvider(url)
         } catch (e: IOException) {
-            // TODO: 페이지 로딩 실패나 네트워크 오류인 경우 핸들링을 해야함
-            throw IllegalArgumentException("해당하는 URL 의 HTML을 불러올 수 없습니다.")
+            throw HtmlLoadException("해당하는 URL의 HTML을 불러올 수 없습니다.", e)
         }
     }
 }
