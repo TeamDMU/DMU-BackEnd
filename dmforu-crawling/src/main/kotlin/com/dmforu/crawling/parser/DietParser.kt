@@ -1,15 +1,17 @@
-package com.dmforu.crawling
+package com.dmforu.crawling.parser
 
+import com.dmforu.crawling.loader.HtmlLoader
 import com.dmforu.domain.diet.Diet
+import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-@Service
-class DietParser : Parser<Diet> {
+class DietParser (
+    private val htmlLoader: HtmlLoader<Document>
+) : Parser<Diet> {
     override fun parse(): List<Diet> {
-        val document = WebPageLoader.getHTML(DMU_DIET_URL)
+        val document = htmlLoader.get(DMU_DIET_URL)
         val rows = document.select(TABLE_SELECTOR)
 
         return rows.mapNotNull { row -> parseDiet(row) }

@@ -1,6 +1,6 @@
 package com.dmforu.admin.scheduler.crawling
 
-import com.dmforu.crawling.DepartmentNoticeParser
+import com.dmforu.crawling.parser.DepartmentNoticeParser
 import com.dmforu.domain.notice.*
 import org.springframework.beans.factory.ObjectProvider
 import org.springframework.context.ApplicationEventPublisher
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service
 @Service
 class DepartmentNoticeCrawlingService(
     private val prototypeBeanProvider: ObjectProvider<DepartmentNoticeParser>,
-    private val noticeWriter: NoticeWriter,
-    private val noticeReader: NoticeReader,
     private val applicationEventPublisher: ApplicationEventPublisher,
+    private val noticeReader: NoticeReader,
+    private val noticeWriter: NoticeWriter,
 ) {
     /**
      * Major 열거형의 모든 값을 반복하여 모든 학과의 공지사항을 크롤링한다. <br></br>
@@ -35,13 +35,11 @@ class DepartmentNoticeCrawlingService(
     private fun crawlMajorDepartment(major: Major) {
         val parser = prototypeBeanProvider.getObject()
 
-        parser.initialize(major)
-
         val maxNumber: Int? = noticeReader.findMaxNumberByType(major.type)
         val currentMaxNumber = maxNumber ?: 0
 
         while (true) {
-            val notices: List<Notice> = parser.parse()
+            val notices: List<Notice> = parser.parse(major)
             val isNewNoticeFound = saveNewNotices(notices, currentMaxNumber)
 
             if (!isNewNoticeFound) {

@@ -1,6 +1,6 @@
 package com.dmforu.admin.scheduler.crawling
 
-import com.dmforu.crawling.DietParser
+import com.dmforu.crawling.parser.DietParser
 import com.dmforu.domain.diet.DietWriter
 import org.springframework.stereotype.Service
 

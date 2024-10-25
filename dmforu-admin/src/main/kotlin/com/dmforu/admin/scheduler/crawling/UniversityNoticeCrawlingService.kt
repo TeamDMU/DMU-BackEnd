@@ -1,6 +1,6 @@
 package com.dmforu.admin.scheduler.crawling
 
-import com.dmforu.crawling.UniversityNoticeParser
+import com.dmforu.crawling.parser.UniversityNoticeParser
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.NoticeReader
 import com.dmforu.domain.notice.NoticeWriter
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service
 class UniversityNoticeCrawlingService(
     private val prototypeBeanProvider: ObjectProvider<UniversityNoticeParser>,
     private val applicationEventPublisher: ApplicationEventPublisher,
-    private val noticeWriter: NoticeWriter,
     private val noticeReader: NoticeReader,
+    private val noticeWriter: NoticeWriter,
 ) {
     /**
      * 모든 대학 공지사항을 크롤링한다. <br></br>

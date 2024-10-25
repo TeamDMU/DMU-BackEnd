@@ -141,11 +141,6 @@ class NoticeReaderTest {
         // given
         val department = Major.COMPUTER_SOFTWARE_ENGINEERING.type
         val maxNumber = 10
-        val notice = createNotice(
-            number = maxNumber,
-            type = department,
-            title = "신입생 설명회"
-        )
 
         `when`(noticeRepository.findMaxNumberByType(department))
             .thenReturn(maxNumber)

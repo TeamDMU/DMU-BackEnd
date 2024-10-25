@@ -33,7 +33,7 @@ subprojects {
 
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-        if (project.name != "dmforu-domain") {
+        if (project.name != "dmforu-domain" && project.name != "dmforu-crawling") {
             implementation("org.springframework.boot:spring-boot-starter")
             testImplementation("org.springframework.boot:spring-boot-starter-test")
         }

@@ -11,8 +11,7 @@ class ScheduleTest {
     @Test
     fun of() {
         // given
-        val date = arrayOf("01.03 (수)", "01.05 (목)")
-        val expectedDate = "[01.03 (수), 01.05 (목)]"
+        val date = listOf("01.03 (수)", "01.05 (목)")
         val content = "정시모집 원서 접수"
         val month = 1
         val year = 2024
@@ -26,7 +25,7 @@ class ScheduleTest {
         // then
         assertThat(schedules[0].year).isEqualTo(year)
         assertThat(schedules[0].yearSchedule[0].month).isEqualTo(month)
-        assertThat(schedules[0].yearSchedule[0].monthSchedule[0].date).isEqualTo(expectedDate)
+        assertThat(schedules[0].yearSchedule[0].monthSchedule[0].dates).isEqualTo(date)
         assertThat(schedules[0].yearSchedule[0].monthSchedule[0].content).isEqualTo(content)
 
     }
