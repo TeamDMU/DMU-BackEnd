@@ -1,6 +1,6 @@
 package com.dmforu.crawling.parser
 
-import com.dmforu.crawling.exception.GenerateUrlException
+import com.dmforu.crawling.exception.GenerateNoticeUrlException
 import com.dmforu.crawling.loader.HtmlLoader
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.Major
@@ -70,7 +70,7 @@ class DepartmentNoticeParser(
 
     private fun verifyValidMatcher(matcher: Matcher) {
         if (!matcher.find()) {
-            throw GenerateUrlException()
+            throw GenerateNoticeUrlException()
         }
     }
 

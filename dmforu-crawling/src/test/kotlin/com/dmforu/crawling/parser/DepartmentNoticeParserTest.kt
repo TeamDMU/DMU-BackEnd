@@ -1,6 +1,6 @@
 package com.dmforu.crawling.parser
 
-import com.dmforu.crawling.exception.GenerateUrlException
+import com.dmforu.crawling.exception.GenerateNoticeUrlException
 import com.dmforu.crawling.loader.HtmlLoader
 import com.dmforu.domain.notice.Major
 import org.assertj.core.api.Assertions.*
@@ -104,7 +104,7 @@ class DepartmentNoticeParserTest {
 
         // when // then
         assertThatThrownBy { parser.parse(Major.COMPUTER_SOFTWARE_ENGINEERING) }
-            .isInstanceOf(GenerateUrlException::class.java)
-            .hasMessage("URL 생성에 실패했습니다.")
+            .isInstanceOf(GenerateNoticeUrlException::class.java)
+            .hasMessage("공지 URL 생성에 실패했습니다.")
     }
 }
