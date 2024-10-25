@@ -26,7 +26,7 @@ class ScheduleReaderTest {
     @Test
     fun read() {
         // given
-        val date = arrayOf("01.03 (수)", "01.05 (목)")
+        val date = listOf("01.03 (수)", "01.05 (목)")
         val expectedDate = "[01.03 (수), 01.05 (목)]"
         val content = "정시모집 원서 접수"
         val month = 1

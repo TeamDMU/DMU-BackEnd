@@ -1,13 +1,11 @@
 package com.dmforu.domain.schedule
 
 class Schedule private constructor(
-    dateArray: Array<String>,
+    val dates: List<String>,
     val content: String,
 ) {
-    val date: String = dateConverter(dateArray)
-
     companion object {
-        fun of(dateArray: Array<String>, content: String): Schedule {
+        fun of(dateArray: List<String>, content: String): Schedule {
             return Schedule(dateArray, content)
         }
     }
@@ -34,11 +32,4 @@ class Schedule private constructor(
         }
     }
 
-    private fun dateConverter(dateArray: Array<String>): String {
-        return dateArray.joinToString(
-            prefix = "[",
-            separator = ", ",
-            postfix = "]"
-        )
-    }
 }
