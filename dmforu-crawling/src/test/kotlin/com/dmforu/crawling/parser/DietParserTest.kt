@@ -1,5 +1,6 @@
-package com.dmforu.crawling
+package com.dmforu.crawling.parser
 
+import com.dmforu.crawling.loader.HtmlLoader
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.tuple
 import org.jsoup.nodes.Document
@@ -20,7 +21,7 @@ import java.time.LocalDate
 class DietParserTest {
 
     @Mock
-    private lateinit var webPageLoader: WebPageLoader<Document>
+    private lateinit var htmlLoader: HtmlLoader<Document>
 
     @InjectMocks
     private lateinit var dietParser: DietParser
@@ -53,7 +54,7 @@ class DietParserTest {
             mock(Element::class.java).apply { given(text()).willReturn("Menu 3, Menu 4") }
         )
 
-        given(webPageLoader.getHTML(anyString())).willReturn(mockDocument)
+        given(htmlLoader.get(anyString())).willReturn(mockDocument)
         given(mockDocument.select(anyString())).willReturn(mockRows)
         given(row1.select(anyString())).willReturn(columns1)
         given(row2.select(anyString())).willReturn(columns2)
@@ -86,7 +87,7 @@ class DietParserTest {
             mock(Element::class.java).apply { given(text()).willReturn(" ") }
         )
 
-        given(webPageLoader.getHTML(anyString())).willReturn(mockDocument)
+        given(htmlLoader.get(anyString())).willReturn(mockDocument)
         given(mockDocument.select(anyString())).willReturn(mockRows)
         given(row.select(anyString())).willReturn(columns)
 
@@ -113,7 +114,7 @@ class DietParserTest {
             mock(Element::class.java)
         )
 
-        given(webPageLoader.getHTML(anyString())).willReturn(mockDocument)
+        given(htmlLoader.get(anyString())).willReturn(mockDocument)
         given(mockDocument.select(anyString())).willReturn(mockRows)
         given(row.select(anyString())).willReturn(columns)
 
