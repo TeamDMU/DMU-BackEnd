@@ -1,99 +1,111 @@
 package com.dmforu.crawling
 
+import com.dmforu.crawling.exception.GenerateUrlException
+import com.dmforu.crawling.loader.HtmlLoader
+import com.dmforu.crawling.parser.DepartmentNoticeParser
 import com.dmforu.domain.notice.Major
+import org.assertj.core.api.Assertions.*
+import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.jsoup.nodes.Element
-import org.jsoup.select.Elements
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.ArgumentMatchers.anyString
+import org.mockito.ArgumentMatchers.*
 import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.mock
 import org.mockito.junit.jupiter.MockitoExtension
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 @ExtendWith(MockitoExtension::class)
 class DepartmentNoticeParserTest {
 
     @Mock
-    private lateinit var webPageLoader: WebPageLoader<Document>
+    private lateinit var htmlLoader: HtmlLoader<Document>
 
     @InjectMocks
     private lateinit var parser: DepartmentNoticeParser
 
+    @DisplayName("")
     @Test
-    fun `should return list of Notice when HTML is valid`() {
-        // Arrange
+    fun parse() {
+        // given
+        val html = """
+            <table class="board-table">
+                <tbody>
+                    <tr>
+                        <td class="td-num">2</td>
+                        <td class="td-subject"><a href="javascript:fnView('2','url','title','2')">공지 제목 2</a></td>
+                        <td class="td-write">작성자 2</td>
+                        <td class="td-date">2024.10.02</td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">1</td>
+                        <td class="td-subject"><a href="javascript:fnView('1','url','title','1')">공지 제목 1</a></td>
+                        <td class="td-write">작성자 1</td>
+                        <td class="td-date">2024.10.01</td>
+                    </tr>
+                </tbody>
+            </table>
+        """.trimIndent()
+        val document: Document = Jsoup.parse(html)
 
-        parser.initialize(Major.COMPUTER_SOFTWARE_ENGINEERING)
+        given(htmlLoader.get(anyString())).willReturn(document)
 
-        val mockDocument = mock(Document::class.java)
-        val mockRow1 = mock(Element::class.java)
-        val mockRow2 = mock(Element::class.java)
+        // when
+        val notices = parser.parse(Major.COMPUTER_SOFTWARE_ENGINEERING)
 
-        // Mocking the rows of the table
-        val rows = Elements(mockRow1, mockRow2)
-        given(webPageLoader.getHTML(anyString())).willReturn(mockDocument)
-        given(mockDocument.select(".board-table tbody tr")).willReturn(rows)
+        // then
+        assertThat(notices).hasSize(2)
+            .extracting("number", "title", "author", "date", "url")
+            .containsExactlyInAnyOrder(
+                tuple(
+                    2,
+                    "공지 제목 2",
+                    "작성자 2",
+                    LocalDate.of(2024, 10, 2),
+                    "https://www.dongyang.ac.kr/combBbs/2/url/2/view.do?layout=unknown"
+                ),
+                tuple(
+                    1,
+                    "공지 제목 1",
+                    "작성자 1",
+                    LocalDate.of(2024, 10, 1),
+                    "https://www.dongyang.ac.kr/combBbs/1/url/1/view.do?layout=unknown"
+                ),
 
-        // Setting up the first row mock
-        val mockNumElement1 = mock(Element::class.java)
-        given(mockNumElement1.text()).willReturn("1")
+                )
 
-        val mockTitleElement1 = mock(Element::class.java)
-        given(mockTitleElement1.text()).willReturn("Notice Title 1")
+    }
 
-        val mockTitleElement10 = mock(Element::class.java)
-        given(mockTitleElement10.attr("href")).willReturn("('dmu_23222','14','320','129499')")
+    @Test
+    fun parseWhenUrlInvalid() {
+        // given
+        val html = """
+            <table class="board-table">
+                <tbody>
+                    <tr>
+                        <td class="td-num">2</td>
+                        <td class="td-subject"><a href="invalid">공지 제목 2</a></td>
+                        <td class="td-write">작성자 2</td>
+                        <td class="td-date">2024.10.02</td>
+                    </tr>
+                    <tr>
+                        <td class="td-num">1</td>
+                        <td class="td-subject"><a href="invalid">공지 제목 1</a></td>
+                        <td class="td-write">작성자 1</td>
+                        <td class="td-date">2024.10.01</td>
+                    </tr>
+                </tbody>
+            </table>
+        """.trimIndent()
+        val document: Document = Jsoup.parse(html)
 
+        given(htmlLoader.get(anyString())).willReturn(document)
 
-        val mockAuthorElement1 = mock(Element::class.java)
-        val testAuthorElements1 = Elements(mockAuthorElement1)
-        given(mockRow1.select(".td-write")).willReturn(testAuthorElements1)
-        given(mockAuthorElement1.text()).willReturn("Author A")
-
-        val mockDateElement1 = mock(Element::class.java)
-        given(mockDateElement1.text()).willReturn("2024.10.23")
-
-        // Mocking select results for first row
-        val test12 = mock(Elements(mockTitleElement10))
-        given(mockRow1.select(".td-num")).willReturn(Elements(mockNumElement1))
-        given(mockRow1.select(".td-subject a"))
-            .willReturn(Elements(mockTitleElement1))
-            .willReturn(test12)
-        given(mockRow1.select(".td-date")).willReturn(Elements(mockDateElement1))
-
-        // Setting up the second row mock
-        val mockNumElement2 = mock(Element::class.java)
-        given(mockNumElement2.text()).willReturn("2")
-
-        val mockTitleElement2 = mock(Element::class.java)
-        given(mockTitleElement2.text()).willReturn("Notice Title 2")
-        given(mockTitleElement2.attr("href")).willReturn("('dmu_23222','14','320','129499')")
-
-        val mockAuthorElement2 = mock(Element::class.java)
-        val testAuthorElements2 = Elements(mockAuthorElement2)
-        given(mockRow2.select(".td-write")).willReturn(testAuthorElements2)
-        given(mockAuthorElement2.text()).willReturn("Author B")
-
-        val mockDateElement2 = mock(Element::class.java)
-        given(mockDateElement2.text()).willReturn("2024.10.24")
-
-        // Mocking select results for second row
-        given(mockRow2.select(".td-num")).willReturn(Elements(mockNumElement2))
-        given(mockRow2.select(".td-subject a")).willReturn(Elements(mockTitleElement2))
-        given(mockRow2.select(".td-date")).willReturn(Elements(mockDateElement2))
-
-        // Act
-        val notices = parser.parse()
-
-        // Assert
-        assertEquals(2, notices.size)
-        assertTrue(notices.any { it.title == "Notice Title 1" && it.author == "Author A" && it.date == LocalDate.parse("2024.10.23", DateTimeFormatter.ofPattern("yyyy.MM.dd")) })
-        assertTrue(notices.any { it.title == "Notice Title 2" && it.author == "Author B" && it.date == LocalDate.parse("2024.10.24", DateTimeFormatter.ofPattern("yyyy.MM.dd")) })
+        // when // then
+        assertThatThrownBy { parser.parse(Major.COMPUTER_SOFTWARE_ENGINEERING) }
+            .isInstanceOf(GenerateUrlException::class.java)
+            .hasMessage("URL 생성에 실패했습니다.")
     }
 }

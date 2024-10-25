@@ -1,9 +1,10 @@
 package com.dmforu.admin.config
 
-import com.dmforu.crawling.DepartmentNoticeParser
-import com.dmforu.crawling.DietParser
-import com.dmforu.crawling.ScheduleParser
-import com.dmforu.crawling.UniversityNoticeParser
+import com.dmforu.crawling.loader.JsoupHtmlLoader
+import com.dmforu.crawling.parser.DepartmentNoticeParser
+import com.dmforu.crawling.parser.DietParser
+import com.dmforu.crawling.parser.ScheduleParser
+import com.dmforu.crawling.parser.UniversityNoticeParser
 import com.dmforu.domain.diet.DietRepository
 import com.dmforu.domain.diet.DietWriter
 import com.dmforu.domain.notice.NoticeReader
@@ -47,22 +48,22 @@ class ApplicationConfiguration {
     @Scope("prototype")
     @Bean
     fun departmentNoticeParser(): DepartmentNoticeParser {
-        return DepartmentNoticeParser()
+        return DepartmentNoticeParser(htmlLoader = JsoupHtmlLoader())
     }
 
     @Scope("prototype")
     @Bean
     fun universityNoticeParser(): UniversityNoticeParser {
-        return UniversityNoticeParser()
+        return UniversityNoticeParser(htmlLoader = JsoupHtmlLoader())
     }
 
     @Bean
     fun dietParser(): DietParser {
-        return DietParser()
+        return DietParser(htmlLoader = JsoupHtmlLoader())
     }
 
     @Bean
     fun scheduleParser(): ScheduleParser {
-        return ScheduleParser()
+        return ScheduleParser(htmlLoader = JsoupHtmlLoader())
     }
 }

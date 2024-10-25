@@ -1,6 +1,6 @@
 package com.dmforu.admin.scheduler.crawling
 
-import com.dmforu.crawling.ScheduleParser
+import com.dmforu.crawling.parser.ScheduleParser
 import com.dmforu.domain.schedule.ScheduleWriter
 import org.springframework.stereotype.Service
 

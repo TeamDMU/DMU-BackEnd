@@ -1,39 +1,36 @@
-package com.dmforu.crawling
+package com.dmforu.crawling.parser
 
+import com.dmforu.crawling.exception.GenerateUrlException
+import com.dmforu.crawling.loader.HtmlLoader
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.Major
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class DepartmentNoticeParser(
     private val htmlLoader: HtmlLoader<Document>,
-) : Parser<Notice> {
+) {
 
     private lateinit var major: Major
     private var pageNumber: Int = 1
 
-    fun initialize(major: Major) {
-        this.major = major
+    fun parse(major: Major): List<Notice> {
+        initialize(major)
+
+        val document = htmlLoader.get(generateSearchUrl())
+
+        return document.select(".board-table tbody tr")
+            .map { row -> parseRow(row) }
+            .toList()
+
     }
 
-    /**
-     * HTML을 파싱하여 학과 공지사항 목록을 반환한다.
-     *
-     * @return 학과 공지사항 목록
-     */
-    override fun parse(): List<Notice> {
-        val departmentNotices: MutableList<Notice> = mutableListOf()
-        val document = htmlLoader.getHTML(generateSearchUrl())
-
-        val rows = document.select(".board-table tbody tr")
-        rows.forEach { row ->
-            departmentNotices.add(parseRow(row))
-        }
-
-        return departmentNotices
+    private fun initialize(major: Major) {
+        this.major = major
     }
 
     private fun parseRow(row: Element): Notice {
@@ -53,37 +50,30 @@ class DepartmentNoticeParser(
         )
     }
 
-    /**
-     * 파싱할 페이지의 URL을 생성한다.
-     *
-     * @return URL
-     */
     private fun generateSearchUrl(): String {
-        return java.lang.String.format(
-            "https://www.dongyang.ac.kr/%s/%s/subview.do?page=%d",
-            major.majorPath, major.noticePath, pageNumber++
-        )
+        return StringBuilder()
+            .append("https://www.dongyang.ac.kr/").append(major.majorPath).append("/").append(major.noticePath)
+            .append("/subview.do?page=").append(pageNumber++).toString()
+
     }
 
-    /**
-     * 파싱 결과를 통해 공지사항의 URL을 생성한다.
-     *
-     * @param url 파싱 결과
-     * @return URL
-     * @throws IllegalArgumentException Matcher를 통해 URL을 생성할 수 없는 경우 예외 발생
-     */
     private fun generateUrlFromSearch(url: String): String {
-        // URL에서 정보를 추출하기 위한 Matcher 생성
+        val matcher: Matcher = pattern.matcher(url)
 
-        val matcher = pattern.matcher(url)
+        verifyValidMatcher(matcher)
 
-        require(matcher.find()) { "Matcher did not find any match" }
-
-        return String.format(
-            "https://www.dongyang.ac.kr/combBbs/%s/%s/%s/view.do?layout=unknown",
-            matcher.group(1), matcher.group(2), matcher.group(4)
-        )
+        return StringBuilder()
+            .append("https://www.dongyang.ac.kr/combBbs/").append(matcher.group(1))
+            .append("/").append(matcher.group(2)).append("/").append(matcher.group(4))
+            .append("/view.do?layout=unknown").toString()
     }
+
+    private fun verifyValidMatcher(matcher: Matcher) {
+        if (!matcher.find()) {
+            throw GenerateUrlException()
+        }
+    }
+
 
     companion object {
         private val pattern: Pattern = Pattern.compile("\\('([^']+)'\\,'([^']+)'\\,'([^']+)'\\,'([^']+)'")

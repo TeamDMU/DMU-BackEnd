@@ -1,5 +1,6 @@
-package com.dmforu.crawling
+package com.dmforu.crawling.parser
 
+import com.dmforu.crawling.loader.HtmlLoader
 import com.dmforu.domain.notice.Notice
 import org.jsoup.nodes.Document
 import java.lang.NumberFormatException
@@ -8,7 +9,7 @@ import java.time.format.DateTimeFormatter
 
 class UniversityNoticeParser(
     private val htmlLoader: HtmlLoader<Document>
-) :  Parser<Notice> {
+) : Parser<Notice> {
     private var pageNumber = 1
 
     /**
@@ -19,7 +20,7 @@ class UniversityNoticeParser(
     override fun parse(): List<Notice> {
         val universityNotices: MutableList<Notice> = java.util.ArrayList<Notice>()
 
-        val document = htmlLoader.getHTML(generateSearchUrl())
+        val document = htmlLoader.get(generateSearchUrl())
 
         val rows = document.select(".board-table tbody tr")
 

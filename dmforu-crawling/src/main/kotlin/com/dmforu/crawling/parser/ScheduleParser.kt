@@ -1,5 +1,6 @@
-package com.dmforu.crawling
+package com.dmforu.crawling.parser
 
+import com.dmforu.crawling.loader.HtmlLoader
 import com.dmforu.domain.schedule.Schedule
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -20,7 +21,7 @@ class ScheduleParser(
     }
 
     private fun fetchYearSchedule(year: Int): List<Schedule.Month> {
-        val document = htmlLoader.getHTML(DMU_SCHEDULE_URL + year)
+        val document = htmlLoader.get(DMU_SCHEDULE_URL + year)
         val monthTables = document.select(YEAR_SCHEDULE_SELECTOR)
 
         return monthTables.mapNotNull { monthTable ->
