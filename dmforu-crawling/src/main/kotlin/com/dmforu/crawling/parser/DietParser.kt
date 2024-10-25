@@ -7,10 +7,10 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class DietParser (
-    private val webPageLoader: WebPageLoader<Document>
+    private val htmlLoader: HtmlLoader<Document>
 ) : Parser<Diet> {
     override fun parse(): List<Diet> {
-        val document = webPageLoader.getHTML(DMU_DIET_URL)
+        val document = htmlLoader.getHTML(DMU_DIET_URL)
         val rows = document.select(TABLE_SELECTOR)
 
         return rows.mapNotNull { row -> parseDiet(row) }

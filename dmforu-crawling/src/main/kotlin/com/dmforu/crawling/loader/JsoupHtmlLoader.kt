@@ -4,7 +4,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.IOException
 
-class JsoupWebPageLoader : WebPageLoader<Document> {
+class JsoupHtmlLoader : HtmlLoader<Document> {
     override fun getHTML(url: String): Document {
         return try {
             Jsoup.connect(url).get()

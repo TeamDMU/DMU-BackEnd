@@ -1,5 +1,5 @@
 package com.dmforu.crawling
 
-interface WebPageLoader<Result> {
+interface HtmlLoader<Result> {
     fun getHTML(url: String): Result
 }

@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 import java.util.regex.Pattern
 
 class DepartmentNoticeParser(
-    private val webPageLoader: WebPageLoader<Document>,
+    private val htmlLoader: HtmlLoader<Document>,
 ) : Parser<Notice> {
 
     private lateinit var major: Major
@@ -26,7 +26,7 @@ class DepartmentNoticeParser(
      */
     override fun parse(): List<Notice> {
         val departmentNotices: MutableList<Notice> = mutableListOf()
-        val document = webPageLoader.getHTML(generateSearchUrl())
+        val document = htmlLoader.getHTML(generateSearchUrl())
 
         val rows = document.select(".board-table tbody tr")
         rows.forEach { row ->

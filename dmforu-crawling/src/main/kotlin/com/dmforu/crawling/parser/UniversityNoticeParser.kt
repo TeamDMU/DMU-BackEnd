@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class UniversityNoticeParser(
-    private val webPageLoader: WebPageLoader<Document>
+    private val htmlLoader: HtmlLoader<Document>
 ) :  Parser<Notice> {
     private var pageNumber = 1
 
@@ -19,7 +19,7 @@ class UniversityNoticeParser(
     override fun parse(): List<Notice> {
         val universityNotices: MutableList<Notice> = java.util.ArrayList<Notice>()
 
-        val document = webPageLoader.getHTML(generateSearchUrl())
+        val document = htmlLoader.getHTML(generateSearchUrl())
 
         val rows = document.select(".board-table tbody tr")
 

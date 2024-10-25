@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.time.ZoneId
 
 class ScheduleParser(
-    private val webPageLoader: WebPageLoader<Document>,
+    private val htmlLoader: HtmlLoader<Document>,
 ) : Parser<Schedule.Year> {
     override fun parse(): List<Schedule.Year> {
         val currentYear = LocalDate.now(ZoneId.of(TIME_ZONE)).year
@@ -20,7 +20,7 @@ class ScheduleParser(
     }
 
     private fun fetchYearSchedule(year: Int): List<Schedule.Month> {
-        val document = webPageLoader.getHTML(DMU_SCHEDULE_URL + year)
+        val document = htmlLoader.getHTML(DMU_SCHEDULE_URL + year)
         val monthTables = document.select(YEAR_SCHEDULE_SELECTOR)
 
         return monthTables.mapNotNull { monthTable ->
