@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class SubscribeController(
     private val subscribeWriter: SubscribeWriter,
-    private val subscribeUpdater: SubscribeUpdater
+    private val subscribeUpdater: SubscribeUpdater,
 ) {
     @Operation(summary = "최초 Token 등록 API", description = "애플리케이션 최초 실행시 Token과 학과, 키워드를 등록한다.")
     @PostMapping("/api/v1/subscribe/registration")
@@ -35,7 +35,7 @@ class SubscribeController(
     @Operation(summary = "키워드 알림 상태 변경 API", description = "키워드 알림 상태를 변경한다.")
     @PatchMapping("/api/v1/subscribe/keyword/status")
     fun updateSubscribeKeywordStatus(@RequestBody request: UpdateSubscribeStatusRequest): ResponseEntity<Void> {
-        subscribeUpdater.updateKeywordSubscribeStatus(request.token, request.isSubscribed)
+        subscribeUpdater.updateKeywordSubscribeStatus(request.token, request.subscribeStatus)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 
@@ -49,7 +49,7 @@ class SubscribeController(
     @Operation(summary = "학과 알림 상태 변경 API", description = "학과 알림 상태를 변경한다.")
     @PatchMapping("/api/v1/subscribe/department/status")
     fun updateSubscribeDepartmentStatus(@RequestBody request: UpdateSubscribeStatusRequest): ResponseEntity<Void> {
-        subscribeUpdater.updateDepartmentSubscribeStatus(token = request.token, request.isSubscribed)
+        subscribeUpdater.updateDepartmentSubscribeStatus(token = request.token, request.subscribeStatus)
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 }

@@ -1,20 +1,12 @@
-package com.dmforu.api.controller.v1.response
+package com.dmforu.api.controller.old.response
 
 import com.dmforu.domain.schedule.Schedule
 
 data class LegacySchedule(
-    val date: String,
+    val date: List<String>,
     val content: String
 ) {
-    private constructor() : this("", "")
-
-    private constructor(dateArray: Array<String>, content: String) : this(
-        dateArray.joinToString(
-            prefix = "[",
-            separator = ", ",
-            postfix = "]"
-        ), content
-    )
+    private constructor() : this(emptyList(), "")
 
     data class MonthSchedule(
         val month: Int,
@@ -51,7 +43,7 @@ data class LegacySchedule(
 
         private fun Schedule.toLegacySchedule(): LegacySchedule {
             return LegacySchedule(
-                date = this.date,
+                date = this.dates,
                 content = this.content
             )
         }
