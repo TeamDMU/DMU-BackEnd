@@ -1,10 +1,10 @@
 package com.dmforu.api.controller.v1
 
 import com.dmforu.api.controller.v1.response.NoticeResponse
+import com.dmforu.api.support.response.ApiResponse
 import com.dmforu.domain.notice.NoticeReader
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
@@ -23,9 +23,9 @@ class NoticeController(
     fun getUniversityNotice(
         @RequestParam(name = "page", defaultValue = "1") page: Int,
         @RequestParam(name = "size", defaultValue = "20") size: Int,
-    ): ResponseEntity<List<NoticeResponse>> {
+    ): ApiResponse<List<NoticeResponse>> {
         val universityNotices = noticeReader.readUniversityNotice(page, size).map { NoticeResponse.form(it) }
-        return ResponseEntity.ok().body(universityNotices)
+        return ApiResponse.success(universityNotices)
     }
 
     @Operation(
@@ -37,10 +37,10 @@ class NoticeController(
         @RequestParam(name = "department") department: String,
         @RequestParam(name = "page", defaultValue = "1") page: Int,
         @RequestParam(name = "size", defaultValue = "20") size: Int,
-    ): ResponseEntity<List<NoticeResponse>> {
+    ): ApiResponse<List<NoticeResponse>> {
         val departmentNotices =
             noticeReader.readDepartmentNotice(department, page, size).map { NoticeResponse.form(it) }
-        return ResponseEntity.ok().body(departmentNotices)
+        return ApiResponse.success(departmentNotices)
     }
 
     @Operation(
@@ -53,8 +53,8 @@ class NoticeController(
         @RequestParam(name = "department") department: String,
         @RequestParam(name = "page", defaultValue = "1") page: Int,
         @RequestParam(name = "size", defaultValue = "20") size: Int,
-    ): ResponseEntity<List<NoticeResponse>> {
+    ): ApiResponse<List<NoticeResponse>> {
         val notices = noticeReader.searchNotice(searchWord, department, page, size).map { NoticeResponse.form(it) }
-        return ResponseEntity.ok().body(notices)
+        return ApiResponse.success(notices)
     }
 }
