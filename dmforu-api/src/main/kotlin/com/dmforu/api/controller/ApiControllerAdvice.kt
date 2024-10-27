@@ -7,8 +7,10 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.logging.LogLevel
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.servlet.resource.NoResourceFoundException
 import java.net.BindException
 
 @RestControllerAdvice
@@ -25,8 +27,19 @@ class ApiControllerAdvice {
         return ResponseEntity(ApiResponse.error(e.errorType, e.data), e.errorType.status)
     }
 
+    @ExceptionHandler(NoResourceFoundException::class)
+    fun handleNoResourceFoundException(e: NoResourceFoundException): ResponseEntity<ApiResponse<Any>> {
+        return ResponseEntity(ApiResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException::class)
+    fun handleRequestParamException(e: MissingServletRequestParameterException): ResponseEntity<ApiResponse<Any>> {
+        log.error("RequestParamException : {}", e.message, e)
+        return ResponseEntity(ApiResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
+    }
+
     @ExceptionHandler(BindException::class)
-    fun handleRequestException(e: BindException): ResponseEntity<ApiResponse<Any>> {
+    fun handleRequestBodyException(e: BindException): ResponseEntity<ApiResponse<Any>> {
         log.error("BindException : {}", e.message, e)
         return ResponseEntity(ApiResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
     }
