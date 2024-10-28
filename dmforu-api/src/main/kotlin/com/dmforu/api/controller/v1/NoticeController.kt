@@ -1,14 +1,13 @@
 package com.dmforu.api.controller.v1
 
+import com.dmforu.api.controller.v1.request.PaginationRequest
 import com.dmforu.api.controller.v1.response.NoticeResponse
 import com.dmforu.api.support.response.ApiResponse
 import com.dmforu.domain.notice.NoticeReader
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import jakarta.validation.Valid
+import org.springframework.web.bind.annotation.*
 
 @Tag(name = "공지")
 @RestController
@@ -21,10 +20,13 @@ class NoticeController(
     )
     @GetMapping("/api/v1/notice/university")
     fun getUniversityNotice(
-        @RequestParam(name = "page", defaultValue = "1") page: Int,
-        @RequestParam(name = "size", defaultValue = "20") size: Int,
+        @Valid @ModelAttribute paginationRequest: PaginationRequest,
     ): ApiResponse<List<NoticeResponse>> {
-        val universityNotices = noticeReader.readUniversityNotice(page, size).map { NoticeResponse.form(it) }
+        val universityNotices =
+            noticeReader.readUniversityNotice(
+                page = paginationRequest.page,
+                size = paginationRequest.size
+            ).map { NoticeResponse.form(it) }
         return ApiResponse.success(universityNotices)
     }
 
@@ -35,11 +37,14 @@ class NoticeController(
     @GetMapping("/api/v1/notice/department")
     fun getDepartmentNotice(
         @RequestParam(name = "department") department: String,
-        @RequestParam(name = "page", defaultValue = "1") page: Int,
-        @RequestParam(name = "size", defaultValue = "20") size: Int,
+        @Valid @ModelAttribute paginationRequest: PaginationRequest,
     ): ApiResponse<List<NoticeResponse>> {
         val departmentNotices =
-            noticeReader.readDepartmentNotice(department, page, size).map { NoticeResponse.form(it) }
+            noticeReader.readDepartmentNotice(
+                department = department,
+                page = paginationRequest.page,
+                size = paginationRequest.size
+            ).map { NoticeResponse.form(it) }
         return ApiResponse.success(departmentNotices)
     }
 
@@ -51,10 +56,14 @@ class NoticeController(
     fun getNoticeByKeyword(
         @PathVariable(name = "searchWord") searchWord: String,
         @RequestParam(name = "department") department: String,
-        @RequestParam(name = "page", defaultValue = "1") page: Int,
-        @RequestParam(name = "size", defaultValue = "20") size: Int,
+        @Valid @ModelAttribute paginationRequest: PaginationRequest,
     ): ApiResponse<List<NoticeResponse>> {
-        val notices = noticeReader.searchNotice(searchWord, department, page, size).map { NoticeResponse.form(it) }
+        val notices = noticeReader.searchNotice(
+            searchWord = searchWord,
+            department = department,
+            page = paginationRequest.page,
+            size = paginationRequest.size
+        ).map { NoticeResponse.form(it) }
         return ApiResponse.success(notices)
     }
 }

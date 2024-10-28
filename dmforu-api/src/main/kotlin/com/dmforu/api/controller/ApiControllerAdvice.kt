@@ -12,7 +12,6 @@ import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.servlet.resource.NoResourceFoundException
-import java.net.BindException
 
 @RestControllerAdvice
 class ApiControllerAdvice {
@@ -42,12 +41,6 @@ class ApiControllerAdvice {
     @ExceptionHandler(MissingServletRequestParameterException::class)
     fun handleRequestParamException(e: MissingServletRequestParameterException): ResponseEntity<ApiResponse<Any>> {
         log.error("RequestParamException : {}", e.message, e)
-        return ResponseEntity(ApiResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
-    }
-
-    @ExceptionHandler(BindException::class)
-    fun handleRequestBodyException(e: BindException): ResponseEntity<ApiResponse<Any>> {
-        log.error("BindException : {}", e.message, e)
         return ResponseEntity(ApiResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
     }
 
