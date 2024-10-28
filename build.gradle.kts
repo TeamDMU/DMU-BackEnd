@@ -74,6 +74,7 @@ subprojects {
                             "**/*Application*",
                             "**/*Config*",
                             "**/*Dto*",
+                            "**/*Error*",
                             "**/*Request*",
                             "**/*Response*",
                             "**/*Interceptor*",
