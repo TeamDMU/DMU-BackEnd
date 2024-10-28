@@ -28,7 +28,7 @@ class SubscribeController(
     @Operation(summary = "키워드 수정 API", description = "알림 키워드를 수정한다.")
     @PatchMapping("/api/v1/subscribe/keywords")
     fun updateSubscribeKeywords(@Valid @RequestBody request: UpdateSubscribeKeywordsRequest): ApiResponse<Any> {
-        subscribeUpdater.updateKeywords(token = request.token, keywords = request.keywords)
+        subscribeUpdater.updateKeywords(token = request.token!!, keywords = request.keywords)
         return ApiResponse.success()
     }
 
@@ -36,8 +36,8 @@ class SubscribeController(
     @PatchMapping("/api/v1/subscribe/keyword/status")
     fun updateSubscribeKeywordStatus(@Valid @RequestBody request: UpdateSubscribeStatusRequest): ApiResponse<Any> {
         subscribeUpdater.updateKeywordSubscribeStatus(
-            token = request.token,
-            keywordSubscribeStatus = request.subscribeStatus
+            token = request.token!!,
+            keywordSubscribeStatus = request.subscribeStatus!!
         )
         return ApiResponse.success()
     }
@@ -53,8 +53,8 @@ class SubscribeController(
     @PatchMapping("/api/v1/subscribe/department/status")
     fun updateSubscribeDepartmentStatus(@Valid @RequestBody request: UpdateSubscribeStatusRequest): ApiResponse<Any> {
         subscribeUpdater.updateDepartmentSubscribeStatus(
-            token = request.token,
-            departmentSubscribeStatus = request.subscribeStatus
+            token = request.token!!,
+            departmentSubscribeStatus = request.subscribeStatus!!
         )
         return ApiResponse.success()
     }
