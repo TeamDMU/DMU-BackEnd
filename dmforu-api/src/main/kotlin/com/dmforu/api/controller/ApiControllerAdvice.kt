@@ -7,6 +7,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.logging.LogLevel
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -30,6 +31,12 @@ class ApiControllerAdvice {
     @ExceptionHandler(NoResourceFoundException::class)
     fun handleNoResourceFoundException(e: NoResourceFoundException): ResponseEntity<ApiResponse<Any>> {
         return ResponseEntity(ApiResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException::class)
+    fun handleRequestBodyException(e: MethodArgumentNotValidException): ResponseEntity<ApiResponse<Any>> {
+        log.error("MethodArgumentNotValidException : {}", e.message, e)
+        return ResponseEntity(ApiResponse.error(ErrorType.BAD_REQUEST_ERROR, e.fieldError?.defaultMessage), ErrorType.BAD_REQUEST_ERROR.status)
     }
 
     @ExceptionHandler(MissingServletRequestParameterException::class)

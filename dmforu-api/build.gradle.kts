@@ -13,5 +13,8 @@ dependencies {
     runtimeOnly(project(":dmforu-infrastructure:storage:db-redis"))
 
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-validation")
 }

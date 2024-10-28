@@ -20,7 +20,7 @@ class SubscribeController(
 ) {
     @Operation(summary = "최초 Token 등록 API", description = "애플리케이션 최초 실행시 Token과 학과, 키워드를 등록한다.")
     @PostMapping("/api/v1/subscribe/registration")
-    fun tokenSubscribe(@Valid @RequestBody request: RegisterSubscribeRequest): ApiResponse<Any> {
+    fun initSubscribe(@Valid @RequestBody request: RegisterSubscribeRequest): ApiResponse<Any> {
         subscribeWriter.write(request.toSubscribe())
         return ApiResponse.create()
     }
