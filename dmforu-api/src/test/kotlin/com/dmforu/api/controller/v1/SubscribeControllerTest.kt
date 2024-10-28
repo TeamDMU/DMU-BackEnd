@@ -1,40 +1,21 @@
 package com.dmforu.api.controller.v1
 
+import com.dmforu.api.ControllerTestSupport
 import com.dmforu.api.controller.v1.request.RegisterSubscribeRequest
 import com.dmforu.api.controller.v1.request.UpdateSubscribeDepartmentRequest
 import com.dmforu.api.controller.v1.request.UpdateSubscribeKeywordsRequest
 import com.dmforu.api.controller.v1.request.UpdateSubscribeStatusRequest
 import com.dmforu.api.support.error.ErrorCode
 import com.dmforu.api.support.response.ResultType
-import com.dmforu.domain.subscribe.SubscribeUpdater
-import com.dmforu.domain.subscribe.SubscribeWriter
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType.APPLICATION_JSON
-import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-@WebMvcTest(SubscribeController::class)
-class SubscribeControllerTest {
-
-    @Autowired
-    private lateinit var mockMvc: MockMvc
-
-    @Autowired
-    private lateinit var objectMapper: ObjectMapper
-
-    @MockBean
-    private lateinit var subscribeUpdater: SubscribeUpdater
-
-    @MockBean
-    private lateinit var subscribeWriter: SubscribeWriter
+class SubscribeControllerTest : ControllerTestSupport() {
 
     @DisplayName("구독을 생성한다.")
     @Test

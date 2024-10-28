@@ -1,30 +1,19 @@
 package com.dmforu.api.controller.v1
 
+import com.dmforu.api.ControllerTestSupport
 import com.dmforu.api.support.error.ErrorCode
 import com.dmforu.api.support.response.ResultType
-import com.dmforu.domain.notice.NoticeReader
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.BDDMockito.given
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType.APPLICATION_JSON
-import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-@WebMvcTest(controllers = [NoticeController::class])
-class NoticeControllerTest {
-
-    @Autowired
-    private lateinit var mockMvc: MockMvc
-
-    @MockBean
-    private lateinit var noticeReader: NoticeReader
+class NoticeControllerTest : ControllerTestSupport() {
 
     @DisplayName("대학 공지를 불러온다.")
     @Test
