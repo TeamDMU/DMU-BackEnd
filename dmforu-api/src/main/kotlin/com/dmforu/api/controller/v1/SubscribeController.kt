@@ -1,12 +1,12 @@
 package com.dmforu.api.controller.v1
 
 import com.dmforu.api.controller.v1.request.*
+import com.dmforu.api.support.response.ApiResponse
 import com.dmforu.domain.subscribe.SubscribeUpdater
 import com.dmforu.domain.subscribe.SubscribeWriter
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -16,41 +16,47 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class SubscribeController(
     private val subscribeWriter: SubscribeWriter,
-    private val subscribeUpdater: SubscribeUpdater
+    private val subscribeUpdater: SubscribeUpdater,
 ) {
     @Operation(summary = "최초 Token 등록 API", description = "애플리케이션 최초 실행시 Token과 학과, 키워드를 등록한다.")
     @PostMapping("/api/v1/subscribe/registration")
-    fun tokenSubscribe(@RequestBody registerSubscribeRequest: RegisterSubscribeRequest): ResponseEntity<Void> {
-        subscribeWriter.write(registerSubscribeRequest.toSubscribe())
-        return ResponseEntity.status(HttpStatus.CREATED).build()
+    fun initSubscribe(@Valid @RequestBody request: RegisterSubscribeRequest): ApiResponse<Any> {
+        subscribeWriter.write(request.toSubscribe())
+        return ApiResponse.create()
     }
 
     @Operation(summary = "키워드 수정 API", description = "알림 키워드를 수정한다.")
     @PatchMapping("/api/v1/subscribe/keywords")
-    fun updateSubscribeKeywords(@RequestBody request: UpdateSubscribeKeywordsRequest): ResponseEntity<Void> {
-        subscribeUpdater.updateKeywords(request.token, request.keywords)
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+    fun updateSubscribeKeywords(@Valid @RequestBody request: UpdateSubscribeKeywordsRequest): ApiResponse<Any> {
+        subscribeUpdater.updateKeywords(token = request.token!!, keywords = request.keywords)
+        return ApiResponse.success()
     }
 
     @Operation(summary = "키워드 알림 상태 변경 API", description = "키워드 알림 상태를 변경한다.")
     @PatchMapping("/api/v1/subscribe/keyword/status")
-    fun updateSubscribeKeywordStatus(@RequestBody request: UpdateSubscribeStatusRequest): ResponseEntity<Void> {
-        subscribeUpdater.updateKeywordSubscribeStatus(request.token, request.isSubscribed)
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+    fun updateSubscribeKeywordStatus(@Valid @RequestBody request: UpdateSubscribeStatusRequest): ApiResponse<Any> {
+        subscribeUpdater.updateKeywordSubscribeStatus(
+            token = request.token!!,
+            keywordSubscribeStatus = request.subscribeStatus!!
+        )
+        return ApiResponse.success()
     }
 
     @Operation(summary = "학과 수정 API", description = "학과 정보를 수정한다.")
     @PatchMapping("/api/v1/subscribe/department")
-    fun updateSubscribeDepartment(@RequestBody request: UpdateSubscribeDepartmentRequest): ResponseEntity<Void> {
-        subscribeUpdater.updateDepartment(request.token, request.department)
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+    fun updateSubscribeDepartment(@Valid @RequestBody request: UpdateSubscribeDepartmentRequest): ApiResponse<Any> {
+        subscribeUpdater.updateDepartment(token = request.token, department = request.department)
+        return ApiResponse.success()
     }
 
     @Operation(summary = "학과 알림 상태 변경 API", description = "학과 알림 상태를 변경한다.")
     @PatchMapping("/api/v1/subscribe/department/status")
-    fun updateSubscribeDepartmentStatus(@RequestBody request: UpdateSubscribeStatusRequest): ResponseEntity<Void> {
-        subscribeUpdater.updateDepartmentSubscribeStatus(token = request.token, request.isSubscribed)
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+    fun updateSubscribeDepartmentStatus(@Valid @RequestBody request: UpdateSubscribeStatusRequest): ApiResponse<Any> {
+        subscribeUpdater.updateDepartmentSubscribeStatus(
+            token = request.token!!,
+            departmentSubscribeStatus = request.subscribeStatus!!
+        )
+        return ApiResponse.success()
     }
 }
 
