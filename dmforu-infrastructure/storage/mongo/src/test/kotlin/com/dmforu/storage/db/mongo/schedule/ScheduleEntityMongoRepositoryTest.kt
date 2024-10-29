@@ -2,31 +2,24 @@ package com.dmforu.storage.db.mongo.schedule
 
 
 import com.dmforu.domain.schedule.Schedule
-import com.dmforu.storage.db.mongo.MongoApplicationTest
-import com.dmforu.storage.db.mongo.config.MongoConfig
+import com.dmforu.storage.db.mongo.MongoTestSupport
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.DisplayName
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.Import
-import org.springframework.test.context.TestPropertySource
 import kotlin.test.Test
 
-@TestPropertySource(properties = ["spring.config.location = src/main/resources/mongo.yml"])
-@SpringBootTest(classes = [MongoApplicationTest::class])
-@Import(MongoConfig::class)
-class ScheduleEntityMongoRepositoryTest {
+class ScheduleEntityMongoRepositoryTest : MongoTestSupport(){
 
     @Autowired
-    private lateinit var mongoRepository: ScheduleMongoRepository
+    private lateinit var scheduleMongoRepository: ScheduleMongoRepository
 
     @Autowired
-    private lateinit var entityRepository: ScheduleEntityRepository
+    private lateinit var scheduleEntityRepository: ScheduleEntityRepository
 
     @AfterEach
     fun tearDown() {
-        mongoRepository.deleteAll()
+        scheduleMongoRepository.deleteAll()
     }
 
     @DisplayName("학사 일정을 저장한다.")
@@ -39,10 +32,10 @@ class ScheduleEntityMongoRepositoryTest {
         val schedules = listOf(yearSchedule, yearSchedule)
 
         // when
-        entityRepository.write(schedules)
+        scheduleEntityRepository.write(schedules)
 
         // then
-        val result = mongoRepository.findAll()[0]
+        val result = scheduleMongoRepository.findAll()[0]
 
         assertThat(result).isNotNull
         assertThat(ScheduleMapper.entityToSchedules(result)).isEqualTo(schedules)
@@ -57,10 +50,10 @@ class ScheduleEntityMongoRepositoryTest {
         val yearSchedule = Schedule.Year.of(1, listOf(monthSchedule))
         val schedules = listOf(yearSchedule, yearSchedule)
 
-        mongoRepository.save(ScheduleMapper.mapToEntity(schedules))
+        scheduleMongoRepository.save(ScheduleMapper.mapToEntity(schedules))
 
         // when
-        val savedEntity = entityRepository.read()
+        val savedEntity = scheduleEntityRepository.read()
 
         assertThat(savedEntity).isNotNull
         assertThat(savedEntity).isEqualTo(schedules)
@@ -72,7 +65,7 @@ class ScheduleEntityMongoRepositoryTest {
         // given
 
         // when
-        val savedEntity = entityRepository.read()
+        val savedEntity = scheduleEntityRepository.read()
 
         // then
         assertThat(savedEntity).isNull()
