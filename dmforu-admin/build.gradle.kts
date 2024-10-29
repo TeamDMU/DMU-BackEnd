@@ -12,5 +12,5 @@ dependencies {
 
     runtimeOnly(project(":dmforu-infrastructure:fcm"))
     runtimeOnly(project(":dmforu-infrastructure:storage:db-mysql"))
-    runtimeOnly(project(":dmforu-infrastructure:storage:db-redis"))
+    runtimeOnly(project(":dmforu-infrastructure:storage:mongo"))
 }

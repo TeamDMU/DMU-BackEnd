@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling
     scanBasePackages = [
         "com.dmforu.admin",
         "com.dmforu.fcm",
-        "com.dmforu.storage.db.redis",
+        "com.dmforu.storage.db.mongo",
         "com.dmforu.storage.db.mysql"
     ]
 )
