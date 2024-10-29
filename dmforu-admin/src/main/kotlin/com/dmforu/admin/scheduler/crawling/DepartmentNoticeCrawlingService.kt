@@ -65,7 +65,6 @@ class DepartmentNoticeCrawlingService(
             }
 
             noticeWriter.write(notice)
-            // TODO: FCM 메세지 전송을 위한 이벤트 트리거
             applicationEventPublisher.publishEvent(notice)
 
             if (notice.isLastInType()) {
