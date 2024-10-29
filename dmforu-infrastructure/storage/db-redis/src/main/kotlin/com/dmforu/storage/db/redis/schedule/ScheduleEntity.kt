@@ -1,4 +1,4 @@
-package com.dmforu.storage.db.mongo.schedule
+package com.dmforu.storage.db.redis.schedule
 
 import com.dmforu.domain.schedule.Schedule
 import org.springframework.data.annotation.Id

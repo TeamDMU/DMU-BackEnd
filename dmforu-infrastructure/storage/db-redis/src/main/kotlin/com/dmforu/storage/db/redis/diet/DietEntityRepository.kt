@@ -1,4 +1,4 @@
-package com.dmforu.storage.db.mongo.diet
+package com.dmforu.storage.db.redis.diet
 
 import com.dmforu.domain.diet.Diet
 import com.dmforu.domain.diet.DietRepository
