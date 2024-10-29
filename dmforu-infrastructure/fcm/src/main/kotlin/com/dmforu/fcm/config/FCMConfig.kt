@@ -3,14 +3,13 @@ package com.dmforu.fcm.config
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
-import org.springframework.boot.autoconfigure.domain.EntityScan
+import com.google.firebase.messaging.FirebaseMessaging
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
 import java.io.IOException
 
 @Configuration
-@EntityScan(basePackages = ["com.dmforu.fcm"])
 internal class FCMConfig {
     @Bean
     @Throws(IOException::class)
@@ -23,5 +22,10 @@ internal class FCMConfig {
             .build()
 
         return FirebaseApp.initializeApp(options, "DMFORU_APP_PROD")
+    }
+
+    @Bean
+    fun firebaseMessaging(firebaseApp: FirebaseApp): FirebaseMessaging {
+        return FirebaseMessaging.getInstance(FirebaseApp.getInstance("DMFORU_APP_PROD"))
     }
 }

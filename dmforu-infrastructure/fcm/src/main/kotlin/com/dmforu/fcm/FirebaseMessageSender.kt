@@ -9,15 +9,14 @@ import org.springframework.stereotype.Component
 @Component
 internal class FirebaseMessageSender(
     private val firebaseMessageConverter: FirebaseMessageConverter,
+    private val firebaseMessaging: FirebaseMessaging,
 ) : MessageSender {
 
     override fun sendNoticeMessage(message: NoticeMessage, tokens: List<String>) {
 
         val firebaseMessage = firebaseMessageConverter.buildMessageToNotice(message, tokens)
-        val firebaseApp = FirebaseApp.getInstance("DMFORU_APP_PROD")
 
-        FirebaseMessaging.getInstance(firebaseApp).sendEachForMulticast(firebaseMessage)
+        firebaseMessaging.sendEachForMulticast(firebaseMessage)
     }
-
 
 }
