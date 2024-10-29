@@ -78,7 +78,8 @@ subprojects {
                             "**/*Request*",
                             "**/*Response*",
                             "**/*Interceptor*",
-                            "**/*Exception*"
+                            "**/*Exception*",
+                            "**/*TestSupport*"
                         )
                     }
                 }
