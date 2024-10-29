@@ -16,13 +16,13 @@ class CrawlingScheduler (
 ) {
     @Scheduled(cron = "0 */10 9-19 * * MON-FRI")
     fun noticeCrawling() {
-        departmentNoticeCrawlingService.crawling()
-        universityNoticeCrawlingService.crawling()
+        departmentNoticeCrawlingService.addRecentDepartmentNotice()
+        universityNoticeCrawlingService.addRecnetUniversityNotice()
     }
 
     @Scheduled(cron = "0 0 8,20 * * *")
-    fun dietCrawling() {
-        dietCrawlingService.overwriteToRedis()
-        scheduleCrawlingService.overwriteToRedis()
+    fun dietAndScheduleCrawling() {
+        dietCrawlingService.updateToRecentDiet()
+        scheduleCrawlingService.updateToRecentSchedule()
     }
 }

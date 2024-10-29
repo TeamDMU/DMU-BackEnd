@@ -9,7 +9,7 @@ class DietCrawlingService(
     private val dietParser: DietParser,
     private val dietWriter: DietWriter,
 ) {
-    fun overwriteToRedis() {
+    fun updateToRecentDiet() {
         dietWriter.overwrite(dietParser.parse())
     }
 }
