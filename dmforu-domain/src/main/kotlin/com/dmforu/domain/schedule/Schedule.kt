@@ -3,6 +3,7 @@ package com.dmforu.domain.schedule
 class Schedule private constructor(
     val dates: List<String>,
     val content: String,
+
 ) {
     companion object {
         fun of(dateArray: List<String>, content: String): Schedule {
@@ -19,6 +20,25 @@ class Schedule private constructor(
                 return Month(month, monthSchedule)
             }
         }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as Month
+
+            if (month != other.month) return false
+            if (monthSchedule != other.monthSchedule) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = month
+            result = 31 * result + monthSchedule.hashCode()
+            return result
+        }
+
     }
 
     class Year private constructor(
@@ -30,6 +50,44 @@ class Schedule private constructor(
                 return Year(year, yearSchedule)
             }
         }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as Year
+
+            if (year != other.year) return false
+            if (yearSchedule != other.yearSchedule) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = year
+            result = 31 * result + yearSchedule.hashCode()
+            return result
+        }
+
+
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Schedule
+
+        if (dates != other.dates) return false
+        if (content != other.content) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = dates.hashCode()
+        result = 31 * result + content.hashCode()
+        return result
     }
 
 }

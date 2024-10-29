@@ -1,4 +1,4 @@
-package com.dmforu.storage.db.redis.diet
+package com.dmforu.storage.db.mongo.diet
 
 import com.dmforu.domain.diet.Diet
 import org.springframework.data.annotation.Id

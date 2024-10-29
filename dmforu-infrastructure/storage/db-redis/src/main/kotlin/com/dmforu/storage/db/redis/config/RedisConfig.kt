@@ -1,8 +1,9 @@
-package com.dmforu.storage.db.redis.config
+package com.dmforu.storage.db.mongo.config
 
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.domain.EntityScan
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cache.CacheManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -19,7 +20,7 @@ import java.time.Duration
 
 @Configuration
 @EntityScan(basePackages = ["com.dmforu.storage.db.redis"])
-@EnableRedisRepositories(basePackages = ["com.dmforu.storage.db.redis"])
+@EnableRedisRepositories(basePackages = ["com.dmforu.storage.db.mongo"])
 internal class RedisConfig(
     @Value("\${spring.data.redis.host}")
     var host: String,
