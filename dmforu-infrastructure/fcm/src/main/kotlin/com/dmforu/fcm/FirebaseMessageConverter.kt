@@ -22,5 +22,4 @@ internal class FirebaseMessageConverter {
             .build()
     }
 
-
 }

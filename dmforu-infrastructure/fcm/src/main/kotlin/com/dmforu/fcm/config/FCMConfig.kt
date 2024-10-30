@@ -25,7 +25,8 @@ internal class FCMConfig {
     }
 
     @Bean
-    fun firebaseMessaging(firebaseApp: FirebaseApp): FirebaseMessaging {
+    fun firebaseMessaging(): FirebaseMessaging {
         return FirebaseMessaging.getInstance(FirebaseApp.getInstance("DMFORU_APP_PROD"))
     }
+
 }
