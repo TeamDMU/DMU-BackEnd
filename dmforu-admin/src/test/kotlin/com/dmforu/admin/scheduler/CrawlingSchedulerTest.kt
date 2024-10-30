@@ -6,28 +6,29 @@ import com.dmforu.admin.scheduler.crawling.ScheduleCrawlingService
 import com.dmforu.admin.scheduler.crawling.UniversityNoticeCrawlingService
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.InjectMocks
+import org.mockito.Mock
 import org.mockito.Mockito.verify
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
+import org.mockito.junit.jupiter.MockitoExtension
 
-@SpringBootTest
+@ExtendWith(MockitoExtension::class)
 class CrawlingSchedulerTest {
 
-    @Autowired
-    private lateinit var crawlingScheduler: CrawlingScheduler
-
-    @MockBean
+    @Mock
     private lateinit var departmentNoticeCrawlingService: DepartmentNoticeCrawlingService
 
-    @MockBean
+    @Mock
     private lateinit var universityNoticeCrawlingService: UniversityNoticeCrawlingService
 
-    @MockBean
+    @Mock
     private lateinit var dietCrawlingService: DietCrawlingService
 
-    @MockBean
+    @Mock
     private lateinit var scheduleCrawlingService: ScheduleCrawlingService
+
+    @InjectMocks
+    private lateinit var crawlingScheduler: CrawlingScheduler
 
     @DisplayName("대학 공지와 학과 공지를 크롤링하고 최신 정보를 추가한다.")
     @Test
