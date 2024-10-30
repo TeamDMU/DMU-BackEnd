@@ -1,10 +1,8 @@
 package com.dmforu.admin.scheduler.crawling
 
-import com.dmforu.crawling.parser.DepartmentNoticeParser
-import com.dmforu.domain.notice.Major
+import com.dmforu.crawling.parser.UniversityNoticeParser
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.NoticeReader
-import com.dmforu.domain.notice.NoticeWriter
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -16,13 +14,12 @@ import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.any
 import org.springframework.beans.factory.ObjectProvider
-import org.springframework.context.ApplicationEventPublisher
 
 @ExtendWith(MockitoExtension::class)
-class DepartmentNoticeCrawlingServiceTest {
+class UniversityNoticeCrawlingServiceTest {
 
     @Mock
-    lateinit var departmentNoticeParser: DepartmentNoticeParser
+    lateinit var universityNoticeParser: UniversityNoticeParser
 
     @Mock
     lateinit var noticeReader: NoticeReader
@@ -31,31 +28,31 @@ class DepartmentNoticeCrawlingServiceTest {
     lateinit var noticeService: NoticeService
 
     @Mock
-    lateinit var prototypeBeanProvider: ObjectProvider<DepartmentNoticeParser>
+    lateinit var prototypeBeanProvider: ObjectProvider<UniversityNoticeParser>
 
     @InjectMocks
-    lateinit var service: DepartmentNoticeCrawlingService
+    lateinit var service: UniversityNoticeCrawlingService
 
-    @DisplayName("학과별 공지사항을 크롤링하고, 새로운 공지사항이 있을 경우 저장한다.")
+    @DisplayName("대학 공지사항을 크롤링하고, 새로운 공지사항이 있을 경우 저장한다.")
     @Test
-    fun addRecentDepartmentNotice() {
+    fun addRecentUniversityNotice() {
         // given
         val notices = listOf(
             mock(Notice::class.java),
             mock(Notice::class.java),
         )
 
-        given(prototypeBeanProvider.getObject()).willReturn(departmentNoticeParser)
+        given(prototypeBeanProvider.getObject()).willReturn(universityNoticeParser)
         given(noticeReader.findMaxNumberByType(any())).willReturn(1)
         given(noticeService.saveNewNotices(any(), any())).willReturn(false)
-        given(departmentNoticeParser.parse(any())).willReturn(notices)
+        given(universityNoticeParser.parse()).willReturn(notices)
 
         // when
-        service.addRecentDepartmentNotice()
+        service.addRecentUniversityNotice()
 
         // then
-        verify(prototypeBeanProvider, times(Major.entries.size)).getObject()
-        verify(noticeReader, times(Major.entries.size)).findMaxNumberByType(any())
+        verify(prototypeBeanProvider).getObject()
+        verify(noticeReader).findMaxNumberByType(any())
     }
 
 }
