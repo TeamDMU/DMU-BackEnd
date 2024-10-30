@@ -7,13 +7,14 @@ import org.springframework.stereotype.Component
 class KeywordFilter {
 
     fun extractKeywordFrom(title: String): String? {
+        val whiteSpaceRemovedTitle = title.replace(" ", "")
+
         Keywords.entries.forEach {
-            if (title.contains(it.korean)) {
+            if (whiteSpaceRemovedTitle.contains(it.korean)) {
                 return it.korean
             }
         }
 
-        val whiteSpaceRemovedTitle = title.replace(" ", "")
         if (whiteSpaceRemovedTitle.contains("중간고사")) {
             return "시험"
         }
