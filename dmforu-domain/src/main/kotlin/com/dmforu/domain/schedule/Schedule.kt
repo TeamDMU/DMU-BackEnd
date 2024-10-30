@@ -1,5 +1,7 @@
 package com.dmforu.domain.schedule
 
+import com.dmforu.domain.Generated
+
 class Schedule private constructor(
     val dates: List<String>,
     val content: String,
@@ -21,6 +23,7 @@ class Schedule private constructor(
             }
         }
 
+        @Generated
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
@@ -33,6 +36,7 @@ class Schedule private constructor(
             return true
         }
 
+        @Generated
         override fun hashCode(): Int {
             var result = month
             result = 31 * result + monthSchedule.hashCode()
@@ -51,6 +55,7 @@ class Schedule private constructor(
             }
         }
 
+        @Generated
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
@@ -63,6 +68,7 @@ class Schedule private constructor(
             return true
         }
 
+        @Generated
         override fun hashCode(): Int {
             var result = year
             result = 31 * result + yearSchedule.hashCode()
@@ -72,6 +78,7 @@ class Schedule private constructor(
 
     }
 
+    @Generated
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -84,6 +91,7 @@ class Schedule private constructor(
         return true
     }
 
+    @Generated
     override fun hashCode(): Int {
         var result = dates.hashCode()
         result = 31 * result + content.hashCode()

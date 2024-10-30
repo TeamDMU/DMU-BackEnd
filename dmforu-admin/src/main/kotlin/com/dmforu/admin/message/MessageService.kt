@@ -1,6 +1,5 @@
 package com.dmforu.admin.message
 
-import com.dmforu.domain.message.Keywords
 import com.dmforu.domain.message.MessageSender
 import com.dmforu.domain.message.NoticeMessage
 import com.dmforu.domain.notice.Notice
@@ -10,19 +9,22 @@ import org.springframework.stereotype.Service
 @Service
 class MessageService(
     private val subscribeReader: SubscribeReader,
+    private val keywordFilter: KeywordFilter,
     private val messageSender: MessageSender,
 ) {
 
     fun sendNoticeMessage(notice: Notice) {
         if (notice.isUniversityNotice()) {
             sendUniversityNoticeMessage(notice)
+
+            return
         }
 
         sendDepartmentNoticeMessage(notice)
     }
 
     private fun sendUniversityNoticeMessage(notice: Notice) {
-        val keyword = keywordFilter(notice.title) ?: return
+        val keyword = keywordFilter.extractKeywordFrom(notice.title) ?: return
 
         val tokens = subscribeReader.getTokensBySubscribedToKeyword(keyword = keyword)
 
@@ -47,22 +49,5 @@ class MessageService(
         messageSender.sendNoticeMessage(message = message, tokens = tokens)
     }
 
-    private fun keywordFilter(title: String): String? {
-        Keywords.entries.forEach {
-            if (title.contains(it.korean)) {
-                return it.korean
-            }
-        }
 
-        val whiteSpaceRemovedTitle = title.replace(" ", "")
-        if (whiteSpaceRemovedTitle.contains("중간고사")) {
-            return "시험"
-        }
-
-        if (whiteSpaceRemovedTitle.contains("기말고사")) {
-            return "시험"
-        }
-
-        return null
-    }
 }

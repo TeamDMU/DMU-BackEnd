@@ -6,6 +6,7 @@ import com.google.firebase.FirebaseOptions
 import com.google.firebase.messaging.FirebaseMessaging
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.DependsOn
 import org.springframework.core.io.ClassPathResource
 import java.io.IOException
 
@@ -25,7 +26,9 @@ internal class FCMConfig {
     }
 
     @Bean
-    fun firebaseMessaging(firebaseApp: FirebaseApp): FirebaseMessaging {
+    @DependsOn("someAppProdFirebaseApp")
+    fun firebaseMessaging(): FirebaseMessaging {
         return FirebaseMessaging.getInstance(FirebaseApp.getInstance("DMFORU_APP_PROD"))
     }
+
 }

@@ -10,7 +10,7 @@ class ScheduleCrawlingService(
     private val scheduleParser: ScheduleParser,
     private val scheduleWriter: ScheduleWriter,
 ) {
-    fun overwriteToRedis() {
+    fun updateToRecentSchedule() {
         scheduleWriter.overwrite(scheduleParser.parse(LocalDate.now().year))
     }
 }
