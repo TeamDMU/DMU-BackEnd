@@ -38,7 +38,7 @@ class CrawlingSchedulerTest {
 
         // then
         verify(departmentNoticeCrawlingService).addRecentDepartmentNotice()
-        verify(universityNoticeCrawlingService).addRecnetUniversityNotice()
+        verify(universityNoticeCrawlingService).addRecentUniversityNotice()
     }
 
     @DisplayName("식단과 학사 일정을 크롤링하고 최신 정보로 업데이트한다.")

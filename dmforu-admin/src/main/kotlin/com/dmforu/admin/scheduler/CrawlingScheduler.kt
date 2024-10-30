@@ -17,7 +17,7 @@ class CrawlingScheduler (
     @Scheduled(cron = "0 */10 9-19 * * MON-FRI")
     fun noticeCrawling() {
         departmentNoticeCrawlingService.addRecentDepartmentNotice()
-        universityNoticeCrawlingService.addRecnetUniversityNotice()
+        universityNoticeCrawlingService.addRecentUniversityNotice()
     }
 
     @Scheduled(cron = "0 0 8,20 * * *")
