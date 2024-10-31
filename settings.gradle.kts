@@ -6,8 +6,7 @@ include(
     "dmforu-domain",
     "dmforu-crawling",
     "dmforu-infrastructure:fcm",
-    "dmforu-infrastructure:storage:db-mysql",
-    "dmforu-infrastructure:storage:db-redis",
+    "dmforu-infrastructure:storage:mysql",
     "dmforu-infrastructure:storage:mongo",
 )
 

@@ -1,0 +1,22 @@
+spring.application.name: dmforu-admin
+spring.profiles.active: local
+
+spring:
+  config:
+    import:
+      - db-mysql.yml
+      - mongo.yml
+
+spring.lifecycle.timeout-per-shutdown-phase: 30s
+server.shutdown: graceful
+
+---
+spring.config.activate.on-profile: local
+
+
+---
+spring.config.activate.on-profile: test
+
+
+---
+spring.config.activate.on-profile: dev
