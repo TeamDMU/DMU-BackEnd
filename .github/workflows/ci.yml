@@ -22,17 +22,29 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Create MySQL resources directory
+        run: |
+          mkdir -p ./dmforu-infrastructure/storage/mysql/src/main/resources
+
       - name: make mysql.yml
         run: |
           touch ./mysql.yml
           echo "${{ secrets.MYSQL }}" > ./mysql.yml
         working-directory: ./dmforu-infrastructure/storage/mysql/src/main/resources
 
+      - name: Create MongoDB resources directory
+        run: |
+          mkdir -p ./dmforu-infrastructure/storage/mongo/src/main/resources
+
       - name: make mongo.yml
         run: |
           touch ./mongo.yml
           echo "${{ secrets.MONGO }}" > ./mongo.yml
         working-directory: ./dmforu-infrastructure/storage/mongo/src/main/resources
+
+      - name: Create Firebase key resources directory
+        run: |
+          mkdir -p ./dmforu-infrastructure/fcm/src/main/resources/key
 
       - name: create JSON file
         run: |
