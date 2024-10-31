@@ -11,20 +11,20 @@ import org.bson.codecs.pojo.PojoCodecProvider
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.data.mongodb.MongoDatabaseFactory
+import org.springframework.data.mongodb.MongoTransactionManager
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
-
 
 @Configuration
 @EnableMongoRepositories(basePackages = ["com.dmforu.storage.db.mongo"])
 internal class MongoConfig(
-    @Value("\${spring.data.mongodb.uri}")
+    @Value("\${spring.data.mongo.uri}")
     val uri: String,
 
-    @Value("\${spring.data.mongodb.database}")
+    @Value("\${spring.data.mongo.database}")
     val database: String
 ) {
-
 
     @Bean
     fun mongoClient(): MongoClient {
@@ -42,6 +42,11 @@ internal class MongoConfig(
     @Bean
     fun mongoTemplate(): MongoTemplate {
         return MongoTemplate(mongoClient(), database)
+    }
+
+    @Bean
+    fun transactionManager(mongoDatabaseFactory: MongoDatabaseFactory): MongoTransactionManager{
+        return MongoTransactionManager(mongoDatabaseFactory)
     }
 
 }
