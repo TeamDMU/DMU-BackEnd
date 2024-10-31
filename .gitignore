@@ -40,5 +40,6 @@ out/
 .kotlin
 
 ### Configuration Settings ###
-secret.yml
+**/mongo.yml
+**/mysql.yml
 **/fire-base-key.json
