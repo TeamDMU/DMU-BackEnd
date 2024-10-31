@@ -4,7 +4,7 @@ spring.profiles.active: local
 spring:
   config:
     import:
-      - db-mysql.yml
+      - mysql.yml
       - mongo.yml
   web.resources.add-mappings: false
 
