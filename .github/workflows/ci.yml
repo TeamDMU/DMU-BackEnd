@@ -21,6 +21,36 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+
+      - name: make mysql.yml
+        run: |
+          touch ./mysql.yml
+          echo "${{ secrets.MYSQL }}" > ./mysql.yml
+        working-directory: ./dmforu-infrastructure/storage/mysql/src/main/resources
+
+      - name: make mongo.yml
+        run: |
+          touch ./mongo.yml
+          echo "${{ secrets.MONGO }}" > ./mongo.yml
+        working-directory: ./dmforu-infrastructure/storage/mongo/src/main/resources
+
+      - name: create JSON file
+        run: |
+          echo '{
+            "type": "${{ secrets.FCM_TYPE }}",
+            "project_id": "${{ secrets.FCM_PROJECT_ID }}",
+            "private_key_id": "${{ secrets.FCM_PRIVATE_KEY_ID }}",
+            "private_key": "${{ secrets.FCM_PRIVATE_KEY }}",
+            "client_email": "${{ secrets.FCM_CLIENT_EMAIL }}",
+            "client_id": "${{ secrets.FCM_CLIENT_ID }}",
+            "auth_uri": "${{ secrets.FCM_AUTH_URI }}",
+            "token_uri": "${{ secrets.FCM_TOKEN_URI }}",
+            "auth_provider_x509_cert_url": "${{ secrets.FCM_AUTH_PROVIDER_X509_CERT_URL }}",
+            "client_x509_cert_url": "${{ secrets.FCM_CLIENT_X509_CERT_URL }}",
+            "universe_domain": "${{ secrets.FCM_UNIVERSE_DOMAIN }}"
+          }' > ./fire-base-key.json
+        working-directory: ./dmforu-infrastructure/fcm/src/main/resources/key
+        
       - name: Test
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
