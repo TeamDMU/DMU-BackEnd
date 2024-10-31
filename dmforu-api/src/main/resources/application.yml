@@ -1,0 +1,28 @@
+spring.application.name: dmforu-api
+spring.profiles.active: local
+
+spring:
+  config:
+    import:
+      - mysql.yml
+      - mongo.yml
+  web.resources.add-mappings: false
+
+spring-doc:
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: method
+
+spring.lifecycle.timeout-per-shutdown-phase: 30s
+server.shutdown: graceful
+
+---
+spring.config.activate.on-profile: local
+
+
+---
+spring.config.activate.on-profile: test
+
+
+---
+spring.config.activate.on-profile: dev

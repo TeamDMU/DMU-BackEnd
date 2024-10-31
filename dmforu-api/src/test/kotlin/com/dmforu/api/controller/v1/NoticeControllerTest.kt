@@ -119,10 +119,10 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .param("size", "20")
                 .contentType(APPLICATION_JSON)
         )
-            .andExpect(status().isBadRequest)
+            .andExpect(status().isNotFound)
             .andExpect(jsonPath("$.result").value(ResultType.ERROR.name))
-            .andExpect(jsonPath("$.error.code").value(ErrorCode.E400.name))
-            .andExpect(jsonPath("$.error.message").value("잘못된 요청을 하였습니다."))
+            .andExpect(jsonPath("$.error.code").value(ErrorCode.E404.name))
+            .andExpect(jsonPath("$.error.message").value("잘못된 URL로 요청을 하였습니다."))
             .andExpect(jsonPath("$.error.data").isEmpty)
             .andExpect(jsonPath("$.data").isEmpty)
     }

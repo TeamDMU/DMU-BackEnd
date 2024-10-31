@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.servlet.NoHandlerFoundException
 import org.springframework.web.servlet.resource.NoResourceFoundException
 
 @RestControllerAdvice
@@ -25,6 +26,11 @@ class ApiControllerAdvice {
             else -> log.info("AppException : {}", e.message, e)
         }
         return ResponseEntity(ApiResponse.error(e.errorType, e.data), e.errorType.status)
+    }
+
+    @ExceptionHandler(NoHandlerFoundException::class)
+    fun handleNoResourceFoundException(e: NoHandlerFoundException): ResponseEntity<ApiResponse<Any>> {
+        return ResponseEntity(ApiResponse.error(ErrorType.NOT_FOUND_ERROR), ErrorType.NOT_FOUND_ERROR.status)
     }
 
     @ExceptionHandler(NoResourceFoundException::class)
