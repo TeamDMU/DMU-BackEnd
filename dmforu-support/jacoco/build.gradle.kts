@@ -9,8 +9,8 @@ dependencies {
 
 tasks.testCodeCoverageReport {
     reports {
-        csv.required = true
-        xml.required = false
+        csv.required = false
+        xml.required = true
     }
     classDirectories.setFrom(
         files(
