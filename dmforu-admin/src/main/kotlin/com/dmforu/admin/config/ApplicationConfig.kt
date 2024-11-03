@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Scope
 
 @Configuration
-class ApplicationConfiguration {
+class ApplicationConfig {
 
     @Bean
     fun subscribeReader(subscribeRepository: SubscribeRepository): SubscribeReader {
