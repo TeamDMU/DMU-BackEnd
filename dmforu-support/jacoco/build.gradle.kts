@@ -30,6 +30,8 @@ tasks.testCodeCoverageReport {
                         "**/*Config*",
                         "**/*Dto*",
                         "**/*Error*",
+                        "**/request/**",
+                        "**/response/**",
                         "**/*Request*",
                         "**/*Response*",
                         "**/*Interceptor*",
