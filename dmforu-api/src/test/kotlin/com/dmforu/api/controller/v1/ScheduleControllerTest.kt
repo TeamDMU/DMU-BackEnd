@@ -12,9 +12,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 class ScheduleControllerTest : ControllerTestSupport() {
 
-    @DisplayName("식단을 불러온다.")
+    @DisplayName("학사 일정을 불러온다.")
     @Test
-    fun readDiet() {
+    fun readSchedule() {
         // given
         given(scheduleReader.read()).willReturn(listOf())
 
