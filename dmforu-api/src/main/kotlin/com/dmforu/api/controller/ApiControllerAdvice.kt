@@ -35,11 +35,6 @@ class ApiControllerAdvice {
         return ResponseEntity(ErrorResponse.error(ErrorType.NOT_FOUND_ERROR), ErrorType.NOT_FOUND_ERROR.status)
     }
 
-    @ExceptionHandler(NoResourceFoundException::class)
-    fun handleNoResourceFoundException(e: NoResourceFoundException): ResponseEntity<ApiResponse<ErrorMessage>> {
-        return ResponseEntity(ErrorResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleRequestBodyException(e: MethodArgumentNotValidException): ResponseEntity<ApiResponse<ErrorMessage>> {
         log.error("MethodArgumentNotValidException : {}", e.message, e)

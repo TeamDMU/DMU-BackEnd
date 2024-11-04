@@ -1,29 +1,25 @@
-package com.dmforu.api.controller.v1
+package com.dmforu.api.controller.old
 
-import com.dmforu.api.ControllerTestSupport
+import com.dmforu.api.OldControllerTestSupport
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.mockito.BDDMockito.given
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-class ScheduleControllerTest : ControllerTestSupport() {
+class OldDietControllerTest : OldControllerTestSupport() {
 
-    @DisplayName("학사 일정을 불러온다.")
+    @DisplayName("식단을 불러온다.")
     @Test
-    fun readSchedule() {
-        // given
-        given(scheduleReader.read()).willReturn(listOf())
-
-        // when // then
+    fun readDiet() {
         mockMvc.perform(
-            get("/api/v1/schedule")
+            get("/api/v1/dmu/cafeteria")
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.data").isArray)
+            .andExpect(jsonPath("$").isArray)
     }
+
 }
