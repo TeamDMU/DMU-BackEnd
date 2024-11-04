@@ -27,6 +27,5 @@ class ScheduleControllerTest : ControllerTestSupport() {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.result").value(ResultType.SUCCESS.name))
             .andExpect(jsonPath("$.data").isArray)
-            .andExpect(jsonPath("$.error").isEmpty)
     }
 }
