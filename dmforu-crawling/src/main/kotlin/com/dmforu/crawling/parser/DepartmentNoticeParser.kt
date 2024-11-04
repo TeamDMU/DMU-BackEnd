@@ -24,7 +24,7 @@ class DepartmentNoticeParser(
         val document = htmlLoader.get(generateSearchUrl())
 
         return document.select(".board-table tbody tr")
-            .map { row -> parseRow(row) }
+            .mapNotNull { row -> parseRow(row) }
             .toList()
 
     }
@@ -33,8 +33,8 @@ class DepartmentNoticeParser(
         this.major = major
     }
 
-    private fun parseRow(row: Element): Notice {
-        val number = row.select(".td-num").text().toInt()
+    private fun parseRow(row: Element): Notice? {
+        val number = row.select(".td-num").text().toIntOrNull() ?: return null
         val title = row.select(".td-subject a").text()
         val author = row.select(".td-write").text()
         val url = generateUrlFromSearch(row.select(".td-subject a").attr("href"))
