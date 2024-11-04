@@ -10,7 +10,7 @@ internal class ScheduleEntityRepository(
     private val scheduleMongoRepository: ScheduleMongoRepository
 ) : ScheduleRepository {
 
-    @Transactional
+//    @Transactional
     override fun write(schedules: List<Schedule.Year>) {
         scheduleMongoRepository.deleteAll()
         scheduleMongoRepository.save(ScheduleMapper.mapToEntity(schedules))

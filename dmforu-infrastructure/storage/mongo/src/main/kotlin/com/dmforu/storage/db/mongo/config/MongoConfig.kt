@@ -44,9 +44,9 @@ internal class MongoConfig(
         return MongoTemplate(mongoClient(), database)
     }
 
-    @Bean
-    fun transactionManager(mongoDatabaseFactory: MongoDatabaseFactory): MongoTransactionManager{
-        return MongoTransactionManager(mongoDatabaseFactory)
-    }
+//    @Bean
+//    fun transactionManager(mongoDatabaseFactory: MongoDatabaseFactory): MongoTransactionManager{
+//        return MongoTransactionManager(mongoDatabaseFactory)
+//    }
 
 }
