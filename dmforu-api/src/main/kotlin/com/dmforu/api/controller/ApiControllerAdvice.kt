@@ -4,6 +4,7 @@ import com.dmforu.api.support.error.AppException
 import com.dmforu.api.support.error.ErrorMessage
 import com.dmforu.api.support.error.ErrorType
 import com.dmforu.api.support.response.ApiResponse
+import com.dmforu.api.support.response.ErrorResponse
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.logging.LogLevel
@@ -26,34 +27,34 @@ class ApiControllerAdvice {
             LogLevel.WARN -> log.warn("AppException : {}", e.message, e)
             else -> log.info("AppException : {}", e.message, e)
         }
-        return ResponseEntity(ApiResponse.error(e.errorType, e.data), e.errorType.status)
+        return ResponseEntity(ErrorResponse.error(e.errorType, e.data), e.errorType.status)
     }
 
     @ExceptionHandler(NoHandlerFoundException::class)
     fun handleNoResourceFoundException(e: NoHandlerFoundException): ResponseEntity<ApiResponse<ErrorMessage>> {
-        return ResponseEntity(ApiResponse.error(ErrorType.NOT_FOUND_ERROR), ErrorType.NOT_FOUND_ERROR.status)
+        return ResponseEntity(ErrorResponse.error(ErrorType.NOT_FOUND_ERROR), ErrorType.NOT_FOUND_ERROR.status)
     }
 
     @ExceptionHandler(NoResourceFoundException::class)
     fun handleNoResourceFoundException(e: NoResourceFoundException): ResponseEntity<ApiResponse<ErrorMessage>> {
-        return ResponseEntity(ApiResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
+        return ResponseEntity(ErrorResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleRequestBodyException(e: MethodArgumentNotValidException): ResponseEntity<ApiResponse<ErrorMessage>> {
         log.error("MethodArgumentNotValidException : {}", e.message, e)
-        return ResponseEntity(ApiResponse.error(ErrorType.BAD_REQUEST_ERROR, e.fieldError?.defaultMessage), ErrorType.BAD_REQUEST_ERROR.status)
+        return ResponseEntity(ErrorResponse.error(ErrorType.BAD_REQUEST_ERROR, e.fieldError?.defaultMessage), ErrorType.BAD_REQUEST_ERROR.status)
     }
 
     @ExceptionHandler(MissingServletRequestParameterException::class)
     fun handleRequestParamException(e: MissingServletRequestParameterException): ResponseEntity<ApiResponse<ErrorMessage>> {
         log.error("RequestParamException : {}", e.message, e)
-        return ResponseEntity(ApiResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
+        return ResponseEntity(ErrorResponse.error(ErrorType.BAD_REQUEST_ERROR), ErrorType.BAD_REQUEST_ERROR.status)
     }
 
     @ExceptionHandler(Exception::class)
     fun handleException(e: Exception): ResponseEntity<ApiResponse<ErrorMessage>> {
         log.error("Exception : {}", e.message, e)
-        return ResponseEntity(ApiResponse.error(ErrorType.SERVER_ERROR), ErrorType.SERVER_ERROR.status)
+        return ResponseEntity(ErrorResponse.error(ErrorType.SERVER_ERROR), ErrorType.SERVER_ERROR.status)
     }
 }
