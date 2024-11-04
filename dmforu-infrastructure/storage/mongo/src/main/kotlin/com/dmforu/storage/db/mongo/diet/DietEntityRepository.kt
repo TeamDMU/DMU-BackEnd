@@ -10,7 +10,7 @@ internal class DietEntityRepository(
     private val dietRepository: DietMongoRepository,
 ) : DietRepository {
 
-    @Transactional
+//    @Transactional
     override fun write(diets: List<Diet>) {
         dietRepository.deleteAll()
         dietRepository.save(DietMapper.mapToEntity(diets))
