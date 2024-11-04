@@ -3,6 +3,7 @@ package com.dmforu.api.controller.v1
 import com.dmforu.api.controller.v1.request.PaginationRequest
 import com.dmforu.api.controller.v1.response.NoticeResponse
 import com.dmforu.api.support.response.ApiResponse
+import com.dmforu.api.support.response.SuccessResponse
 import com.dmforu.domain.notice.NoticeReader
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -27,7 +28,7 @@ class NoticeController(
                 page = paginationRequest.page,
                 size = paginationRequest.size
             ).map { NoticeResponse.form(it) }
-        return ApiResponse.success(universityNotices)
+        return SuccessResponse.success(universityNotices)
     }
 
     @Operation(
@@ -45,7 +46,7 @@ class NoticeController(
                 page = paginationRequest.page,
                 size = paginationRequest.size
             ).map { NoticeResponse.form(it) }
-        return ApiResponse.success(departmentNotices)
+        return SuccessResponse.success(departmentNotices)
     }
 
     @Operation(
@@ -64,6 +65,6 @@ class NoticeController(
             page = paginationRequest.page,
             size = paginationRequest.size
         ).map { NoticeResponse.form(it) }
-        return ApiResponse.success(notices)
+        return SuccessResponse.success(notices)
     }
 }

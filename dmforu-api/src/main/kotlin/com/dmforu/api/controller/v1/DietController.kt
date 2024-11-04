@@ -1,6 +1,7 @@
 package com.dmforu.api.controller.v1
 
 import com.dmforu.api.support.response.ApiResponse
+import com.dmforu.api.support.response.SuccessResponse
 import com.dmforu.domain.diet.Diet
 import com.dmforu.domain.diet.DietReader
 import io.swagger.v3.oas.annotations.Operation
@@ -19,6 +20,6 @@ class DietController(
     )
     @GetMapping("/api/v1/cafeteria")
     fun readDiet(): ApiResponse<List<Diet>> {
-        return ApiResponse.success(dietReader.read())
+        return SuccessResponse.success(dietReader.read())
     }
 }

@@ -2,7 +2,6 @@ package com.dmforu.api.controller.v1
 
 import com.dmforu.api.ControllerTestSupport
 import com.dmforu.api.support.error.ErrorCode
-import com.dmforu.api.support.response.ResultType
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.anyInt
@@ -29,9 +28,7 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.result").value(ResultType.SUCCESS.name))
             .andExpect(jsonPath("$.data").isArray)
-            .andExpect(jsonPath("$.error").isEmpty)
     }
 
     @DisplayName("학과 공지를 불러온다.")
@@ -49,9 +46,7 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.result").value(ResultType.SUCCESS.name))
             .andExpect(jsonPath("$.data").isArray)
-            .andExpect(jsonPath("$.error").isEmpty)
     }
 
     @DisplayName("학과 공지를 불러올 때, 학과는 필수 값이다.")
@@ -64,11 +59,9 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isBadRequest)
-            .andExpect(jsonPath("$.result").value(ResultType.ERROR.name))
             .andExpect(jsonPath("$.error.code").value(ErrorCode.E400.name))
             .andExpect(jsonPath("$.error.message").value("잘못된 요청을 하였습니다."))
             .andExpect(jsonPath("$.error.data").isEmpty)
-            .andExpect(jsonPath("$.data").isEmpty)
     }
 
 
@@ -87,9 +80,7 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.result").value(ResultType.SUCCESS.name))
             .andExpect(jsonPath("$.data").isArray)
-            .andExpect(jsonPath("$.error").isEmpty)
     }
 
     @DisplayName("공지를 검색할 때, 학과는 필수 값이다.")
@@ -102,11 +93,9 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isBadRequest)
-            .andExpect(jsonPath("$.result").value(ResultType.ERROR.name))
             .andExpect(jsonPath("$.error.code").value(ErrorCode.E400.name))
             .andExpect(jsonPath("$.error.message").value("잘못된 요청을 하였습니다."))
             .andExpect(jsonPath("$.error.data").isEmpty)
-            .andExpect(jsonPath("$.data").isEmpty)
     }
 
     @DisplayName("공지를 검색할 때, 검색어는 필수 값이다. ")
@@ -120,11 +109,9 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isNotFound)
-            .andExpect(jsonPath("$.result").value(ResultType.ERROR.name))
             .andExpect(jsonPath("$.error.code").value(ErrorCode.E404.name))
             .andExpect(jsonPath("$.error.message").value("잘못된 URL로 요청을 하였습니다."))
             .andExpect(jsonPath("$.error.data").isEmpty)
-            .andExpect(jsonPath("$.data").isEmpty)
     }
 
     @DisplayName("공지를 불러올 때, 페이지네이션 값이 빠져있다면 페이지 1, 사이즈 20으로 자동 설정된다.")
@@ -141,9 +128,7 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.result").value(ResultType.SUCCESS.name))
             .andExpect(jsonPath("$.data").isArray)
-            .andExpect(jsonPath("$.error").isEmpty)
 
         mockMvc.perform(
             get("/api/v1/notice/department")
@@ -151,9 +136,7 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.result").value(ResultType.SUCCESS.name))
             .andExpect(jsonPath("$.data").isArray)
-            .andExpect(jsonPath("$.error").isEmpty)
 
         mockMvc.perform(
             get("/api/v1/notice/공지사항")
@@ -161,9 +144,7 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.result").value(ResultType.SUCCESS.name))
             .andExpect(jsonPath("$.data").isArray)
-            .andExpect(jsonPath("$.error").isEmpty)
     }
 
     @DisplayName("공지를 불러올 때, 페이지의 값은 1이상이어야 한다.")
@@ -182,8 +163,6 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.result").value(ResultType.ERROR.name))
-            .andExpect(jsonPath("$.data").isEmpty)
             .andExpect(jsonPath("$.error.code").value(ErrorCode.E400.name))
             .andExpect(jsonPath("$.error.message").value("잘못된 요청을 하였습니다."))
             .andExpect(jsonPath("$.error.data").value("페이지는 1이상이어야 합니다."))
@@ -196,8 +175,6 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.result").value(ResultType.ERROR.name))
-            .andExpect(jsonPath("$.data").isEmpty)
             .andExpect(jsonPath("$.error.code").value(ErrorCode.E400.name))
             .andExpect(jsonPath("$.error.message").value("잘못된 요청을 하였습니다."))
             .andExpect(jsonPath("$.error.data").value("페이지는 1이상이어야 합니다."))
@@ -210,8 +187,6 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.result").value(ResultType.ERROR.name))
-            .andExpect(jsonPath("$.data").isEmpty)
             .andExpect(jsonPath("$.error.code").value(ErrorCode.E400.name))
             .andExpect(jsonPath("$.error.message").value("잘못된 요청을 하였습니다."))
             .andExpect(jsonPath("$.error.data").value("페이지는 1이상이어야 합니다."))
@@ -233,8 +208,6 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.result").value(ResultType.ERROR.name))
-            .andExpect(jsonPath("$.data").isEmpty)
             .andExpect(jsonPath("$.error.code").value(ErrorCode.E400.name))
             .andExpect(jsonPath("$.error.message").value("잘못된 요청을 하였습니다."))
             .andExpect(jsonPath("$.error.data").value("사이즈는 1이상이어야 합니다."))
@@ -247,8 +220,6 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.result").value(ResultType.ERROR.name))
-            .andExpect(jsonPath("$.data").isEmpty)
             .andExpect(jsonPath("$.error.code").value(ErrorCode.E400.name))
             .andExpect(jsonPath("$.error.message").value("잘못된 요청을 하였습니다."))
             .andExpect(jsonPath("$.error.data").value("사이즈는 1이상이어야 합니다."))
@@ -261,8 +232,6 @@ class NoticeControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isBadRequest())
-            .andExpect(jsonPath("$.result").value(ResultType.ERROR.name))
-            .andExpect(jsonPath("$.data").isEmpty)
             .andExpect(jsonPath("$.error.code").value(ErrorCode.E400.name))
             .andExpect(jsonPath("$.error.message").value("잘못된 요청을 하였습니다."))
             .andExpect(jsonPath("$.error.data").value("사이즈는 1이상이어야 합니다."))

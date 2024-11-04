@@ -1,6 +1,7 @@
 package com.dmforu.api.controller.v1
 
 import com.dmforu.api.support.response.ApiResponse
+import com.dmforu.api.support.response.SuccessResponse
 import com.dmforu.domain.schedule.Schedule
 import com.dmforu.domain.schedule.ScheduleReader
 import io.swagger.v3.oas.annotations.Operation
@@ -19,6 +20,6 @@ class ScheduleController(
         description = "현재년도를 기준으로 작년부터 내년 2월까지의 학사일정을 출력한다."
     )
     fun raedSchedule(): ApiResponse<List<Schedule.Year>> {
-        return ApiResponse.success(scheduleReader.read())
+        return SuccessResponse.success(scheduleReader.read())
     }
 }

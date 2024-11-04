@@ -1,7 +1,6 @@
 package com.dmforu.api.controller.v1
 
 import com.dmforu.api.ControllerTestSupport
-import com.dmforu.api.support.response.ResultType
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -20,8 +19,6 @@ class DietControllerTest : ControllerTestSupport() {
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.result").value(ResultType.SUCCESS.name))
             .andExpect(jsonPath("$.data").isArray)
-            .andExpect(jsonPath("$.error").isEmpty)
     }
 }
