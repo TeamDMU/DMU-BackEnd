@@ -7,24 +7,25 @@ import com.google.firebase.messaging.MulticastMessage
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.InjectMocks
+import org.mockito.Mock
 
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
+import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.any
 import org.mockito.kotlin.given
 import java.time.LocalDate
 
+@ExtendWith(MockitoExtension::class)
 class FirebaseMessageSenderTest {
 
+    @Mock
     private lateinit var firebaseMessaging: FirebaseMessaging
 
+    @InjectMocks
     private lateinit var messageSender: FirebaseMessageSender
-
-    @BeforeEach
-    fun setUp() {
-        firebaseMessaging = mock()
-        messageSender = FirebaseMessageSender(firebaseMessaging)
-    }
 
     @DisplayName("공지를 푸시 알림으로 전송한다.")
     @Test
