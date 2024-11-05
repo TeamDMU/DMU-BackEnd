@@ -10,7 +10,8 @@ include(
     "dmforu-infrastructure:storage:mysql",
     "dmforu-infrastructure:storage:mongo",
 
-    "dmforu-support:jacoco"
+    "dmforu-support:jacoco",
+    "dmforu-support:monitoring"
 )
 
 pluginManagement {
