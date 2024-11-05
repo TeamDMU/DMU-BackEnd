@@ -1,19 +1,24 @@
 package com.dmforu.storage.db.mysql.subscribe
 
 import com.dmforu.domain.subscribe.Subscribe
+import com.dmforu.storage.db.mysql.MysqlIntegrationTest
 import com.dmforu.storage.db.mysql.config.MysqlJpaConfig
 import com.dmforu.storage.db.mysql.subscribe.SubscribeEntity
 import com.dmforu.storage.db.mysql.subscribe.SubscribeJpaRepository
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.Import
 
-@DataJpaTest
-@Import(MysqlJpaConfig::class)
-class SubscribeJpaRepositoryTest {
+class SubscribeJpaRepositoryTest : MysqlIntegrationTest() {
+
+    @AfterEach
+    fun tearDown() {
+        subscribeRepository.deleteAllInBatch()
+    }
 
     @Autowired
     private lateinit var subscribeRepository: SubscribeJpaRepository

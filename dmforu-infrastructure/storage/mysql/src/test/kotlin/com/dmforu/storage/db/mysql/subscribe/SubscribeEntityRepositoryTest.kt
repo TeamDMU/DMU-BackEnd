@@ -3,6 +3,7 @@ package com.dmforu.storage.db.mysql.subscribe
 import com.dmforu.domain.subscribe.Subscribe
 import com.dmforu.storage.db.mysql.config.MysqlJpaConfig
 import com.dmforu.storage.db.mysql.MysqlApplicationTest
+import com.dmforu.storage.db.mysql.MysqlIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.tuple
 import org.junit.jupiter.api.AfterEach
@@ -13,10 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
 
-@ActiveProfiles("test")
-@SpringBootTest(classes = [MysqlApplicationTest::class])
-@Import(MysqlJpaConfig::class)
-class SubscribeEntityRepositoryTest {
+class SubscribeEntityRepositoryTest : MysqlIntegrationTest(){
 
     @Autowired
     private lateinit var subscribeRepository: SubscribeJpaRepository
