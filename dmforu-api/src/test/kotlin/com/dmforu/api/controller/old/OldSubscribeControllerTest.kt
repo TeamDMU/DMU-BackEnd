@@ -1,21 +1,19 @@
 package com.dmforu.api.controller.old
 
-import com.dmforu.api.OldControllerTestSupport
+import com.dmforu.api.ControllerTestSupport
 import com.dmforu.api.controller.old.request.OldDepartmentRequest
 import com.dmforu.api.controller.old.request.OldKeywordsSubscribeRequest
 import com.dmforu.api.controller.old.request.OldRegisterSubscribeRequest
 import com.dmforu.api.controller.old.request.OldTokenRequest
-import com.dmforu.api.controller.v1.request.RegisterSubscribeRequest
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-class OldSubscribeControllerTest : OldControllerTestSupport() {
+class OldSubscribeControllerTest : ControllerTestSupport() {
 
     @DisplayName("구독을 생성한다.")
     @Test

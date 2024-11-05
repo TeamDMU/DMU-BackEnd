@@ -1,9 +1,11 @@
 package com.dmforu.storage.db.mysql.notice
 
 import com.dmforu.domain.notice.Notice
+import com.dmforu.storage.db.mysql.MysqlIntegrationTest
 import com.dmforu.storage.db.mysql.config.MysqlJpaConfig
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.tuple
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,10 +16,12 @@ import org.springframework.data.domain.Sort
 import org.springframework.test.context.ActiveProfiles
 import java.time.LocalDate
 
-@ActiveProfiles("test")
-@DataJpaTest
-@Import(MysqlJpaConfig::class)
-class NoticeJpaRepositoryTest {
+class NoticeJpaRepositoryTest : MysqlIntegrationTest() {
+
+    @AfterEach
+    fun tearDown() {
+        noticeRepository.deleteAllInBatch()
+    }
 
     @Autowired
     private lateinit var noticeRepository: NoticeJpaRepository
