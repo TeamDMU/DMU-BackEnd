@@ -25,7 +25,7 @@ class DepartmentNoticeParserTest {
     @InjectMocks
     private lateinit var parser: DepartmentNoticeParser
 
-    @DisplayName("")
+    @DisplayName("학과 공지사항 목록을 파싱할 수 있다.")
     @Test
     fun parse() {
         // given
@@ -77,6 +77,7 @@ class DepartmentNoticeParserTest {
 
     }
 
+    @DisplayName("학과 공지사항 목록을 파싱할 때, 공지사항 주소가 잘못되어 있는 경우 예외를 발생시킨다.")
     @Test
     fun parseWhenUrlInvalid() {
         // given
