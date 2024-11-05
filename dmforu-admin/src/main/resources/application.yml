@@ -6,6 +6,7 @@ spring:
     import:
       - mysql.yml
       - mongo.yml
+      - monitoring.yml
 
 spring.lifecycle.timeout-per-shutdown-phase: 30s
 server.shutdown: graceful

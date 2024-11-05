@@ -6,6 +6,7 @@ spring:
     import:
       - mysql.yml
       - mongo.yml
+      - monitoring.yml
   web.resources.add-mappings: false
 
 spring-doc:
