@@ -9,11 +9,11 @@ tasks.getByName("jar") {
 dependencies {
     implementation(project(":dmforu-domain"))
     implementation(project(":dmforu-crawling"))
+    implementation(project(":dmforu-support:monitoring"))
 
     runtimeOnly(project(":dmforu-infrastructure:fcm"))
     runtimeOnly(project(":dmforu-infrastructure:storage:mysql"))
     runtimeOnly(project(":dmforu-infrastructure:storage:mongo"))
-    runtimeOnly(project(":dmforu-support:monitoring"))
 
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
 }
