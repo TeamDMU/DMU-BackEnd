@@ -1,6 +1,5 @@
 package com.dmforu.admin
 
-import org.springframework.boot.WebApplicationType
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.scheduling.annotation.EnableScheduling
@@ -20,6 +19,5 @@ class AdminApplication
 fun main(args: Array<String>) {
     TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"))
     SpringApplicationBuilder(AdminApplication::class.java)
-        .web(WebApplicationType.NONE)
         .run(*args)
 }

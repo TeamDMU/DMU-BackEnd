@@ -11,6 +11,8 @@ dependencies {
     implementation(project(":dmforu-crawling"))
     implementation(project(":dmforu-support:monitoring"))
 
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
     runtimeOnly(project(":dmforu-infrastructure:fcm"))
     runtimeOnly(project(":dmforu-infrastructure:storage:mysql"))
     runtimeOnly(project(":dmforu-infrastructure:storage:mongo"))

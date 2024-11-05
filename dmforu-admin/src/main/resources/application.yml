@@ -7,6 +7,7 @@ spring:
       - mysql.yml
       - mongo.yml
       - monitoring.yml
+  web.resources.add-mappings: false
 
 spring.lifecycle.timeout-per-shutdown-phase: 30s
 server.shutdown: graceful
