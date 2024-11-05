@@ -14,6 +14,7 @@ dependencies {
 
     runtimeOnly(project(":dmforu-infrastructure:storage:mysql"))
     runtimeOnly(project(":dmforu-infrastructure:storage:mongo"))
+    runtimeOnly(project(":dmforu-support:monitoring"))
 
     testImplementation("org.springframework.boot:spring-boot-starter-validation")
 }
