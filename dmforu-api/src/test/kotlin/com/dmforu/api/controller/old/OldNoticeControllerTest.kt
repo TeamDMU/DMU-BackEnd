@@ -1,6 +1,6 @@
 package com.dmforu.api.controller.old
 
-import com.dmforu.api.OldControllerTestSupport
+import com.dmforu.api.ControllerTestSupport
 import com.dmforu.api.support.error.ErrorCode
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-class OldNoticeControllerTest : OldControllerTestSupport() {
+class OldNoticeControllerTest : ControllerTestSupport() {
 
     @DisplayName("대학 공지를 불러온다.")
     @Test

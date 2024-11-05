@@ -1,5 +1,9 @@
 package com.dmforu.api
 
+import com.dmforu.api.controller.old.OldDietController
+import com.dmforu.api.controller.old.OldNoticeController
+import com.dmforu.api.controller.old.OldScheduleController
+import com.dmforu.api.controller.old.OldSubscribeController
 import com.dmforu.api.controller.v1.DietController
 import com.dmforu.api.controller.v1.NoticeController
 import com.dmforu.api.controller.v1.ScheduleController
@@ -7,6 +11,7 @@ import com.dmforu.api.controller.v1.SubscribeController
 import com.dmforu.domain.diet.DietReader
 import com.dmforu.domain.notice.NoticeReader
 import com.dmforu.domain.schedule.ScheduleReader
+import com.dmforu.domain.subscribe.OldSubscribeUpdater
 import com.dmforu.domain.subscribe.SubscribeUpdater
 import com.dmforu.domain.subscribe.SubscribeWriter
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -15,7 +20,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.web.servlet.MockMvc
 
-@WebMvcTest(controllers = [DietController::class, NoticeController::class, ScheduleController::class, SubscribeController::class])
+@WebMvcTest(
+    controllers = [
+        DietController::class, NoticeController::class, ScheduleController::class, SubscribeController::class,
+        OldDietController::class, OldNoticeController::class, OldScheduleController::class, OldSubscribeController::class
+    ]
+)
 abstract class ControllerTestSupport {
 
     @Autowired
@@ -39,6 +49,8 @@ abstract class ControllerTestSupport {
     @MockBean
     protected lateinit var subscribeWriter: SubscribeWriter
 
+    @MockBean
+    protected lateinit var oldSubscribeUpdater: OldSubscribeUpdater
 }
 
 
