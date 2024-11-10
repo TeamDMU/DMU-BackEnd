@@ -3,6 +3,7 @@ plugins {
     kotlin("plugin.spring") apply false
     id("org.springframework.boot") apply false
     id("io.spring.dependency-management")
+    id("jacoco")
 }
 
 java {
@@ -28,18 +29,14 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
-
-    dependencyManagement {
-        val springCloudDependenciesVersion: String by project
-        imports{
-            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudDependenciesVersion}")
-        }
-    }
+    apply(plugin = "jacoco")
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        if (project.name != "dmforu-domain" && project.name != "dmforu-crawling") {
+            implementation("org.springframework.boot:spring-boot-starter")
+            testImplementation("org.springframework.boot:spring-boot-starter-test")
+        }
         testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     }
@@ -60,5 +57,36 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+        finalizedBy(tasks.jacocoTestReport)
     }
+
+    tasks.jacocoTestReport {
+        dependsOn(tasks.test)
+        reports {
+            html.required.set(true)
+            xml.required.set(true)
+        }
+        classDirectories.setFrom(
+            files(
+                classDirectories.files.map {
+                    fileTree(it) {
+                        exclude(
+                            "**/*Application*",
+                            "**/*Config*",
+                            "**/*Dto*",
+                            "**/*Error*",
+                            "**/request/**",
+                            "**/response/**",
+                            "**/*Request*",
+                            "**/*Response*",
+                            "**/*Interceptor*",
+                            "**/*Exception*",
+                            "**/*TestSupport*"
+                        )
+                    }
+                }
+            )
+        )
+    }
+
 }

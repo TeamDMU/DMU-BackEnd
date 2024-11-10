@@ -8,8 +8,14 @@ tasks.getByName("jar") {
 
 dependencies {
     implementation(project(":dmforu-domain"))
-    runtimeOnly(project(":dmforu-storage:db-mysql"))
+    implementation(project(":dmforu-support:monitoring"))
 
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+
+    runtimeOnly(project(":dmforu-infrastructure:storage:mysql"))
+    runtimeOnly(project(":dmforu-infrastructure:storage:mongo"))
+
+    testImplementation("org.springframework.boot:spring-boot-starter-validation")
 }

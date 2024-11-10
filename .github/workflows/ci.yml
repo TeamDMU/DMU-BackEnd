@@ -1,0 +1,84 @@
+name: CI Auto Test
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+permissions:
+      contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Create MySQL resources directory
+        run: |
+          mkdir -p ./dmforu-infrastructure/storage/mysql/src/main/resources
+
+      - name: make mysql.yml
+        run: |
+          touch ./mysql.yml
+          echo "${{ secrets.MYSQL }}" | base64 --decode > ./mysql.yml
+        working-directory: ./dmforu-infrastructure/storage/mysql/src/main/resources
+
+      - name: Create MongoDB resources directory
+        run: |
+          mkdir -p ./dmforu-infrastructure/storage/mongo/src/main/resources
+
+      - name: make mongo.yml
+        run: |
+          touch ./mongo.yml
+          echo "${{ secrets.MONGO }}" | base64 --decode > ./mongo.yml
+        working-directory: ./dmforu-infrastructure/storage/mongo/src/main/resources
+
+      - name: Create SQS resources directory
+        run: |
+          mkdir -p ./dmforu-infrastructure/sqs/src/main/resources
+
+      - name: make sqs.yml
+        run: |
+          touch ./sqs.yml
+          echo "${{ secrets.SQS }}" | base64 --decode > ./sqs.yml
+        working-directory: ./dmforu-infrastructure/sqs/src/main/resources
+
+      - name: Create Firebase key resources directory
+        run: |
+          mkdir -p ./dmforu-infrastructure/fcm/src/main/resources/key
+
+      - name: create JSON file
+        run: |
+          echo '{
+            "type": "${{ secrets.FCM_TYPE }}",
+            "project_id": "${{ secrets.FCM_PROJECT_ID }}",
+            "private_key_id": "${{ secrets.FCM_PRIVATE_KEY_ID }}",
+            "private_key": "${{ secrets.FCM_PRIVATE_KEY }}",
+            "client_email": "${{ secrets.FCM_CLIENT_EMAIL }}",
+            "client_id": "${{ secrets.FCM_CLIENT_ID }}",
+            "auth_uri": "${{ secrets.FCM_AUTH_URI }}",
+            "token_uri": "${{ secrets.FCM_TOKEN_URI }}",
+            "auth_provider_x509_cert_url": "${{ secrets.FCM_AUTH_PROVIDER_X509_CERT_URL }}",
+            "client_x509_cert_url": "${{ secrets.FCM_CLIENT_X509_CERT_URL }}",
+            "universe_domain": "${{ secrets.FCM_UNIVERSE_DOMAIN }}"
+          }' > ./fire-base-key.json
+        working-directory: ./dmforu-infrastructure/fcm/src/main/resources/key
+        
+      - name: Test
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        with:
+          arguments: testCodeCoverageReport
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: '**/jacoco/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml'
