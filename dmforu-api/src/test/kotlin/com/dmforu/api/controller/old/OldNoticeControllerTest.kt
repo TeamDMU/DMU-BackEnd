@@ -124,7 +124,7 @@ class OldNoticeControllerTest : ControllerTestSupport() {
 
         // when then
         mockMvc.perform(
-            get("/api/v1/dmu/notice/universityNotice")
+            get("/api/v1/dmu/universityNotice")
                 .contentType(APPLICATION_JSON)
         )
             .andExpect(status().isOk())
