@@ -41,6 +41,16 @@ jobs:
           echo "${{ secrets.MONGO }}" | base64 --decode > ./mongo.yml
         working-directory: ./dmforu-infrastructure/storage/mongo/src/main/resources
 
+      - name: Create SQS resources directory
+        run: |
+          mkdir -p ./dmforu-infrastructure/sqs/src/main/resources
+
+      - name: make sqs.yml
+        run: |
+          touch ./sqs.yml
+          echo "${{ secrets.SQS }}" | base64 --decode > ./sqs.yml
+        working-directory: ./dmforu-infrastructure/sqs/src/main/resources
+
       - name: Create Firebase key resources directory
         run: |
           mkdir -p ./dmforu-infrastructure/fcm/src/main/resources/key

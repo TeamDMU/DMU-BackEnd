@@ -42,4 +42,5 @@ out/
 ### Configuration Settings ###
 **/mongo.yml
 **/mysql.yml
+**/sqs.yml
 **/fire-base-key.json
