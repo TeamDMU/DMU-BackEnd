@@ -45,6 +45,12 @@ jobs:
         run: |
           mkdir -p ./dmforu-infrastructure/fcm/src/main/resources/key
 
+      - name: make sqs.yml
+        run: |
+          touch ./sqs.yml
+          echo "${{ secrets.SQS }}" | base64 --decode > ./sqs.yml
+        working-directory: ./dmforu-infrastructure/sqs/src/main/resources
+
       - name: create JSON file
         run: |
           echo '{
