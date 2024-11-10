@@ -20,7 +20,7 @@ class CrawlingScheduler (
         universityNoticeCrawlingService.addRecentUniversityNotice()
     }
 
-    @Scheduled(cron = "0 0 8,20 * * *")
+    @Scheduled(cron = "0 */10 8,20 * * *")
     fun dietAndScheduleCrawling() {
         dietCrawlingService.updateToRecentDiet()
         scheduleCrawlingService.updateToRecentSchedule()
