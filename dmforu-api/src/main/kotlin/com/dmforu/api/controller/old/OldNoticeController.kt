@@ -19,7 +19,7 @@ class OldNoticeController(
         summary = "[구버전] 대학 공지 API",
         description = "대학 공지를 출력한다.<br>Page, Size의 default 값은 1, 20이다."
     )
-    @GetMapping("/api/v1/dmu/notice/universityNotice")
+    @GetMapping("/api/v1/dmu/universityNotice")
     fun getOldUniversityNotice(
         @RequestParam(name = "page", defaultValue = "1") page: Int,
         @RequestParam(name = "size", defaultValue = "20") size: Int,
