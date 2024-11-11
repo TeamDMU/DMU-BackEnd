@@ -6,16 +6,16 @@ import com.dmforu.domain.subscribe.Subscribe
 data class OldRegisterSubscribeRequest(
     val token: String,
     val department: String,
-    val topic: List<String>
+    val topic: List<String>?
 ) {
     fun toSubscribe(): Subscribe {
         val isDepartmentSubscribed = department.isNotBlank()
-        val areKeywordsSubscribed = topic.isNotEmpty()
+        val areKeywordsSubscribed = topic?.isNotEmpty() ?: false
 
         return Subscribe.of(
             token = token,
             department = department,
-            keywords = topic,
+            keywords = topic ?: listOf(),
             isDepartmentSubscribed = isDepartmentSubscribed,
             isKeywordSubscribed = areKeywordsSubscribed
         )
