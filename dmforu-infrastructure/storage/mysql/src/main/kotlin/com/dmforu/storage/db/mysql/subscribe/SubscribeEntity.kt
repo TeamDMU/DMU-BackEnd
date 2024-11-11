@@ -12,11 +12,11 @@ internal class SubscribeEntity(
     val token: String,
 
     @Column(nullable = true)
-    val department: String,
+    val department: String?,
 
     @Convert(converter = StringListConverter::class)
     @Column(name = "keywords_list", nullable = true)
-    val keywords: List<String>,
+    val keywords: List<String>?,
 
     @Column(name = "department_onoff")
     val isDepartmentSubscribed: Boolean,

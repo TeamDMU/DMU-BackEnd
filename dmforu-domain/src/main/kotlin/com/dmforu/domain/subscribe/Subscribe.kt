@@ -4,15 +4,15 @@ import com.dmforu.domain.Generated
 
 class Subscribe private constructor(
     val token: String,
-    department: String,
-    keywords: List<String>,
+    department: String?,
+    keywords: List<String>?,
     isDepartmentSubscribed: Boolean,
     isKeywordSubscribed: Boolean,
 ) {
-    var department: String = department
+    var department: String? = department
         private set
 
-    var keywords: List<String> = keywords
+    var keywords: List<String>? = keywords
         private set
 
     var isDepartmentSubscribed: Boolean = isDepartmentSubscribed
@@ -24,8 +24,8 @@ class Subscribe private constructor(
     companion object {
         fun of(
             token: String,
-            department: String,
-            keywords: List<String>,
+            department: String?,
+            keywords: List<String>?,
             isDepartmentSubscribed: Boolean,
             isKeywordSubscribed: Boolean,
         ): Subscribe {
