@@ -43,7 +43,7 @@ class OldSubscribeController(
     @Operation(summary = "[구버전] 키워드 알림 구독", description = "키워드 알림을 받도록 설정한다.")
     @PostMapping("/token/v1/dmu/updateTopic")
     fun oldKeywordsSubscribe(@RequestBody keywordsRequest: OldKeywordsSubscribeRequest): ResponseEntity<Void> {
-        oldSubscribeUpdater.subscribeKeywords(token = keywordsRequest.token, keywords = keywordsRequest.topics)
+        oldSubscribeUpdater.subscribeKeywords(token = keywordsRequest.token, keywords = keywordsRequest.topics.map { it.korean })
         return ResponseEntity.ok().build()
     }
 

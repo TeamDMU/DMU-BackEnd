@@ -1,10 +1,7 @@
 package com.dmforu.api.controller.old
 
 import com.dmforu.api.ControllerTestSupport
-import com.dmforu.api.controller.old.request.OldDepartmentRequest
-import com.dmforu.api.controller.old.request.OldKeywordsSubscribeRequest
-import com.dmforu.api.controller.old.request.OldRegisterSubscribeRequest
-import com.dmforu.api.controller.old.request.OldTokenRequest
+import com.dmforu.api.controller.old.request.*
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -22,7 +19,7 @@ class OldSubscribeControllerTest : ControllerTestSupport() {
         val request = OldRegisterSubscribeRequest(
             token = "0001",
             department = "컴퓨터소프트웨어공학과",
-            topic = listOf("학사")
+            topic = listOf(Topic.exam, Topic.work)
         )
 
         // when // then
@@ -75,7 +72,7 @@ class OldSubscribeControllerTest : ControllerTestSupport() {
         // given
         val request = OldKeywordsSubscribeRequest(
             token = "0001",
-            topics = listOf("학사")
+            topics = listOf(Topic.exam, Topic.work)
         )
 
         // when // then
