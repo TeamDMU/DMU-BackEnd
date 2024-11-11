@@ -5,7 +5,7 @@ import com.dmforu.domain.Generated
 @Generated
 enum class Topic (val korean: String){
     exam("시험"),
-    sign_up("수강"),
+    signup("수강"),
     speciallecture("특강"),
     seasonalsemester("계절학기"),
     leaveofabsence("휴학"),
