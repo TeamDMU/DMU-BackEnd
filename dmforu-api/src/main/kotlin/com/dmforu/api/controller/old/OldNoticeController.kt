@@ -38,8 +38,20 @@ class OldNoticeController(
         @RequestParam(name = "page", defaultValue = "1") page: Int,
         @RequestParam(name = "size", defaultValue = "20") size: Int,
     ): ResponseEntity<List<NoticeResponse>> {
-        val departmentNotices =
-            noticeReader.readDepartmentNotice(department, page, size).map { NoticeResponse.form(it) }
+        val checkDepartment = when (department) {
+            "로봇공학과" -> {
+                "로봇소프트웨어과"
+            }
+            "컴퓨터정보공학과" -> {
+                "웹응용소프트웨어공학과"
+            }
+            else -> {
+                department
+            }
+        }
+
+        val departmentNotices = noticeReader.readDepartmentNotice(checkDepartment, page, size)
+            .map { NoticeResponse.form(it) }
         return ResponseEntity.ok().body(departmentNotices)
     }
 
@@ -54,7 +66,19 @@ class OldNoticeController(
         @RequestParam(name = "page", defaultValue = "1") page: Int,
         @RequestParam(name = "size", defaultValue = "20") size: Int,
     ): ResponseEntity<List<NoticeResponse>> {
-        val notices = noticeReader.searchNotice(searchWord, department, page, size).map { NoticeResponse.form(it) }
+        val checkDepartment = when (department) {
+            "로봇공학과" -> {
+                "로봇소프트웨어과"
+            }
+            "컴퓨터정보공학과" -> {
+                "웹응용소프트웨어공학과"
+            }
+            else -> {
+                department
+            }
+        }
+
+        val notices = noticeReader.searchNotice(searchWord, checkDepartment, page, size).map { NoticeResponse.form(it) }
         return ResponseEntity.ok().body(notices)
     }
 }
