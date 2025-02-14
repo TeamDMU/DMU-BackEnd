@@ -1,9 +1,9 @@
 package com.dmforu.admin.scheduler.crawling
 
+import com.dmforu.crawling.parser.DepartmentCrawlingPath
 import com.dmforu.crawling.parser.DepartmentNoticeParser
 import com.dmforu.domain.notice.*
 import org.springframework.beans.factory.ObjectProvider
-import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,12 +14,12 @@ class DepartmentNoticeCrawlingService(
 ) {
 
     fun addRecentDepartmentNotice() {
-        for (major in Major.entries) {
+        for (major in DepartmentCrawlingPath.entries) {
             crawlMajorDepartment(major)
         }
     }
 
-    private fun crawlMajorDepartment(major: Major) {
+    private fun crawlMajorDepartment(major: DepartmentCrawlingPath) {
         val parser = prototypeBeanProvider.getObject()
 
         val maxNumber = noticeReader.findMaxNumberByType(major.type)

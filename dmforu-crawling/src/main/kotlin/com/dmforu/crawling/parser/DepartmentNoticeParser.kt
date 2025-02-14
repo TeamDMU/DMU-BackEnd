@@ -3,7 +3,6 @@ package com.dmforu.crawling.parser
 import com.dmforu.crawling.exception.GenerateNoticeUrlException
 import com.dmforu.crawling.loader.HtmlLoader
 import com.dmforu.domain.notice.Notice
-import com.dmforu.domain.notice.Major
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.time.LocalDate
@@ -15,10 +14,10 @@ class DepartmentNoticeParser(
     private val htmlLoader: HtmlLoader<Document>,
 ) {
 
-    private lateinit var major: Major
+    private lateinit var major: DepartmentCrawlingPath
     private var pageNumber: Int = 1
 
-    fun parse(major: Major): List<Notice> {
+    fun parse(major: DepartmentCrawlingPath): List<Notice> {
         initialize(major)
 
         val document = htmlLoader.get(generateSearchUrl())
@@ -29,7 +28,7 @@ class DepartmentNoticeParser(
 
     }
 
-    private fun initialize(major: Major) {
+    private fun initialize(major: DepartmentCrawlingPath) {
         this.major = major
     }
 
