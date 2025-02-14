@@ -2,7 +2,6 @@ package com.dmforu.crawling.parser
 
 import com.dmforu.crawling.exception.GenerateNoticeUrlException
 import com.dmforu.crawling.loader.HtmlLoader
-import com.dmforu.domain.notice.Major
 import org.assertj.core.api.Assertions.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
