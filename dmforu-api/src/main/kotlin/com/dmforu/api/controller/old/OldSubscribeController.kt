@@ -22,7 +22,24 @@ class OldSubscribeController(
     @Operation(summary = "[구버전] 최초 Token 등록 API", description = "애플리케이션 최초 실행시 Token과 학과, 키워드를 등록한다.")
     @PostMapping("/token/v1/dmu/initToken")
     fun oldTokenSubscribe(@RequestBody oldRegisterSubscribeRequest: OldRegisterSubscribeRequest): ResponseEntity<Void> {
-        subscribeWriter.write(oldRegisterSubscribeRequest.toSubscribe())
+        val checkDepartment = when (oldRegisterSubscribeRequest.department) {
+            "로봇공학과" -> {
+                "로봇소프트웨어과"
+            }
+            "컴퓨터정보공학과" -> {
+                "웹응용소프트웨어공학과"
+            }
+            else -> {
+                oldRegisterSubscribeRequest.department
+            }
+        }
+
+        val subscribe = oldRegisterSubscribeRequest.toSubscribe()
+
+        subscribe.changeDepartment(checkDepartment)
+
+        subscribeWriter.write(subscribe)
+
         return ResponseEntity.ok().build()
     }
 
