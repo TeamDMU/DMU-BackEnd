@@ -36,15 +36,15 @@ Release 1.0.0 ~ 1.1.1의 소스 코드는 [해당 프로젝트](https://github.c
 
 ### 블로그 포스팅
 
-1. [서버 앞으로의 개선 방향]([https://rlwnd2577.tistory.com/entry/DMforU-서버-앞으로의-개선-방향](https://rlwnd2577.tistory.com/entry/DMforU-%EC%84%9C%EB%B2%84-%EC%95%9E%EC%9C%BC%EB%A1%9C%EC%9D%98-%EA%B0%9C%EC%84%A0-%EB%B0%A9%ED%96%A5))
-2. [Kotlin + Spring / Multi-Module 적용]([https://rlwnd2577.tistory.com/entry/DMforU-Kotlin-Spring-Mutli-Module-적용](https://rlwnd2577.tistory.com/entry/DMforU-Kotlin-Spring-Mutli-Module-%EC%A0%81%EC%9A%A9))
-3. [Jnuit5, Mocktito 테스트 코드 작성]([https://rlwnd2577.tistory.com/entry/DMforU-Jnuit5-Mocktito-테스트-코드-작성](https://rlwnd2577.tistory.com/entry/DMforU-Jnuit5-Mocktito-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%9E%91%EC%84%B1))
-4. [테스트 커버리지 관리 및 테스트 자동화]([https://rlwnd2577.tistory.com/entry/DMforU-테스트-커버리지-관리-및-테스트-자동화](https://rlwnd2577.tistory.com/entry/DMforU-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BB%A4%EB%B2%84%EB%A6%AC%EC%A7%80-%EA%B4%80%EB%A6%AC-%EB%B0%8F-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%90%EB%8F%99%ED%99%94))
-5. [Jenkins CI / CD 구축]([https://rlwnd2577.tistory.com/entry/DMforU-Multi-Module-프로젝트-Jenkins-CI-CD-구축](https://rlwnd2577.tistory.com/entry/DMforU-Multi-Module-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Jenkins-CI-CD-%EA%B5%AC%EC%B6%95))
-6. [Prometheus + Grafana 모니터링 시스템 구축]([https://rlwnd2577.tistory.com/entry/DMforU-Prometheus-Grafana-모니터링-시스템-구축](https://rlwnd2577.tistory.com/entry/DMforU-Prometheus-Grafana-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B5%AC%EC%B6%95))
-7. [FCM 메시지 전송에 SQS 활용]([https://rlwnd2577.tistory.com/entry/DMforU-FCM-메시지-전송에-SQS-활용](https://rlwnd2577.tistory.com/entry/DMforU-FCM-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%A0%84%EC%86%A1%EC%97%90-SQS-%ED%99%9C%EC%9A%A9))
-8. [Release 1.2.0 배포 완료]([https://rlwnd2577.tistory.com/entry/DMforU-Release-120-배포-완료](https://rlwnd2577.tistory.com/entry/DMforU-Release-120-%EB%B0%B0%ED%8F%AC-%EC%99%84%EB%A3%8C))
-9. [MySQL 세컨더리 인덱스를 활용한 성능 개선]([https://rlwnd2577.tistory.com/entry/DMforU-공지사항-테이블-인덱스를-활용한-성능-개선](https://rlwnd2577.tistory.com/entry/DMforU-%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%9D%B8%EB%8D%B1%EC%8A%A4%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%84%B1%EB%8A%A5-%EA%B0%9C%EC%84%A0))
+1. [서버 앞으로의 개선 방향](https://rlwnd2577.tistory.com/entry/DMforU-%EC%84%9C%EB%B2%84-%EC%95%9E%EC%9C%BC%EB%A1%9C%EC%9D%98-%EA%B0%9C%EC%84%A0-%EB%B0%A9%ED%96%A5)
+2. [Kotlin + Spring / Multi-Module 적용](https://rlwnd2577.tistory.com/entry/DMforU-Kotlin-Spring-Mutli-Module-%EC%A0%81%EC%9A%A9)
+3. [Jnuit5, Mocktito 테스트 코드 작성](https://rlwnd2577.tistory.com/entry/DMforU-Jnuit5-Mocktito-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C-%EC%9E%91%EC%84%B1)
+4. [테스트 커버리지 관리 및 테스트 자동화](https://rlwnd2577.tistory.com/entry/DMforU-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BB%A4%EB%B2%84%EB%A6%AC%EC%A7%80-%EA%B4%80%EB%A6%AC-%EB%B0%8F-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%90%EB%8F%99%ED%99%94)
+5. [Jenkins CI / CD 구축](https://rlwnd2577.tistory.com/entry/DMforU-Multi-Module-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Jenkins-CI-CD-%EA%B5%AC%EC%B6%95)
+6. [Prometheus + Grafana 모니터링 시스템 구축](https://rlwnd2577.tistory.com/entry/DMforU-Prometheus-Grafana-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B5%AC%EC%B6%95)
+7. [FCM 메시지 전송에 SQS 활용](https://rlwnd2577.tistory.com/entry/DMforU-FCM-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%A0%84%EC%86%A1%EC%97%90-SQS-%ED%99%9C%EC%9A%A9)
+8. [Release 1.2.0 배포 완료](https://rlwnd2577.tistory.com/entry/DMforU-Release-120-%EB%B0%B0%ED%8F%AC-%EC%99%84%EB%A3%8C)
+9. [MySQL 세컨더리 인덱스를 활용한 성능 개선](https://rlwnd2577.tistory.com/entry/DMforU-%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%9D%B8%EB%8D%B1%EC%8A%A4%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%84%B1%EB%8A%A5-%EA%B0%9C%EC%84%A0)
 
 ---
 
