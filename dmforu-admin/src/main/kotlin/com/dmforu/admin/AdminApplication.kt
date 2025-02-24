@@ -8,7 +8,7 @@ import java.util.*
 @SpringBootApplication(
     scanBasePackages = [
         "com.dmforu.admin",
-        "com.dmforu.sqs",
+        "com.dmforu.fcm",
         "com.dmforu.storage.db.mongo",
         "com.dmforu.storage.db.mysql"
     ]
