@@ -1,11 +1,9 @@
 package com.dmforu.admin.scheduler.crawling
 
+import com.dmforu.crawling.parser.DepartmentCrawlingPath
 import com.dmforu.crawling.parser.DepartmentNoticeParser
-import com.dmforu.domain.notice.Major
 import com.dmforu.domain.notice.Notice
 import com.dmforu.domain.notice.NoticeReader
-import com.dmforu.domain.notice.NoticeWriter
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -16,7 +14,6 @@ import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.any
 import org.springframework.beans.factory.ObjectProvider
-import org.springframework.context.ApplicationEventPublisher
 
 @ExtendWith(MockitoExtension::class)
 class DepartmentNoticeCrawlingServiceTest {
@@ -54,8 +51,8 @@ class DepartmentNoticeCrawlingServiceTest {
         service.addRecentDepartmentNotice()
 
         // then
-        verify(prototypeBeanProvider, times(Major.entries.size)).getObject()
-        verify(noticeReader, times(Major.entries.size)).findMaxNumberByType(any())
+        verify(prototypeBeanProvider, times(DepartmentCrawlingPath.entries.size)).getObject()
+        verify(noticeReader, times(DepartmentCrawlingPath.entries.size)).findMaxNumberByType(any())
     }
 
 }

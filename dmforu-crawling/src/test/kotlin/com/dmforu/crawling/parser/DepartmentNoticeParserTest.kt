@@ -2,7 +2,6 @@ package com.dmforu.crawling.parser
 
 import com.dmforu.crawling.exception.GenerateNoticeUrlException
 import com.dmforu.crawling.loader.HtmlLoader
-import com.dmforu.domain.notice.Major
 import org.assertj.core.api.Assertions.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -52,7 +51,7 @@ class DepartmentNoticeParserTest {
         given(htmlLoader.get(anyString())).willReturn(document)
 
         // when
-        val notices = parser.parse(Major.COMPUTER_SOFTWARE_ENGINEERING)
+        val notices = parser.parse(DepartmentCrawlingPath.COMPUTER_SOFTWARE_ENGINEERING)
 
         // then
         assertThat(notices).hasSize(2)
@@ -104,7 +103,7 @@ class DepartmentNoticeParserTest {
         given(htmlLoader.get(anyString())).willReturn(document)
 
         // when // then
-        assertThatThrownBy { parser.parse(Major.COMPUTER_SOFTWARE_ENGINEERING) }
+        assertThatThrownBy { parser.parse(DepartmentCrawlingPath.COMPUTER_SOFTWARE_ENGINEERING) }
             .isInstanceOf(GenerateNoticeUrlException::class.java)
             .hasMessage("공지 URL 생성에 실패했습니다.")
     }

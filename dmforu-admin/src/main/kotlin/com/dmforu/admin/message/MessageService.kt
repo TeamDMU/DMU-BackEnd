@@ -23,6 +23,18 @@ class MessageService(
         sendDepartmentNoticeMessage(notice)
     }
 
+    fun sendTestNoticeMessage(token: String, notice: Notice) {
+        if (notice.isUniversityNotice()) {
+            val keyword = keywordFilter.extractKeywordFrom(notice.title) ?: return
+            val message = NoticeMessage.createUniversityNoticeMessage(notice = notice, keyword = keyword)
+            messageSender.sendNoticeMessage(message = message, tokens = listOf(token))
+            return
+        }
+
+        val message = NoticeMessage.createDepartmentNoticeMessage(notice = notice)
+        messageSender.sendNoticeMessage(message = message, tokens = listOf(token))
+    }
+
     private fun sendUniversityNoticeMessage(notice: Notice) {
         val keyword = keywordFilter.extractKeywordFrom(notice.title) ?: return
 

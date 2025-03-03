@@ -11,10 +11,10 @@ internal class FirebaseMessageSender(
 ) : MessageSender {
 
     override fun sendNoticeMessage(message: NoticeMessage, tokens: List<String>) {
-
-        val firebaseMessage = MulticastMessageMapper.mapToMulticastMessage(message, tokens)
-
-        firebaseMessaging.sendEachForMulticast(firebaseMessage)
+        tokens.chunked(500).forEach { chunkedTokens ->
+            val firebaseMessage = MulticastMessageMapper.mapToMulticastMessage(message, chunkedTokens)
+            firebaseMessaging.sendEachForMulticast(firebaseMessage)
+        }
     }
 
 }

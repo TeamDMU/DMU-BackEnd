@@ -15,6 +15,8 @@ internal object MulticastMessageMapper {
         return MulticastMessage.builder()
             .setNotification(notification)
             .addAllTokens(tokens)
+            .putData("title", message.title)
+            .putData("body", message.body)
             .putData("url", message.url)
             .putData("type", message.type)
             .build()
