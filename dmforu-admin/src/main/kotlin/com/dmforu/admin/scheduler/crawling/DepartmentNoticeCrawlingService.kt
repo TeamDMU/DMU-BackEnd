@@ -15,7 +15,6 @@ class DepartmentNoticeCrawlingService(
 
     fun addRecentDepartmentNotice() {
         for (major in DepartmentCrawlingPath.entries) {
-            println(major.type)
             crawlMajorDepartment(major)
         }
     }
