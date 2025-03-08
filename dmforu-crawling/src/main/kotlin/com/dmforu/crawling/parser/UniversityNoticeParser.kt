@@ -50,7 +50,7 @@ class UniversityNoticeParser(
 
     private fun generateSearchUrl(): String {
         return StringBuilder()
-            .append("https://www.dongyang.ac.kr/dongyang/129/subview.do?page=").append(pageNumber++)
+            .append("https://www.dongyang.ac.kr/dmu/4904/subview.do?page=").append(pageNumber++)
             .toString()
     }
 
