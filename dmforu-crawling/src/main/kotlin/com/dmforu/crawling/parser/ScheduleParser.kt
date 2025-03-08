@@ -18,14 +18,24 @@ class ScheduleParser(
     }
 
     private fun fetchYearSchedule(year: Int): List<Schedule.Month> {
-        val document = htmlLoader.get(DMU_SCHEDULE_URL + year)
+        val beforeDocument = htmlLoader.get(DMU_SCHEDULE_URL + (year - 1)) // 작년 일정
+        val document = htmlLoader.get(DMU_SCHEDULE_URL + year) // 올해 일정
+
+        // 작년 일정에서 1~2월 가져오기
+        val prevYearMonths = fetchMonthSchedules(beforeDocument, 1..2)
+        // 올해 일정에서 3~12월 가져오기
+        val currentYearMonths = fetchMonthSchedules(document, 3..12)
+
+        // 두 리스트 합쳐서 반환
+        return prevYearMonths + currentYearMonths
+    }
+
+    private fun fetchMonthSchedules(document: Document, filterRange: IntRange): List<Schedule.Month> {
         val monthTables = document.select(YEAR_SCHEDULE_SELECTOR)
 
         return monthTables.mapNotNull { monthTable ->
             val monthSchedule = fetchMonthSchedule(monthTable)
-
-            // 일정 정보가 업로드 되지 않는 달은 제외한다. (다음 년도 3월 이후의 정보)
-            if (monthSchedule.monthSchedule.isEmpty()) null else monthSchedule
+            if (monthSchedule.month !in filterRange || monthSchedule.monthSchedule.isEmpty()) null else monthSchedule
         }
     }
 
@@ -73,7 +83,7 @@ class ScheduleParser(
     }
 
     companion object {
-        private const val DMU_SCHEDULE_URL = "https://www.dongyang.ac.kr/dongyang/71/subview.do?year="
+        private const val DMU_SCHEDULE_URL = "https://www.dongyang.ac.kr/dmu/4749/subview.do?year="
         private const val YEAR_SCHEDULE_SELECTOR = ".yearSchdulWrap"
         private const val MONTH_DATE_SELECTOR = "p"
         private const val MONTH_SCHEDULE_SELECTOR = ".scheList li"
