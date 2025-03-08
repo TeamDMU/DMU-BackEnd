@@ -36,14 +36,7 @@ class DepartmentNoticeParser(
         val number = row.select(".td-num").text().toIntOrNull() ?: return null
         val title = row.select(".td-subject a").text()
         val author = row.select(".td-write").text()
-
-        // TODO 리팩토링 대상
-        val url = if (major.type == "자유전공학과") {
-            generateUrlFromSearch2(row.select(".td-subject a").attr("onclick"))
-        } else {
-            generateUrlFromSearch(row.select(".td-subject a").attr("href"))
-        }
-
+        val url = generateUrlFromSearch(row.select(".td-subject a").attr("href"))
         val date = LocalDate.parse(row.select(".td-date").text(), formatter)
 
         return Notice.of(
@@ -58,7 +51,7 @@ class DepartmentNoticeParser(
 
     private fun generateSearchUrl(): String {
         return StringBuilder()
-            .append("https://www.dongyang.ac.kr/").append(major.majorPath).append("/").append(major.noticePath)
+            .append("https://www.dongyang.ac.kr/dmu/").append(major.path)
             .append("/subview.do?page=").append(pageNumber++).toString()
 
     }
@@ -74,18 +67,6 @@ class DepartmentNoticeParser(
             .append("/view.do?layout=unknown").toString()
     }
 
-    //TODO 리팩토링 대상
-    private fun generateUrlFromSearch2(url: String): String {
-        val matcher: Matcher = pattern2.matcher(url)
-
-        verifyValidMatcher(matcher)
-
-        return StringBuilder()
-            .append("https://www.dongyang.ac.kr/bbs/").append(matcher.group(1))
-            .append("/").append(matcher.group(2)).append("/").append(matcher.group(3))
-            .append("/artclView.do?layout=unknown").toString()
-    }
-
     private fun verifyValidMatcher(matcher: Matcher) {
         if (!matcher.find()) {
             throw GenerateNoticeUrlException()
@@ -95,7 +76,6 @@ class DepartmentNoticeParser(
 
     companion object {
         private val pattern: Pattern = Pattern.compile("\\('([^']+)'\\,'([^']+)'\\,'([^']+)'\\,'([^']+)'")
-        private val pattern2: Pattern = Pattern.compile("jf_viewArtcl\\('([^']+)', '([^']+)', '([^']+)'\\)")
         private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
     }
 }
