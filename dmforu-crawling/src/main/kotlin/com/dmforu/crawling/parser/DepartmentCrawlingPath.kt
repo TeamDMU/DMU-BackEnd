@@ -31,7 +31,7 @@ enum class DepartmentCrawlingPath(val type: String, val path: String) {
 
     // 경영학부
     BUSINESS_MANAGEMENT("경영학과", "4677"),
-    TAX_ACCOUNTING("세무회계학과", "4680"),
+    TAX_ACCOUNTING("세무회계학과", "4687"),
     DISTRIBUTION_MARKETING("유통마케팅학과", "4697"),
     HOTEL_TOURISM("호텔관광학과", "4708"),
     BUSINESS_INFORMATION("경영정보학과", "4719"),
