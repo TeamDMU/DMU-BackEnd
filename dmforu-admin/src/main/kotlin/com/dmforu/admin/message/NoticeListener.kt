@@ -10,6 +10,6 @@ class NoticeListener (
 ) {
     @EventListener
     fun onNoticeMessageSendEventHandler(notice: Notice) {
-//        messageService.sendNoticeMessage(notice)
+        messageService.sendNoticeMessage(notice)
     }
 }
