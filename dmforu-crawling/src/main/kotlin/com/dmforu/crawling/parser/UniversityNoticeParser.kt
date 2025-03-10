@@ -28,7 +28,7 @@ class UniversityNoticeParser(
                 continue
             }
 
-            val title = removeSuffix(row.select(".td-subject a").text(), SUFFIX_NEW_POST)
+            val title = removeSuffix(row.select(".td-subject strong").text(), SUFFIX_NEW_POST)
             val author = row.select(".td-write").text()
             val url = generateUrlFromSearch(row.select(".td-subject a").attr("href"))
             val date = LocalDate.parse(row.select(".td-date").text(), DATE_FORMATTER)
@@ -44,7 +44,7 @@ class UniversityNoticeParser(
 
             universityNotices.add(universityNotice)
         }
-        String
+
         return universityNotices
     }
 
