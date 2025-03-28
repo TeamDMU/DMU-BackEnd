@@ -12,9 +12,34 @@ class DietParser (
 ) : Parser<Diet> {
     override fun parse(): List<Diet> {
         val document = htmlLoader.get(DMU_DIET_URL)
-        val rows = document.select(TABLE_SELECTOR)
+        val menus = document.select(TABLE_SELECTOR)
+        val dates = document.select(DATE_SELECTOR)
 
-        return rows.mapNotNull { row -> parseDiet(row) }
+        val menuList = mutableListOf<String>()
+        val tests = mutableListOf<List<String>>()
+        val ms = menus[1].select("td")
+        for (m in ms) {
+            val menu : List<String> = m.text().substringAfter("[점심] ") ?.split(MENU_SEPARATOR)
+                ?.map { it.trim() }
+                ?: emptyList()
+            tests.add(menu)
+        }
+
+        val dateList = mutableListOf<LocalDate>()
+        for (date in dates) {
+            val d = date.text().substringAfter("(").substringBefore(")")
+            val l = LocalDate.parse(d, DATE_FORMATTER)
+            dateList.add(l)
+        }
+
+        val result = mutableListOf<Diet>()
+
+        for (i: Int in 0 .. 4) {
+            val diet = Diet.of(dateList[i], tests[i])
+            result.add(diet)
+        }
+
+        return result
     }
 
     private fun parseDiet(row: Element): Diet? {
@@ -46,8 +71,9 @@ class DietParser (
 
     companion object {
         private val DATE_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
-        private const val DMU_DIET_URL = "https://www.dongyang.ac.kr/diet/dongyang/1/view.do"
+        private const val DMU_DIET_URL = "https://www.dongyang.ac.kr/dmu/4902/subview.do"
         private const val TABLE_SELECTOR = "div.table_1 table tbody tr"
+        private const val DATE_SELECTOR = "div.table_1 thead tr th"
         private const val DATA_SELECTOR = "th, td"
         private const val MENU_SEPARATOR = ", "
         private const val PASS_COLUMN = "교직원식당"
