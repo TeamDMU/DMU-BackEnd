@@ -45,17 +45,22 @@ class ApplicationConfig {
         return DietWriter(dietRepository = dietRepository)
     }
 
-    @Scope("prototype")
     @Bean
-    fun departmentNoticeParser(): DepartmentNoticeParser {
-        return DepartmentNoticeParser(htmlLoader = JsoupHtmlLoader())
+    fun jsoupHtmlLoader(): JsoupHtmlLoader {
+        return JsoupHtmlLoader()
     }
 
-    @Scope("prototype")
-    @Bean
-    fun universityNoticeParser(): UniversityNoticeParser {
-        return UniversityNoticeParser(htmlLoader = JsoupHtmlLoader())
-    }
+//    @Scope("prototype")
+//    @Bean
+//    fun departmentNoticeParser(): DepartmentNoticeParser {
+//        return DepartmentNoticeParser(htmlLoader = JsoupHtmlLoader())
+//    }
+//
+//    @Scope("prototype")
+//    @Bean
+//    fun universityNoticeParser(): UniversityNoticeParser {
+//        return UniversityNoticeParser(htmlLoader = JsoupHtmlLoader())
+//    }
 
     @Bean
     fun dietParser(): DietParser {
