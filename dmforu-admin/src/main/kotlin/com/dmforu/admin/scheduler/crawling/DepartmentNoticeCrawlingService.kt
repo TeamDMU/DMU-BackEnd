@@ -1,5 +1,6 @@
 package com.dmforu.admin.scheduler.crawling
 
+import com.dmforu.crawling.loader.JsoupHtmlLoader
 import com.dmforu.crawling.parser.DepartmentCrawlingPath
 import com.dmforu.crawling.parser.DepartmentNoticeParser
 import com.dmforu.domain.notice.*
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class DepartmentNoticeCrawlingService(
-    private val prototypeBeanProvider: ObjectProvider<DepartmentNoticeParser>,
+    private val htmlLoader: JsoupHtmlLoader,
     private val noticeReader: NoticeReader,
     private val noticeService: NoticeService
 ) {
@@ -20,7 +21,7 @@ class DepartmentNoticeCrawlingService(
     }
 
     private fun crawlMajorDepartment(major: DepartmentCrawlingPath) {
-        val parser = prototypeBeanProvider.getObject()
+        val parser = DepartmentNoticeParser(htmlLoader)
 
         val maxNumber = noticeReader.findMaxNumberByType(major.type)
         val currentMaxNumber = maxNumber ?: 0
