@@ -14,13 +14,15 @@ class CrawlingScheduler (
     private val dietCrawlingService: DietCrawlingService,
     private val scheduleCrawlingService: ScheduleCrawlingService,
 ) {
-    @Scheduled(cron = "0 */10 9-19 * * MON-FRI")
+//    @Scheduled(cron = "0 */10 9-19 * * MON-FRI")
+    @Scheduled(cron = "0 */10 * * * *")
     fun noticeCrawling() {
         departmentNoticeCrawlingService.addRecentDepartmentNotice()
         universityNoticeCrawlingService.addRecentUniversityNotice()
     }
 
-    @Scheduled(cron = "0 */10 8-20 * * *")
+//    @Scheduled(cron = "0 */10 8-20 * * *")
+    @Scheduled(cron = "0 */10 * * * *")
     fun dietAndScheduleCrawling() {
         dietCrawlingService.updateToRecentDiet()
         scheduleCrawlingService.updateToRecentSchedule()
