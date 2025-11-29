@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class DepartmentNoticeCrawlingService(
-    private val htmlLoader: JsoupHtmlLoader,
+//    private val htmlLoader: JsoupHtmlLoader,
+    private val objectProvider: ObjectProvider<DepartmentNoticeParser>,
     private val noticeReader: NoticeReader,
     private val noticeService: NoticeService
 ) {
@@ -23,7 +24,7 @@ class DepartmentNoticeCrawlingService(
     }
 
     private fun crawlMajorDepartment(major: DepartmentCrawlingPath) {
-        val parser = DepartmentNoticeParser(htmlLoader)
+        val parser = objectProvider.getObject()
         val log: Logger = LoggerFactory.getLogger(DepartmentNoticeParser::class.java)
         log.info("${major} 스크래핑 시작")
 
