@@ -37,9 +37,9 @@ internal interface NoticeJpaRepository : JpaRepository<NoticeEntity, Long> {
         value = """
             SELECT * 
             FROM notice 
-            WHERE MATCH(title) AGAINST (?1 IN NATURAL LANGUAGE MODE)
-            ORDER BY date DESC, id DESC
-        """,
+            WHERE REPLACE(title, ' ', '') LIKE CONCAT('%', REPLACE(?1, ' ', ''), '%') 
+            AND type IN (?2, '대학')
+            """,
         nativeQuery = true
     )
     fun findBySearchWordAndDepartment(searchWord: String, department: String, pageable: Pageable): Page<NoticeEntity>
