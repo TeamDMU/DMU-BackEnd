@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
 internal interface NoticeJpaRepository : JpaRepository<NoticeEntity, Long> {
-    /** 원하는 타입의 가장 최신 공지사항 번호를 확인하는 메서드
+    /**
+     * 원하는 타입의 가장 최신 공지사항 번호를 확인하는 메서드
      *
      * @Param type (학과 이름 또는 대학)
      * @Return type에 알맞는 최신 공지사항 번호, 만약 공지사항이 존재하지 않다면 Null을 반환한다.
@@ -33,7 +34,12 @@ internal interface NoticeJpaRepository : JpaRepository<NoticeEntity, Long> {
      * @return 키워드에 맞는 공지사항 페이지
      */
     @Query(
-        value = "SELECT * FROM notice WHERE REPLACE(title, ' ', '') LIKE CONCAT('%', REPLACE(?1, ' ', ''), '%') AND type IN (?2, '대학')",
+        value = """
+            SELECT * 
+            FROM notice 
+            WHERE MATCH(title) AGAINST (?1 IN NATURAL LANGUAGE MODE)
+            ORDER BY date DESC, id DESC
+        """,
         nativeQuery = true
     )
     fun findBySearchWordAndDepartment(searchWord: String, department: String, pageable: Pageable): Page<NoticeEntity>
