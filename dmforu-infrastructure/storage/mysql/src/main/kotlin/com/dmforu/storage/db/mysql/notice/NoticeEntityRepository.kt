@@ -23,7 +23,7 @@ internal class NoticeEntityRepository(
         page: Int,
         size: Int,
     ): List<Notice> {
-        val pageable = pageRequest(page, size)
+        val pageable = createPageRequestByDateAndIdDesc(page, size)
         val noticePage = noticeJpaRepository.findBySearchWordAndDepartment(searchWord, department, pageable)
         return noticePage.map { it.toNotice() }.toList()
     }
@@ -33,13 +33,13 @@ internal class NoticeEntityRepository(
         page: Int,
         size: Int,
     ): List<Notice> {
-        val pageable = pageRequest(page, size)
+        val pageable = createPageRequestByNumberDesc(page, size)
         val departmentNoticePage = noticeJpaRepository.findByType(department, pageable)
         return departmentNoticePage.map { it.toNotice() }.toList()
     }
 
     override fun findUniversityNotices(page: Int, size: Int): List<Notice> {
-        val pageable = pageRequest(page, size)
+        val pageable = createPageRequestByNumberDesc(page, size)
         val universityNoticePage = noticeJpaRepository.findByType("대학", pageable)
         return universityNoticePage.map { it.toNotice() }.toList()
     }
@@ -48,7 +48,15 @@ internal class NoticeEntityRepository(
         return noticeJpaRepository.findMaxNumberByType(type)
     }
 
-    private fun pageRequest(page: Int, size: Int): PageRequest {
+    private fun createPageRequestByNumberDesc(page: Int, size: Int): PageRequest {
+        return PageRequest.of(
+            page - 1, size, Sort.by(
+                Sort.Order.desc("number")
+            )
+        )
+    }
+
+    private fun createPageRequestByDateAndIdDesc(page: Int, size: Int): PageRequest {
         return PageRequest.of(
             page - 1, size, Sort.by(
                 Sort.Order.desc("date"),
